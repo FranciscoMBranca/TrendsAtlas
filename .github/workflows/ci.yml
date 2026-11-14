@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -e "pipeline[dev]" -r api/requirements.txt httpx
+      - run: pip install -e "./pipeline[dev]" -r api/requirements.txt httpx
       - name: Pipeline tests
         run: pytest -q
         working-directory: pipeline

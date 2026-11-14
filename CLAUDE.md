@@ -21,7 +21,7 @@ Terra Tempo: tendências do sistema terrestre com dados da NASA. Ver `docs/00-vi
 - Cada fórmula vive num só sítio (pipeline); o backend importa-a.
 
 ## Comandos (preencher quando existirem)
-- Ambiente Python (uma vez): `python -m venv .venv` e `.venv/Scripts/python -m pip install -e "pipeline[dev]" -r api/requirements.txt httpx`
+- Ambiente Python (uma vez): `python -m venv .venv` e `.venv/Scripts/python -m pip install -e "./pipeline[dev]" -r api/requirements.txt httpx`
 - Testes do pipeline: `cd pipeline && ../.venv/Scripts/python -m pytest -q`
 - Testes da API: `cd api && ../.venv/Scripts/python -m pytest -q`
 - Exportar mapas e manifesto estáticos: `cd pipeline && ../.venv/Scripts/python -m terratempo.export --out ../web/public/data`
