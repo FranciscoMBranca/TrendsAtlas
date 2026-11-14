@@ -28,12 +28,15 @@ from terratempo.maps import preset_years, trend_map
 from terratempo.regions import MAX_VERTICES, region_series
 
 ALLOWED_ORIGINS = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",") if o.strip()]
+# Optional regex for preview deployments, e.g. ^https://terra-tempo-[a-z0-9-]+\.vercel\.app$
+ALLOWED_ORIGIN_REGEX = os.getenv("ALLOWED_ORIGIN_REGEX") or None
 RATE_LIMIT_PER_MIN = int(os.getenv("RATE_LIMIT_PER_MIN", "60"))
 
 app = FastAPI(title="Terra Tempo API", version=SCHEMA_VERSION)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=ALLOWED_ORIGIN_REGEX,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )

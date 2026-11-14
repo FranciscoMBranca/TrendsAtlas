@@ -1,0 +1,14 @@
+# Railway: Terra Tempo API (FastAPI). The web site is deployed on Vercel (web/).
+# Docs: https://docs.railway.com/reference/config-as-code
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "api/Dockerfile"
+# Only rebuild the API when its code, the pipeline or the cubes change.
+watchPatterns = ["api/**", "pipeline/terratempo/**", "pipeline/pyproject.toml", "data/cubes/**", "railway.toml"]
+
+[deploy]
+healthcheckPath = "/saude"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

@@ -1,6 +1,10 @@
 // Thin client for the Terra Tempo API. Static files in /data are the degraded mode (B07).
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// Set NEXT_PUBLIC_API_URL in Vercel (e.g. the Railway URL). Without it, production never
+// calls the visitor's localhost: the API is treated as unavailable (degraded mode, B07).
+export const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")
+).replace(/\/+$/, "");
 
 export type Label = "real" | "demonstracao";
 

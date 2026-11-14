@@ -1,0 +1,18 @@
+# Build context for api/Dockerfile is the repo root: send only what the API needs.
+**/.git
+**/.venv
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+**/*.egg-info
+web/
+tests/
+docs/
+specs/
+validation/
+assistant/
+.claude/
+.github/
+data/raw/
+**/.env
+**/.env.*
