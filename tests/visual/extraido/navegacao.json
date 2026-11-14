@@ -1,0 +1,92 @@
+[
+  {
+    "tag": "a",
+    "text": "Atlas de Tendências",
+    "href": "#abertura",
+    "aria": "Atlas de Tendências, início"
+  },
+  {
+    "tag": "a",
+    "text": "Panorama",
+    "href": "#panorama",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "O quê",
+    "href": "#o-que",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "Onde",
+    "href": "#onde",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "Quando",
+    "href": "#quando",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "Regiões",
+    "href": "#regioes",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "Significância",
+    "href": "#significativo",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "Método",
+    "href": "#metodo",
+    "aria": null
+  },
+  {
+    "tag": "a",
+    "text": "Explorar o mapa",
+    "href": "#onde",
+    "aria": null
+  },
+  {
+    "tag": "button",
+    "text": "Temperatura do ar",
+    "href": null,
+    "aria": null
+  },
+  {
+    "tag": "button",
+    "text": "Precipitação",
+    "href": null,
+    "aria": null
+  },
+  {
+    "tag": "button",
+    "text": "Vegetação (NDVI)",
+    "href": null,
+    "aria": null
+  },
+  {
+    "tag": "button",
+    "text": "Gelo marinho",
+    "href": null,
+    "aria": null
+  },
+  {
+    "tag": "button",
+    "text": "Aerossóis (AOD)",
+    "href": null,
+    "aria": null
+  },
+  {
+    "tag": "button",
+    "text": "Nível do mar",
+    "href": null,
+    "aria": null
+  }
+]

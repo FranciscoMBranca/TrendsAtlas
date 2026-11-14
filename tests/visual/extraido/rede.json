@@ -1,0 +1,138 @@
+[
+  {
+    "url": "https://terra-tempo.vercel.app/",
+    "method": "GET",
+    "type": "document",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 5843
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/assets/styles-BeRSrv-j.css",
+    "method": "GET",
+    "type": "stylesheet",
+    "status": 200,
+    "contentType": "text/css; charset=utf-8",
+    "bytes": 91446
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/assets/routes-XIHv_FLb.js",
+    "method": "GET",
+    "type": "script",
+    "status": 200,
+    "contentType": "application/javascript; charset=utf-8",
+    "bytes": 591651
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/assets/index-VxfTxT0k.js",
+    "method": "GET",
+    "type": "script",
+    "status": 200,
+    "contentType": "application/javascript; charset=utf-8",
+    "bytes": 340588
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,500&display=swap",
+    "method": "GET",
+    "type": "stylesheet",
+    "status": 200,
+    "contentType": "text/css; charset=utf-8",
+    "bytes": 15987
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/data/variables.json",
+    "method": "GET",
+    "type": "fetch",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bytes": 2122
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/data/temperature/series_global.json",
+    "method": "GET",
+    "type": "fetch",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bytes": 11338
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/data/temperature/grid_trend.json",
+    "method": "GET",
+    "type": "fetch",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bytes": 403904
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/data/temperature/regions.json",
+    "method": "GET",
+    "type": "fetch",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bytes": 46333
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/data/temperature/meta.json",
+    "method": "GET",
+    "type": "fetch",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bytes": 2851
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/ibmplexmono/v23/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2",
+    "method": "GET",
+    "type": "font",
+    "status": 200,
+    "contentType": "font/woff2",
+    "bytes": 14648
+  },
+  {
+    "url": "https://terra-tempo.vercel.app/data/land.json",
+    "method": "GET",
+    "type": "fetch",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bytes": 55207
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2",
+    "method": "GET",
+    "type": "font",
+    "status": 200,
+    "contentType": "font/woff2",
+    "bytes": 45712
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ.woff2",
+    "method": "GET",
+    "type": "font",
+    "status": 200,
+    "contentType": "font/woff2",
+    "bytes": 58084
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMwaT9ZHFjQ.woff2",
+    "method": "GET",
+    "type": "font",
+    "status": 200,
+    "contentType": "font/woff2",
+    "bytes": 25636
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbABA.woff2",
+    "method": "GET",
+    "type": "font",
+    "status": 200,
+    "contentType": "font/woff2",
+    "bytes": 19500
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/ibmplexmono/v23/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2",
+    "method": "GET",
+    "type": "font",
+    "status": 200,
+    "contentType": "font/woff2",
+    "bytes": 14904
+  }
+]
