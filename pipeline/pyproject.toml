@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "terratempo"
+version = "0.1.0"
+description = "Terra Tempo pipeline: anomalies, trend tests and exports for NASA Earth system data"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pymannkendall>=1.4"]
+
+[tool.setuptools.packages.find]
+include = ["terratempo*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
