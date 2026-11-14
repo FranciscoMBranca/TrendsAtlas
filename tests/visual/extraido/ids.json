@@ -1,0 +1,72 @@
+[
+  {
+    "id": "abertura",
+    "tag": "section",
+    "top": 139
+  },
+  {
+    "id": "panorama",
+    "tag": "section",
+    "top": 838
+  },
+  {
+    "id": "o-que",
+    "tag": "section",
+    "top": 1650
+  },
+  {
+    "id": "onde",
+    "tag": "section",
+    "top": 2125
+  },
+  {
+    "id": "quando",
+    "tag": "section",
+    "top": 3340
+  },
+  {
+    "id": "emergence-year",
+    "tag": "input",
+    "top": 3706
+  },
+  {
+    "id": "regioes",
+    "tag": "section",
+    "top": 4866
+  },
+  {
+    "id": "significativo",
+    "tag": "section",
+    "top": 6256
+  },
+  {
+    "id": "demo-trend",
+    "tag": "input",
+    "top": 6589
+  },
+  {
+    "id": "demo-noise",
+    "tag": "input",
+    "top": 6665
+  },
+  {
+    "id": "demo-years",
+    "tag": "input",
+    "top": 6741
+  },
+  {
+    "id": "metodo",
+    "tag": "section",
+    "top": 7127
+  },
+  {
+    "id": "fontes",
+    "tag": "footer",
+    "top": 8009
+  },
+  {
+    "id": "recharts_measurement_span",
+    "tag": "span",
+    "top": -20000
+  }
+]

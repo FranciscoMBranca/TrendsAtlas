@@ -1,0 +1,428 @@
+===== _cabecalho 18
+Atlas de Tendências
+Panorama
+O quê
+Onde
+Quando
+Regiões
+Significância
+Método
+Explorar o mapa
+Temperatura do ar
+Precipitação
+Vegetação (NDVI)
+Gelo marinho
+Aerossóis (AOD)
+Nível do mar
+Atlas de Tendências, início
+Secções
+Variável
+===== abertura 21
+DADOS SINTÉTICOS DE DEMONSTRAÇÃO · 2001–2024 · ANOMALIAS MENSAIS
+dados de exemplo
+O planeta não aquece
+ao mesmo ritmo
+em todo o lado.
+Uma leitura de 24 anos de temperatura do ar, aqui com dados sintéticos, e de onde a mudança é real.
+UMA QUESTÃO DE GEOGRAFIA
+Uma tendência global pode esconder realidades locais opostas. O lugar importa tanto como o número.
++0,57
+°C
+/déc.
+MAIOR SUBIDA REGIONAL
+Árctico · p < 0,001
+—
+MAIOR DESCIDA REGIONAL
+Nenhuma região desce
+75%
+ÁREA COM TENDÊNCIA SIGNIFICATIVA
+p < 0,05 · 79% com controlo FDR
+Ler a geografia da mudança
+SISTEMA TERRA / ATLAS 001
+===== panorama 55
+00
+Panorama das variáveis
+O mesmo teste,
+seis assuntos.
+Para cada variável: a tendência média, a parte do mapa em que ela se distingue do acaso e desde quando. Clique numa linha para abrir o atlas dessa variável.
+VARIÁVEL
+TENDÊNCIA MÉDIA
+ÁREA SIGNIFICATIVA (FDR)
+METADE DA ÁREA DETECTÁVEL
+Temperatura do ar
+Globo inteiro
++0,240
+°C por década
+p
+< 0,001
+79
+%
+2020
+Precipitação
++0,008
+mm/dia por década
+9
+ainda não
+Vegetação (NDVI)
+Só em terra
++0,0005
+NDVI por década
+12
+Gelo marinho
+Oceanos polares
+−0,208
+% por década
+20
+Aerossóis (AOD)
+−0,0002
+AOD por década
+0,022
+3
+Nível do mar
+Só no oceano
++35,80
+mm por década
+98
+2012
+A linha vertical marca o que o acaso daria sozinho (
+5
+%). A área é ponderada por cos(latitude) e só conta onde a variável tem dados, por isso percentagens de variáveis com cobertura diferente (gelo marinho, nível do mar) não se referem à mesma parte do planeta.
+Dados de demonstração sintéticos: os números ilustram o método, não o planeta.
+79% da área, contra 5% esperado só por acaso
+Nível esperado só por acaso
+9% da área, contra 5% esperado só por acaso
+12% da área, contra 5% esperado só por acaso
+20% da área, contra 5% esperado só por acaso
+3% da área, contra 5% esperado só por acaso
+98% da área, contra 5% esperado só por acaso
+===== o-que 37
+01
+O quê está a mudar
+Temperatura do ar
+.
+Temperatura do ar a 2 metros do chão. As anomalias mensais mostram quanto cada mês se afastou do normal para esse mês do ano, o que tira a estação da conta.
+O ciclo das estações sai da conta e sobra a mudança.
+Dados sintéticos de demonstração
+°C
+·
+288
+meses
+MÉDIA GLOBAL
+, PONDERADA PELA ÁREA
++0,240
+°C por década
+Intervalo de confiança de 95%:
++0,232
+a
++0,247
+. Valor-p
+< 0,001
+. Uma média global pequena pode esconder regiões com sinais opostos, como mostra o mapa a seguir.
+Anomalia mensal
+Média de 12 meses
+Tendência (Theil-Sen)
+2001
+2006
+2011
+2016
+2021
+-0,40
+-0,20
+0,00
+0,20
+0,40
+Legenda do gráfico
+Série mensal da anomalia global de temperatura do ar (média global), com média de 12 meses e recta de tendência
+===== onde 58
+02
+Onde está a mudar
+GRELHA GLOBAL
+·
+5° × 5°
+Um planeta.
+Dois sinais.
+Mais calor aqui. Menos calor ali.
+A mudança não tem a mesma direcção em todo o lado.
+VARIÁVEL
+Temperatura do ar
+PERÍODO
+2001 – 2024
+CRITÉRIO
+p < 0,05
+Com FDR
+Mostrar só significativas
+Tendência por década
+60° N
+30° N
+0°
+30° S
+60° S
+←
+Arrefece
+Aquece
+→
+−
+1,0
+0
++
+°C por década
+Tendência significativa
+p < 0,05, sem correcção para testes múltiplos
+Árctico
++0,57
+°C
+/déc.
+p
+< 0,001
+Ásia central
++0,37
+Pacífico Sul
++0,06
+Atlântico Norte subpolar
++0,14
+Dados de exemplo, não resultados observados.
+Projecção Equal Earth: as áreas no mapa são proporcionais às áreas reais.
+O pontilhado indica p < 0,05, sem correcção para testes múltiplos: em milhares de células, cerca de 5% aparecem assim só por acaso.
+Critério de significância
+Mapa de tendências: Temperatura do ar. Cor da descida: arrefece; cor da subida: aquece; pontos: tendência significativa. As regiões estão também listadas em botões abaixo do mapa.
+Explorar Árctico
+Explorar Ásia central
+Explorar Pacífico Sul
+Explorar Atlântico Norte subpolar
+Ampliar mapa
+Reduzir mapa
+Repor mapa
+===== quando 59
+03
+Quando saberemos
+TEMPO DE EMERGÊNCIA · JANELAS DE
+10
+A
+24
+ANOS
+Quando é que a mudança
+deixa de ser ruído?
+Uma tendência não aparece de repente. Repetimos o teste ano após ano, com dados cada vez mais longos, e registámos quando cada célula passou a ser detectável e assim ficou. Onde ainda não é, estimamos quantos anos de dados faltam.
+75
+%
+DA ÁREA JÁ TEM TENDÊNCIA DETECTÁVEL
+metade emergiu até 2018
+21
+SE VIA EM
+2010
+o puro acaso explicaria ~
+5
+18
+PODE FICAR CLARA EM ATÉ 20 ANOS
+se as tendências actuais persistirem
+VISTA
+Quando emergiu
+Quanto falta
+ANO
+2024
+60° N
+30° N
+0°
+30° S
+60° S
+← Emergiu cedo
+Emergiu tarde →
+ano em que passou a ser detectável
+Ainda não detectável
+ÁREA COM TENDÊNCIA DETECTÁVEL, ANO A ANO
+Já emergida (p < 0,05)
+Já emergida (com FDR)
+O que se via nesse ano
+Nível do acaso
+O sinal só conta quando fica acima do nível do acaso. Em
+,
+% da área já parecia significativa; em
+%.
+2014
+2018
+0%
+20%
+40%
+60%
+80%
+nível do acaso
+O ano de emergência é descritivo: olhar para os dados ano após ano é espreitar várias vezes, o que infla falsos positivos. Por isso exigimos que a tendência se mantenha detectável até ao fim, e uma célula só emerge se o teste do período completo for significativo. «Quanto falta» é uma projecção condicional (se o declive e o ruído actuais persistirem): uma ordem de grandeza, nunca uma previsão do clima.
+Vista do mapa de emergência
+Reproduzir a linha do tempo
+Mapa do ano em que a tendência de cada célula passou a ser detectável. Cor forte: cedo; pálida: tarde; cinzento: ainda não.
+Legenda do gráfico
+Percentagem da área do planeta com tendência detectável em cada ano, comparada com o nível esperado só por acaso
+===== regioes 51
+04
+Contraste entre regiões
+4
+REGIÕES · MESMA ESCALA
+O mesmo período,
+histórias diferentes.
+Cada região tem a sua estimativa e a sua incerteza. Uma tendência só merece confiança quando o intervalo fica de um dos lados do zero.
+TENDÊNCIA E INCERTEZA ·
+°C por década
+Árctico
++0,57
+Ásia central
++0,37
+Pacífico Sul
++0,06
+Atlântico Norte subpolar
++0,14
+−
+0,68
+0
++
+Aumento
+A temperatura sobe 0,57 °C por década (IC 95%: 0,56 a 0,59). Com p < 0,001, o acaso explica mal esta mudança.
+A tendência tornou-se detectável em 2010 (com dados desde 2001) e assim se manteve.
+Média
+-18,37
+°C
+Variação
+—
+Valor-p
+< 0,001
+Células
+272
+A temperatura sobe 0,37 °C por década (IC 95%: 0,33 a 0,42). Com p < 0,001, o acaso explica mal esta mudança.
+10,57
+12
+A temperatura sobe 0,06 °C por década (IC 95%: 0,03 a 0,09). Com p < 0,001, o acaso explica mal esta mudança.
+A tendência tornou-se detectável em 2021 (com dados desde 2001) e assim se manteve.
+-4,10
+36
+A temperatura sobe 0,14 °C por década (IC 95%: 0,10 a 0,18). Com p < 0,001, o acaso explica mal esta mudança.
+-4,08
+18
+Árctico: +0,57 com intervalo de +0,56 a +0,59
+Ásia central: +0,37 com intervalo de +0,33 a +0,42
+Pacífico Sul: +0,06 com intervalo de +0,03 a +0,09
+Atlântico Norte subpolar: +0,14 com intervalo de +0,10 a +0,18
+Anomalias mensais de Árctico, com tendência
+Anomalias mensais de Ásia central, com tendência
+Anomalias mensais de Pacífico Sul, com tendência
+Anomalias mensais de Atlântico Norte subpolar, com tendência
+===== significativo 51
+05
+É significativo?
+DEMONSTRAÇÃO · RECALCULA NO BROWSER
+Uma tendência não é
+um número
+. É um número e a sua dúvida.
+Inventámos uma série com uma tendência conhecida e juntámos ruído. Mexa nos controlos e veja o teste de Mann-Kendall (o mesmo do mapa) decidir se a tendência se distingue do acaso.
+Sinal claro
+Ruído a esconder o sinal
+Sem tendência
+Tendência verdadeira
++0,60 unid./déc.
+Ruído mensal
+0,3 unid.
+Anos de dados
+20 anos
+Nova amostra de ruído
+2001
+2006
+2011
+2016
+-0,60
+0,00
+0,60
+1,20
+1,80
+Significativa: o acaso explica mal esta tendência.
+Imposta
++0,60 unid. por década
+Estimada
++0,53
+IC 95%
+[
++0,46
+;
++0,60
+]
+Valor-p
+< 0,001
+O intervalo fica de um lado do zero: a direcção da mudança é fiável, mesmo que o tamanho seja incerto.
+Emergência.
+A tendência tornou-se detectável em 2010 (com dados desde 2001) e assim se manteve.
+E num mapa inteiro?
+Com p <
+0,05
+em cada célula, cerca de 5% aparecem significativas só por acaso. Simulámos
+400
+células de ruído puro, sem nenhuma tendência real:
+Simular
+Exemplos
+Série sintética com a recta de tendência estimada
+===== metodo 45
+06
+Método e dados
+REPRODUTÍVEL ·
+2001–2024
+Anomalias
+Anomalia = valor menos a média do mesmo mês do calendário. Assim sai o ciclo das estações e sobra a mudança.
+Tendência
+Theil-Sen: a mediana dos declives de todos os pares de meses. Um mês extremo quase não a move.
+Teste
+Mann-Kendall: conta quantos pares sobem menos quantos descem e pergunta se o acaso explicaria um saldo assim (α = 0.05).
+Autocorrelação
+Hamed-Rao: meses vizinhos parecem-se, o que dá menos informação independente do que parece; a correcção alarga a incerteza, nunca a reduz.
+Testes múltiplos
+Benjamini-Hochberg com q = 0.1: controla a proporção de falsos positivos entre as 2592 células.
+Emergência
+Repetimos o teste em janelas que crescem (10 anos, 11, ... até ao fim) e registamos o início da sequência final de janelas significativas. Uma célula só emerge se o período completo for significativo.
+Quanto falta
+Se o declive e o ruído actuais persistirem, o erro-padrão do declive encolhe com n^(-3/2); resolvemos em quantos anos fica abaixo do declive (limite de 100 anos). É uma ordem de grandeza condicional, não uma previsão.
+Áreas
+Médias globais e percentagens de área pesam cada célula por cos(latitude), porque os meridianos convergem para os pólos.
+Fonte
+Dados sintéticos de demonstração
+· Gerador terratempo.synthetic
+· v1
+Estes dados são inventados para testar o pipeline e o site. NÃO são medições da NASA e não descrevem o clima real.
+Limites
+Significância estatística não é atribuição causal: o teste diz se a mudança é distinguível do acaso, não porquê.
+Poucas décadas misturam tendência com variabilidade natural lenta, como o El Niño: um período diferente pode dar outro resultado.
+A grelha de 5° suaviza detalhes locais; uma célula é uma média, não um sítio.
+Os intervalos de confiança assumem que o modelo (tendência monótona) descreve bem a série.
+O ano de emergência é descritivo: espreitar os dados ano a ano infla falsos positivos, por isso exigimos persistência até ao fim.
+«Quanto falta» assume que declive e ruído se mantêm; o declive estimado é ele próprio incerto, logo é uma ordem de grandeza.
+Descarregar
+Grelha (CSV)
+Regiões (CSV)
+Grelha de tendências
+·
+grid_trend.json
+↗
+Regiões
+regions.json
+Série global
+series_global.json
+Metadados
+meta.json
+===== _rodape 19
+NASA GPM · IMERG
+é a fonte de referência do atlas.
+Esta edição usa dados sintéticos; não permite inferências sobre o clima real.
+Média e áreas ponderadas pelo co-seno da latitude. Grelha de
+5
+° ×
+°.
+Significância estatística não é atribuição causal.
+EDIÇÃO DEMONSTRATIVA
+· ESQUEMA v
+3
+2001
+–
+2024
+/
+288
+MESES
+Gerado a
+2026-10-22
+===== _title 1
+Atlas de Tendências — A geografia da mudança
+===== _meta 1
+Onde o planeta está a mudar, quanto, e se a mudança é distinguível do acaso: temperatura, chuva, vegetação, gelo, aerossóis e nível do mar. Mapas interactivos, regiões em contraste e método explicado.

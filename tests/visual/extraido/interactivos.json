@@ -1,0 +1,498 @@
+[
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Atlas de Tendências",
+    "aria": "Atlas de Tendências, início",
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Panorama",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "O quê",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Onde",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Quando",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Regiões",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Significância",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Método",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "a",
+    "role": null,
+    "text": "Explorar o mapa",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": null,
+    "tag": "button",
+    "role": null,
+    "text": "Temperatura do ar",
+    "aria": null,
+    "pressed": "true"
+  },
+  {
+    "section": null,
+    "tag": "button",
+    "role": null,
+    "text": "Precipitação",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": null,
+    "tag": "button",
+    "role": null,
+    "text": "Vegetação (NDVI)",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": null,
+    "tag": "button",
+    "role": null,
+    "text": "Gelo marinho",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": null,
+    "tag": "button",
+    "role": null,
+    "text": "Aerossóis (AOD)",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": null,
+    "tag": "button",
+    "role": null,
+    "text": "Nível do mar",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "abertura",
+    "tag": "a",
+    "role": null,
+    "text": "Ler a geografia da mudança",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "panorama",
+    "tag": "button",
+    "role": null,
+    "text": "Temperatura do ar",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "panorama",
+    "tag": "button",
+    "role": null,
+    "text": "Precipitação",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "panorama",
+    "tag": "button",
+    "role": null,
+    "text": "Vegetação (NDVI)",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "panorama",
+    "tag": "button",
+    "role": null,
+    "text": "Gelo marinho",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "panorama",
+    "tag": "button",
+    "role": null,
+    "text": "Aerossóis (AOD)",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "panorama",
+    "tag": "button",
+    "role": null,
+    "text": "Nível do mar",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "o-que",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": "radio",
+    "text": "p < 0,05",
+    "aria": null,
+    "pressed": "true"
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": "radio",
+    "text": "Com FDR",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": "switch",
+    "text": "Mostrar só significativas",
+    "aria": "Mostrar só significativas",
+    "pressed": "false"
+  },
+  {
+    "section": "onde",
+    "tag": "path",
+    "role": "button",
+    "text": "Explorar Árctico",
+    "aria": "Explorar Árctico",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "path",
+    "role": "button",
+    "text": "Explorar Ásia central",
+    "aria": "Explorar Ásia central",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "path",
+    "role": "button",
+    "text": "Explorar Pacífico Sul",
+    "aria": "Explorar Pacífico Sul",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "path",
+    "role": "button",
+    "text": "Explorar Atlântico Norte subpolar",
+    "aria": "Explorar Atlântico Norte subpolar",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Ampliar mapa",
+    "aria": "Ampliar mapa",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Reduzir mapa",
+    "aria": "Reduzir mapa",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Repor mapa",
+    "aria": "Repor mapa",
+    "pressed": null
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Árctico+0,57 °C/déc.p < 0,001",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Ásia central+0,37 °C/déc.p < 0,001",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Pacífico Sul+0,06 °C/déc.p < 0,001",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "onde",
+    "tag": "button",
+    "role": null,
+    "text": "Atlântico Norte subpolar+0,14 °C/déc.p < 0,001",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "quando",
+    "tag": "button",
+    "role": "radio",
+    "text": "Quando emergiu",
+    "aria": null,
+    "pressed": "true"
+  },
+  {
+    "section": "quando",
+    "tag": "button",
+    "role": "radio",
+    "text": "Quanto falta",
+    "aria": null,
+    "pressed": "false"
+  },
+  {
+    "section": "quando",
+    "tag": "button",
+    "role": null,
+    "text": "Reproduzir a linha do tempo",
+    "aria": "Reproduzir a linha do tempo",
+    "pressed": null
+  },
+  {
+    "section": "quando",
+    "tag": "input",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "quando",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "regioes",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "regioes",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "regioes",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "regioes",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "button",
+    "role": null,
+    "text": "Sinal claro",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "button",
+    "role": null,
+    "text": "Ruído a esconder o sinal",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "button",
+    "role": null,
+    "text": "Sem tendência",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "input",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "input",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "input",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "button",
+    "role": null,
+    "text": "Nova amostra de ruído",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "div",
+    "role": null,
+    "text": "",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "significativo",
+    "tag": "button",
+    "role": null,
+    "text": "Simular",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "metodo",
+    "tag": "button",
+    "role": null,
+    "text": "Grelha (CSV)",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "metodo",
+    "tag": "button",
+    "role": null,
+    "text": "Regiões (CSV)",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "metodo",
+    "tag": "a",
+    "role": null,
+    "text": "Grelha de tendências · grid_trend.json ↗",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "metodo",
+    "tag": "a",
+    "role": null,
+    "text": "Regiões · regions.json ↗",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "metodo",
+    "tag": "a",
+    "role": null,
+    "text": "Série global · series_global.json ↗",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "metodo",
+    "tag": "a",
+    "role": null,
+    "text": "Metadados · meta.json ↗",
+    "aria": null,
+    "pressed": null
+  },
+  {
+    "section": "fontes",
+    "tag": "a",
+    "role": null,
+    "text": "NASA GPM · IMERG",
+    "aria": null,
+    "pressed": null
+  }
+]

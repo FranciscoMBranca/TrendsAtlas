@@ -1,0 +1,20 @@
+(None, 'a', None) 9: Atlas de Tendências | Panorama | O quê | Onde | Quando | Regiões | Significância | Método
+(None, 'button', None) 6: Temperatura do ar | Precipitação | Vegetação (NDVI) | Gelo marinho | Aerossóis (AOD) | Nível do mar
+('abertura', 'a', None) 1: Ler a geografia da mudança
+('panorama', 'button', None) 6: Temperatura do ar | Precipitação | Vegetação (NDVI) | Gelo marinho | Aerossóis (AOD) | Nível do mar
+('o-que', 'div', None) 1: 
+('onde', 'button', 'radio') 2: p < 0,05 | Com FDR
+('onde', 'button', 'switch') 1: Mostrar só significativas
+('onde', 'path', 'button') 4: Explorar Árctico | Explorar Ásia central | Explorar Pacífico Sul | Explorar Atlântico Norte subpolar
+('onde', 'button', None) 7: Ampliar mapa | Reduzir mapa | Repor mapa | Árctico+0,57 °C/déc.p < 0,001 | Ásia central+0,37 °C/déc.p < 0,001 | Pacífico Sul+0,06 °C/déc.p < 0,001 | Atlântico Norte subpolar+0,14 °C/déc.p <
+('quando', 'button', 'radio') 2: Quando emergiu | Quanto falta
+('quando', 'button', None) 1: Reproduzir a linha do tempo
+('quando', 'input', None) 1: 
+('quando', 'div', None) 1: 
+('regioes', 'div', None) 4:  |  |  | 
+('significativo', 'button', None) 5: Sinal claro | Ruído a esconder o sinal | Sem tendência | Nova amostra de ruído | Simular
+('significativo', 'input', None) 3:  |  | 
+('significativo', 'div', None) 1: 
+('metodo', 'button', None) 2: Grelha (CSV) | Regiões (CSV)
+('metodo', 'a', None) 4: Grelha de tendências · grid_trend.json ↗ | Regiões · regions.json ↗ | Série global · series_global.json ↗ | Metadados · meta.json ↗
+('fontes', 'a', None) 1: NASA GPM · IMERG

@@ -1,0 +1,15 @@
+{
+  "name": "terra-tempo-visual",
+  "private": true,
+  "type": "module",
+  "description": "R0 (W41): capture reference screenshots and inventories from the published prototype",
+  "scripts": {
+    "capture": "node capture.mjs",
+    "measure": "node measure.mjs"
+  },
+  "devDependencies": {
+    "pixelmatch": "^8.0.0",
+    "playwright": "^1.65.1",
+    "pngjs": "^7.0.0"
+  }
+}

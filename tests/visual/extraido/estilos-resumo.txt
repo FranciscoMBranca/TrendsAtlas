@@ -1,0 +1,214 @@
+SHEETS ['https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,500&display=swap', 'https://terra-tempo.vercel.app/assets/styles-BeRSrv-j.css', None]
+MEDIA ['(width >= 40rem)', '(width >= 48rem)', '(width >= 64rem)', '(width >= 80rem)', '(width >= 96rem)', '(hover: hover)', '(prefers-reduced-motion: reduce)', '(width <= 760px)', '(width >= 1500px)', '(width <= 1100px)', '(width <= 640px)']
+FONTFACES 0
+HTML {'lang': 'pt', 'dataset': {}}
+ROOTVARS (custom only)
+  --font-sans: "IBM Plex Sans", sans-serif
+  --font-mono: "IBM Plex Mono", monospace
+  --color-black: #000
+  --spacing: .25rem
+  --container-sm: 24rem
+  --container-md: 28rem
+  --container-lg: 32rem
+  --text-xs: .75rem
+  --text-xs--line-height: calc(1 / .75)
+  --text-sm: .875rem
+  --text-sm--line-height: calc(1.25 / .875)
+  --text-base: 1rem
+  --text-base--line-height: calc(1.5 / 1)
+  --text-lg: 1.125rem
+  --text-lg--line-height: calc(1.75 / 1.125)
+  --text-xl: 1.25rem
+  --text-xl--line-height: calc(1.75 / 1.25)
+  --text-7xl: 4.5rem
+  --text-7xl--line-height: 1
+  --font-weight-normal: 400
+  --font-weight-medium: 500
+  --font-weight-semibold: 600
+  --font-weight-bold: 700
+  --tracking-tight: -.025em
+  --tracking-widest: .1em
+  --leading-relaxed: 1.625
+  --radius-xl: .75rem
+  --ease-out: cubic-bezier(0, 0, .2, 1)
+  --ease-in-out: cubic-bezier(.4, 0, .2, 1)
+  --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite
+  --aspect-video: 16 / 9
+  --default-transition-duration: .15s
+  --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1)
+  --default-font-family: "IBM Plex Sans", sans-serif
+  --default-mono-font-family: "IBM Plex Mono", monospace
+  --font-display: "Newsreader", Georgia, serif
+  --color-border: oklch(87.1% .018 88)
+  --cell-size: 
+  --background: oklch(96.5% .01 87)
+  --foreground: oklch(23.7% .009 248)
+  --muted-foreground: oklch(50.4% .022 238)
+  --border: oklch(87.1% .018 88)
+  --primary: oklch(38.6% .062 220)
+  --primary-foreground: oklch(96.5% .01 87)
+  --secondary: oklch(92.8% .013 85)
+  --map-ink: oklch(25% .025 190)
+  --trend-down: oklch(49.1% .112 66)
+  --trend-up: oklch(45.7% .079 184)
+  --legend-gradient: linear-gradient(90deg, oklch(49.1% .112 66), oklch(96.5% .01 87) 50%, oklch(45.7% .079 184))
+== color (6)
+    158  oklch(0.237 0.009 248)   e.g. header/footer span.wordmark-text; header/footer a
+    157  oklch(0.504 0.022 238)   e.g. abertura span.data-badge; abertura p.opening-subtitle
+     26  oklch(0.386 0.062 220)   e.g. header/footer a.nav-map; header/footer button.variable-chip
+     13  oklch(0.52 0.15 35)   e.g. abertura div.metric-value.text-trend-up; onde span.text-trend-up
+      3  oklch(0.965 0.01 87)   e.g. onde button; quando button
+      1  oklch(0.47 0.1 250)   e.g. abertura div.metric-value.text-trend-down
+== backgroundColor (8)
+     16  oklch(0.386 0.062 220)   e.g. header/footer span; header/footer span
+     13  oklch(0.928 0.013 85)   e.g. header/footer button.variable-chip; panorama td
+      8  oklch(0.965 0.01 87)   e.g. header/footer header.atlas-header; onde span.pointer-events-none.block
+      8  oklch(0.52 0.15 35)   e.g. regioes span.forest-interval.forest-rising; regioes span.forest-dot.forest-rising
+      6  oklch(0.237 0.009 248)   e.g. panorama i; panorama i
+      4  oklab(0.965 0.00052336 0.00998629 / 0.95)   e.g. onde button.inline-flex.items-center; onde button.inline-flex.items-center
+      2  oklch(0.47 0.1 250)   e.g. header/footer span; header/footer span
+      1  oklch(0.871 0.018 88)   e.g. onde button.peer.inline-flex
+== borderTopColor (8)
+   6010  oklch(0.871 0.018 88)   e.g. header/footer div; header/footer header.atlas-header
+      7  oklch(0.237 0.009 248)   e.g. panorama button.panorama-row-button; panorama button.panorama-row-button
+      4  oklch(0.386 0.062 220)   e.g. header/footer button.variable-chip; o-que i.key-line.key-smooth
+      4  oklch(0.965 0.01 87)   e.g. regioes span.forest-dot.forest-rising; regioes span.forest-dot.forest-rising
+      4  oklch(0.52 0.15 35)   e.g. regioes span.verdict.verdict-rising; regioes span.verdict.verdict-rising
+      2  oklab(0.504 -0.0116582 -0.0186571 / 0.55)   e.g. o-que i.key-line.key-monthly; quando i.key-line.key-monthly
+      1  oklch(0.47 0.1 250)   e.g. o-que i.key-line.key-trend
+      1  oklch(0.504 0.022 238)   e.g. quando i.key-line.key-chance
+== fontFamily (3)
+    210  "IBM Plex Mono", monospace   e.g. abertura p.eyebrow; abertura span.data-badge
+     94  "IBM Plex Sans", sans-serif   e.g. header/footer a; header/footer a
+     54  Newsreader, Georgia, serif   e.g. header/footer span.wordmark-text; abertura h1
+== fontSize (18)
+    117  10px   e.g. abertura span.data-badge; abertura span.technical
+     67  12px   e.g. abertura aside.margin-note; abertura a.explore-link
+     35  9px   e.g. abertura span.edition; onde span.technical
+     30  11px   e.g. abertura p.eyebrow; abertura small
+     20  13px   e.g. header/footer a; header/footer a
+     16  14px   e.g. panorama td.panorama-trend; panorama td
+     12  40px   e.g. panorama h3; panorama em
+     11  18px   e.g. abertura p.opening-subtitle; panorama button.panorama-row-button
+     11  20px   e.g. metodo h4; metodo h4
+     10  9.09091px   e.g. onde text; onde text
+      6  54px   e.g. abertura div.metric-value.text-trend-up; abertura div.metric-value.text-trend-down
+      6  11.2px   e.g. panorama small; panorama small
+      5  22px   e.g. regioes h3; regioes h3
+      4  21px   e.g. onde span.region-name; onde span.region-name
+== fontWeight (3)
+    310  400   e.g. header/footer a; header/footer a
+     45  500   e.g. header/footer span.wordmark-text; abertura h1
+      3  700   e.g. o-que strong; significativo strong
+== lineHeight (33)
+     84  16px   e.g. o-que span.variable-source; o-que li
+     36  20.4px   e.g. panorama p; o-que p
+     32  15px   e.g. abertura span.data-badge; abertura span.technical
+     24  17.6px   e.g. panorama th; panorama th
+     22  14.4px   e.g. abertura span.edition; onde span.control-note
+     19  19.2px   e.g. abertura a.explore-link; panorama div.area-value
+     17  20.8px   e.g. header/footer a; header/footer a
+     12  22.4px   e.g. panorama td.panorama-trend; panorama td
+     11  32px   e.g. metodo h4; metodo h4
+     10  28.8px   e.g. panorama button.panorama-row-button; panorama button.panorama-row-button
+     10  14.5455px   e.g. onde text; onde text
+      8  44.8px   e.g. panorama h3; panorama em
+      8  12.8571px   e.g. onde span.region-unit; onde span.region-p
+      7  18px   e.g. panorama h2; o-que h2
+== letterSpacing (1)
+      4  0.66px   e.g. panorama th; panorama th
+== textTransform (0)
+== borderRadius (3)
+     11  2px   e.g. onde button.inline-flex.items-center; onde button.inline-flex.items-center
+      4  50%   e.g. regioes span.forest-dot.forest-rising; regioes span.forest-dot.forest-rising
+      2  3.35544e+07px   e.g. onde button.peer.inline-flex; onde span.pointer-events-none.block
+== boxShadow (2)
+      7  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px   e.g. onde button.peer.inline-flex; significativo button.inline-flex.items-center
+      1  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.237 0.009 248) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px   e.g. onde span.pointer-events-none.block
+== maxWidth (13)
+     11  1360px   e.g. header/footer div.atlas-width.header-inner; header/footer nav.atlas-width.variable-rail
+      6  340px   e.g. panorama p; quando p
+      4  760px   e.g. panorama h3; quando h3
+      2  828px   e.g. o-que div.recharts-wrapper; quando div.recharts-wrapper
+      2  260px   e.g. onde div.stippling-key; quando div.stippling-key
+      2  840px   e.g. onde p.map-footnote; quando p.map-footnote
+      2  560px   e.g. header/footer p; header/footer p.mt-2
+      1  850px   e.g. abertura h1
+      1  650px   e.g. abertura p.opening-subtitle
+      1  546px   e.g. panorama p.panorama-note
+      1  364px   e.g. regioes div.recharts-wrapper
+      1  341px   e.g. regioes div.recharts-wrapper
+      1  800px   e.g. significativo div.recharts-wrapper
+== paddingTop (16)
+     26  14px   e.g. panorama td; panorama td.panorama-trend
+     11  24px   e.g. panorama div.section-intro; onde div.map-intro
+      9  6px   e.g. header/footer button.variable-chip; header/footer button.variable-chip
+      6  30px   e.g. abertura div.opening-copy; onde section.map-section.atlas-width
+      4  25px   e.g. abertura div.metrics; onde div.map-legend
+      4  28px   e.g. o-que section.variable-section.atlas-width; significativo div.demo-grid
+      4  4px   e.g. onde button; onde button
+      4  17px   e.g. onde button.inline-flex.items-center; onde button.inline-flex.items-center
+      4  2px   e.g. regioes span.verdict.verdict-rising; regioes span.verdict.verdict-rising
+      4  12px   e.g. regioes dl.region-facts; regioes dl.region-facts
+      1  10px   e.g. header/footer nav.atlas-width.variable-rail
+      1  64px   e.g. abertura section.opening.atlas-width
+      1  5px   e.g. abertura span.data-badge
+      1  56px   e.g. panorama section.panorama.atlas-width
+== paddingLeft (6)
+     17  12px   e.g. header/footer button.variable-chip; header/footer button.variable-chip
+      7  24px   e.g. onde button.inline-flex.items-center; onde button.inline-flex.items-center
+      4  8px   e.g. regioes span.verdict.verdict-rising; regioes span.verdict.verdict-rising
+      2  20px   e.g. abertura aside.margin-note; significativo div.demo-verdict.is-significant
+      1  9px   e.g. abertura span.data-badge
+      1  18px   e.g. metodo ul
+== marginTop (18)
+     11  8px   e.g. o-que div.series-figure; quando div.metrics.emergence-metrics
+     10  4px   e.g. panorama div.area-value; panorama div.area-value
+      8  5px   e.g. abertura span.metric-p; abertura span.metric-p
+      6  7px   e.g. abertura span.metric-label; abertura span.metric-label
+      4  18px   e.g. o-que ul.series-key; quando ul.series-key
+      3  24px   e.g. panorama table.panorama-table; quando div.map-controls.emergence-controls
+      3  14px   e.g. onde p.map-footnote; quando p.emergence-note
+      2  36px   e.g. o-que div.series-block; significativo div.alarm-box
+      2  22px   e.g. onde div.map-canvas; quando div.map-canvas
+      2  3px   e.g. onde p; quando p
+      2  6px   e.g. metodo ul; metodo ul.json-links
+      1  23px   e.g. abertura p.opening-subtitle
+      1  44px   e.g. abertura div.metrics
+      1  30px   e.g. abertura div.opening-bottom
+== marginBottom (5)
+      3  7px   e.g. abertura aside.margin-note; onde div.legend-directions
+      3  8px   e.g. significativo label; significativo label
+      2  12px   e.g. significativo dl; metodo div.download-row
+      1  10px   e.g. abertura span.technical
+      1  6px   e.g. significativo h4
+== rowGap (23)
+     22  8px   e.g. header/footer a.nav-map; header/footer nav.atlas-width.variable-rail
+     21  12px   e.g. abertura div.metric-value.text-trend-up; abertura div.metric-value.text-trend-down
+     18  10px   e.g. panorama button.panorama-row-button; panorama button.panorama-row-button
+      7  14px   e.g. header/footer a.wordmark; onde div.control-group
+      7  15px   e.g. panorama div.section-label; o-que div.section-label
+      5  20px   e.g. abertura div.eyebrow-row; regioes div.forest-row
+      5  25px   e.g. panorama div.section-intro; onde div.map-intro
+      5  16px   e.g. onde div.map-section-heading; quando div.section-heading-row
+      4  30px   e.g. header/footer nav.header-nav; abertura div.metrics
+      4  4px   e.g. onde button.inline-flex.items-center; onde button.inline-flex.items-center
+      3  40px   e.g. o-que div.series-block; quando div.emergence-chart-block
+      2  24px   e.g. header/footer div.atlas-width.header-inner; o-que div.variable-intro
+      2  6px   e.g. o-que ul.series-key; quando ul.series-key
+      2  36px   e.g. onde div.map-controls; quando div.map-controls.emergence-controls
+== columnGap (23)
+     33  12px   e.g. abertura div.metric-value.text-trend-up; abertura div.metric-value.text-trend-down
+     21  8px   e.g. header/footer a.nav-map; header/footer nav.atlas-width.variable-rail
+     14  10px   e.g. panorama button.panorama-row-button; panorama button.panorama-row-button
+      9  16px   e.g. onde div.map-section-heading; quando div.section-heading-row
+      7  14px   e.g. header/footer a.wordmark; onde div.control-group
+      7  15px   e.g. panorama div.section-label; o-que div.section-label
+      5  20px   e.g. abertura div.eyebrow-row; regioes div.forest-row
+      5  25px   e.g. panorama div.section-intro; onde div.map-intro
+      4  30px   e.g. header/footer nav.header-nav; abertura div.metrics
+      3  40px   e.g. o-que div.series-block; quando div.emergence-chart-block
+      2  24px   e.g. header/footer div.atlas-width.header-inner; o-que div.variable-intro
+      2  6px   e.g. o-que ul.series-key; quando ul.series-key
+      2  36px   e.g. onde div.map-controls; quando div.map-controls.emergence-controls
+      2  55px   e.g. onde div.map-legend; quando div.map-legend.emergence-legend

@@ -1,0 +1,169 @@
+{
+  "a": "referencia",
+  "b": "_run2",
+  "threshold": 0.1,
+  "rows": [
+    {
+      "file": "abertura-1280.png",
+      "size": "1168x701",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "abertura-375.png",
+      "size": "339x809",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "abertura-768.png",
+      "size": "704x676",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "cabecalho-1280.png",
+      "size": "1280x139",
+      "diffPx": 3,
+      "diffPct": 0.0017
+    },
+    {
+      "file": "cabecalho-375.png",
+      "size": "375x125",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "cabecalho-768.png",
+      "size": "768x139",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "metodo-1280.png",
+      "size": "1168x883",
+      "diffPx": 45,
+      "diffPct": 0.0044
+    },
+    {
+      "file": "metodo-375.png",
+      "size": "339x1793",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "metodo-768.png",
+      "size": "704x1345",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "o-que-1280.png",
+      "size": "1168x476",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "o-que-375.png",
+      "size": "339x764",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "o-que-768.png",
+      "size": "704x728",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "onde-1280.png",
+      "size": "1168x1217",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "onde-375.png",
+      "size": "375x1103",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "onde-768.png",
+      "size": "704x1069",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "panorama-1280.png",
+      "size": "1168x812",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "panorama-375.png",
+      "size": "339x1793",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "panorama-768.png",
+      "size": "704x919",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "quando-1280.png",
+      "size": "1168x1527",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "quando-375.png",
+      "size": "339x1777",
+      "diffPx": 68,
+      "diffPct": 0.0113
+    },
+    {
+      "file": "quando-768.png",
+      "size": "704x1554",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "regioes-1280.png",
+      "size": "1168x1390",
+      "diffPx": 13,
+      "diffPct": 0.0008
+    },
+    {
+      "file": "regioes-375.png",
+      "size": "339x2473",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "regioes-768.png",
+      "size": "704x2168",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "significativo-1280.png",
+      "size": "1168x872",
+      "diffPx": 55,
+      "diffPct": 0.0054
+    },
+    {
+      "file": "significativo-375.png",
+      "size": "339x1494",
+      "diffPx": 0,
+      "diffPct": 0
+    },
+    {
+      "file": "significativo-768.png",
+      "size": "704x1323",
+      "diffPx": 0,
+      "diffPct": 0
+    }
+  ]
+}

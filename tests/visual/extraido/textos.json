@@ -1,0 +1,2094 @@
+{
+  "_cabecalho": [
+    {
+      "tag": "span",
+      "text": "Atlas de Tendências"
+    },
+    {
+      "tag": "a",
+      "text": "Panorama"
+    },
+    {
+      "tag": "a",
+      "text": "O quê"
+    },
+    {
+      "tag": "a",
+      "text": "Onde"
+    },
+    {
+      "tag": "a",
+      "text": "Quando"
+    },
+    {
+      "tag": "a",
+      "text": "Regiões"
+    },
+    {
+      "tag": "a",
+      "text": "Significância"
+    },
+    {
+      "tag": "a",
+      "text": "Método"
+    },
+    {
+      "tag": "a",
+      "text": "Explorar o mapa"
+    },
+    {
+      "tag": "button",
+      "text": "Temperatura do ar"
+    },
+    {
+      "tag": "button",
+      "text": "Precipitação"
+    },
+    {
+      "tag": "button",
+      "text": "Vegetação (NDVI)"
+    },
+    {
+      "tag": "button",
+      "text": "Gelo marinho"
+    },
+    {
+      "tag": "button",
+      "text": "Aerossóis (AOD)"
+    },
+    {
+      "tag": "button",
+      "text": "Nível do mar"
+    },
+    {
+      "tag": "a@aria-label",
+      "text": "Atlas de Tendências, início"
+    },
+    {
+      "tag": "nav@aria-label",
+      "text": "Secções"
+    },
+    {
+      "tag": "nav@aria-label",
+      "text": "Variável"
+    }
+  ],
+  "abertura": [
+    {
+      "tag": "p",
+      "text": "DADOS SINTÉTICOS DE DEMONSTRAÇÃO · 2001–2024 · ANOMALIAS MENSAIS"
+    },
+    {
+      "tag": "span",
+      "text": "dados de exemplo"
+    },
+    {
+      "tag": "h1",
+      "text": "O planeta não aquece"
+    },
+    {
+      "tag": "em",
+      "text": "ao mesmo ritmo"
+    },
+    {
+      "tag": "h1",
+      "text": "em todo o lado."
+    },
+    {
+      "tag": "p",
+      "text": "Uma leitura de 24 anos de temperatura do ar, aqui com dados sintéticos, e de onde a mudança é real."
+    },
+    {
+      "tag": "span",
+      "text": "UMA QUESTÃO DE GEOGRAFIA"
+    },
+    {
+      "tag": "aside",
+      "text": "Uma tendência global pode esconder realidades locais opostas. O lugar importa tanto como o número."
+    },
+    {
+      "tag": "div",
+      "text": "+0,57"
+    },
+    {
+      "tag": "small",
+      "text": "°C"
+    },
+    {
+      "tag": "small",
+      "text": "/déc."
+    },
+    {
+      "tag": "span",
+      "text": "MAIOR SUBIDA REGIONAL"
+    },
+    {
+      "tag": "span",
+      "text": "Árctico · p < 0,001"
+    },
+    {
+      "tag": "div",
+      "text": "—"
+    },
+    {
+      "tag": "small",
+      "text": "°C"
+    },
+    {
+      "tag": "small",
+      "text": "/déc."
+    },
+    {
+      "tag": "span",
+      "text": "MAIOR DESCIDA REGIONAL"
+    },
+    {
+      "tag": "span",
+      "text": "Nenhuma região desce"
+    },
+    {
+      "tag": "div",
+      "text": "75%"
+    },
+    {
+      "tag": "span",
+      "text": "ÁREA COM TENDÊNCIA SIGNIFICATIVA"
+    },
+    {
+      "tag": "span",
+      "text": "p < 0,05 · 79% com controlo FDR"
+    },
+    {
+      "tag": "a",
+      "text": "Ler a geografia da mudança"
+    },
+    {
+      "tag": "span",
+      "text": "SISTEMA TERRA / ATLAS 001"
+    }
+  ],
+  "panorama": [
+    {
+      "tag": "span",
+      "text": "00"
+    },
+    {
+      "tag": "h2",
+      "text": "Panorama das variáveis"
+    },
+    {
+      "tag": "h3",
+      "text": "O mesmo teste,"
+    },
+    {
+      "tag": "em",
+      "text": "seis assuntos."
+    },
+    {
+      "tag": "p",
+      "text": "Para cada variável: a tendência média, a parte do mapa em que ela se distingue do acaso e desde quando. Clique numa linha para abrir o atlas dessa variável."
+    },
+    {
+      "tag": "th",
+      "text": "VARIÁVEL"
+    },
+    {
+      "tag": "th",
+      "text": "TENDÊNCIA MÉDIA"
+    },
+    {
+      "tag": "th",
+      "text": "ÁREA SIGNIFICATIVA (FDR)"
+    },
+    {
+      "tag": "th",
+      "text": "METADE DA ÁREA DETECTÁVEL"
+    },
+    {
+      "tag": "button",
+      "text": "Temperatura do ar"
+    },
+    {
+      "tag": "span",
+      "text": "Globo inteiro"
+    },
+    {
+      "tag": "td",
+      "text": "+0,240"
+    },
+    {
+      "tag": "small",
+      "text": "°C por década"
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "div",
+      "text": "79"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "td",
+      "text": "2020"
+    },
+    {
+      "tag": "button",
+      "text": "Precipitação"
+    },
+    {
+      "tag": "span",
+      "text": "Globo inteiro"
+    },
+    {
+      "tag": "td",
+      "text": "+0,008"
+    },
+    {
+      "tag": "small",
+      "text": "mm/dia por década"
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "div",
+      "text": "9"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "td",
+      "text": "ainda não"
+    },
+    {
+      "tag": "button",
+      "text": "Vegetação (NDVI)"
+    },
+    {
+      "tag": "span",
+      "text": "Só em terra"
+    },
+    {
+      "tag": "td",
+      "text": "+0,0005"
+    },
+    {
+      "tag": "small",
+      "text": "NDVI por década"
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "div",
+      "text": "12"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "td",
+      "text": "ainda não"
+    },
+    {
+      "tag": "button",
+      "text": "Gelo marinho"
+    },
+    {
+      "tag": "span",
+      "text": "Oceanos polares"
+    },
+    {
+      "tag": "td",
+      "text": "−0,208"
+    },
+    {
+      "tag": "small",
+      "text": "% por década"
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "div",
+      "text": "20"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "td",
+      "text": "ainda não"
+    },
+    {
+      "tag": "button",
+      "text": "Aerossóis (AOD)"
+    },
+    {
+      "tag": "span",
+      "text": "Globo inteiro"
+    },
+    {
+      "tag": "td",
+      "text": "−0,0002"
+    },
+    {
+      "tag": "small",
+      "text": "AOD por década"
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "0,022"
+    },
+    {
+      "tag": "div",
+      "text": "3"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "td",
+      "text": "ainda não"
+    },
+    {
+      "tag": "button",
+      "text": "Nível do mar"
+    },
+    {
+      "tag": "span",
+      "text": "Só no oceano"
+    },
+    {
+      "tag": "td",
+      "text": "+35,80"
+    },
+    {
+      "tag": "small",
+      "text": "mm por década"
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "div",
+      "text": "98"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "td",
+      "text": "2012"
+    },
+    {
+      "tag": "p",
+      "text": "A linha vertical marca o que o acaso daria sozinho ("
+    },
+    {
+      "tag": "p",
+      "text": "5"
+    },
+    {
+      "tag": "p",
+      "text": "%). A área é ponderada por cos(latitude) e só conta onde a variável tem dados, por isso percentagens de variáveis com cobertura diferente (gelo marinho, nível do mar) não se referem à mesma parte do planeta."
+    },
+    {
+      "tag": "p",
+      "text": "Dados de demonstração sintéticos: os números ilustram o método, não o planeta."
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "79% da área, contra 5% esperado só por acaso"
+    },
+    {
+      "tag": "i@title",
+      "text": "Nível esperado só por acaso"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "9% da área, contra 5% esperado só por acaso"
+    },
+    {
+      "tag": "i@title",
+      "text": "Nível esperado só por acaso"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "12% da área, contra 5% esperado só por acaso"
+    },
+    {
+      "tag": "i@title",
+      "text": "Nível esperado só por acaso"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "20% da área, contra 5% esperado só por acaso"
+    },
+    {
+      "tag": "i@title",
+      "text": "Nível esperado só por acaso"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "3% da área, contra 5% esperado só por acaso"
+    },
+    {
+      "tag": "i@title",
+      "text": "Nível esperado só por acaso"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "98% da área, contra 5% esperado só por acaso"
+    },
+    {
+      "tag": "i@title",
+      "text": "Nível esperado só por acaso"
+    }
+  ],
+  "o-que": [
+    {
+      "tag": "span",
+      "text": "01"
+    },
+    {
+      "tag": "h2",
+      "text": "O quê está a mudar"
+    },
+    {
+      "tag": "strong",
+      "text": "Temperatura do ar"
+    },
+    {
+      "tag": "strong",
+      "text": "."
+    },
+    {
+      "tag": "p",
+      "text": "Temperatura do ar a 2 metros do chão. As anomalias mensais mostram quanto cada mês se afastou do normal para esse mês do ano, o que tira a estação da conta."
+    },
+    {
+      "tag": "p",
+      "text": "O ciclo das estações sai da conta e sobra a mudança."
+    },
+    {
+      "tag": "span",
+      "text": "Dados sintéticos de demonstração"
+    },
+    {
+      "tag": "span",
+      "text": "°C"
+    },
+    {
+      "tag": "span",
+      "text": "·"
+    },
+    {
+      "tag": "span",
+      "text": "288"
+    },
+    {
+      "tag": "span",
+      "text": "meses"
+    },
+    {
+      "tag": "span",
+      "text": "MÉDIA GLOBAL"
+    },
+    {
+      "tag": "span",
+      "text": ", PONDERADA PELA ÁREA"
+    },
+    {
+      "tag": "div",
+      "text": "+0,240"
+    },
+    {
+      "tag": "small",
+      "text": "°C por década"
+    },
+    {
+      "tag": "p",
+      "text": "Intervalo de confiança de 95%:"
+    },
+    {
+      "tag": "p",
+      "text": "+0,232"
+    },
+    {
+      "tag": "p",
+      "text": "a"
+    },
+    {
+      "tag": "p",
+      "text": "+0,247"
+    },
+    {
+      "tag": "p",
+      "text": ". Valor-p"
+    },
+    {
+      "tag": "p",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "p",
+      "text": ". Uma média global pequena pode esconder regiões com sinais opostos, como mostra o mapa a seguir."
+    },
+    {
+      "tag": "li",
+      "text": "Anomalia mensal"
+    },
+    {
+      "tag": "li",
+      "text": "Média de 12 meses"
+    },
+    {
+      "tag": "li",
+      "text": "Tendência (Theil-Sen)"
+    },
+    {
+      "tag": "tspan",
+      "text": "2001"
+    },
+    {
+      "tag": "tspan",
+      "text": "2006"
+    },
+    {
+      "tag": "tspan",
+      "text": "2011"
+    },
+    {
+      "tag": "tspan",
+      "text": "2016"
+    },
+    {
+      "tag": "tspan",
+      "text": "2021"
+    },
+    {
+      "tag": "tspan",
+      "text": "-0,40"
+    },
+    {
+      "tag": "tspan",
+      "text": "-0,20"
+    },
+    {
+      "tag": "tspan",
+      "text": "0,00"
+    },
+    {
+      "tag": "tspan",
+      "text": "0,20"
+    },
+    {
+      "tag": "tspan",
+      "text": "0,40"
+    },
+    {
+      "tag": "ul@aria-label",
+      "text": "Legenda do gráfico"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Série mensal da anomalia global de temperatura do ar (média global), com média de 12 meses e recta de tendência"
+    }
+  ],
+  "onde": [
+    {
+      "tag": "span",
+      "text": "02"
+    },
+    {
+      "tag": "h2",
+      "text": "Onde está a mudar"
+    },
+    {
+      "tag": "span",
+      "text": "GRELHA GLOBAL"
+    },
+    {
+      "tag": "span",
+      "text": "·"
+    },
+    {
+      "tag": "span",
+      "text": "5° × 5°"
+    },
+    {
+      "tag": "h3",
+      "text": "Um planeta."
+    },
+    {
+      "tag": "em",
+      "text": "Dois sinais."
+    },
+    {
+      "tag": "p",
+      "text": "Mais calor aqui. Menos calor ali."
+    },
+    {
+      "tag": "p",
+      "text": "A mudança não tem a mesma direcção em todo o lado."
+    },
+    {
+      "tag": "span",
+      "text": "VARIÁVEL"
+    },
+    {
+      "tag": "span",
+      "text": "Temperatura do ar"
+    },
+    {
+      "tag": "span",
+      "text": "PERÍODO"
+    },
+    {
+      "tag": "span",
+      "text": "2001 – 2024"
+    },
+    {
+      "tag": "span",
+      "text": "CRITÉRIO"
+    },
+    {
+      "tag": "button",
+      "text": "p < 0,05"
+    },
+    {
+      "tag": "button",
+      "text": "Com FDR"
+    },
+    {
+      "tag": "span",
+      "text": "Mostrar só significativas"
+    },
+    {
+      "tag": "span",
+      "text": "Tendência por década"
+    },
+    {
+      "tag": "text",
+      "text": "60° N"
+    },
+    {
+      "tag": "text",
+      "text": "30° N"
+    },
+    {
+      "tag": "text",
+      "text": "0°"
+    },
+    {
+      "tag": "text",
+      "text": "30° S"
+    },
+    {
+      "tag": "text",
+      "text": "60° S"
+    },
+    {
+      "tag": "span",
+      "text": "←"
+    },
+    {
+      "tag": "span",
+      "text": "Arrefece"
+    },
+    {
+      "tag": "span",
+      "text": "Aquece"
+    },
+    {
+      "tag": "span",
+      "text": "→"
+    },
+    {
+      "tag": "span",
+      "text": "−"
+    },
+    {
+      "tag": "span",
+      "text": "1,0"
+    },
+    {
+      "tag": "span",
+      "text": "0"
+    },
+    {
+      "tag": "span",
+      "text": "+"
+    },
+    {
+      "tag": "span",
+      "text": "1,0"
+    },
+    {
+      "tag": "p",
+      "text": "°C por década"
+    },
+    {
+      "tag": "span",
+      "text": "Tendência significativa"
+    },
+    {
+      "tag": "span",
+      "text": "p < 0,05, sem correcção para testes múltiplos"
+    },
+    {
+      "tag": "span",
+      "text": "Árctico"
+    },
+    {
+      "tag": "span",
+      "text": "+0,57"
+    },
+    {
+      "tag": "span",
+      "text": "°C"
+    },
+    {
+      "tag": "span",
+      "text": "/déc."
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "span",
+      "text": "Ásia central"
+    },
+    {
+      "tag": "span",
+      "text": "+0,37"
+    },
+    {
+      "tag": "span",
+      "text": "°C"
+    },
+    {
+      "tag": "span",
+      "text": "/déc."
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "span",
+      "text": "Pacífico Sul"
+    },
+    {
+      "tag": "span",
+      "text": "+0,06"
+    },
+    {
+      "tag": "span",
+      "text": "°C"
+    },
+    {
+      "tag": "span",
+      "text": "/déc."
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "span",
+      "text": "Atlântico Norte subpolar"
+    },
+    {
+      "tag": "span",
+      "text": "+0,14"
+    },
+    {
+      "tag": "span",
+      "text": "°C"
+    },
+    {
+      "tag": "span",
+      "text": "/déc."
+    },
+    {
+      "tag": "span",
+      "text": "p"
+    },
+    {
+      "tag": "span",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "p",
+      "text": "Dados de exemplo, não resultados observados."
+    },
+    {
+      "tag": "p",
+      "text": "Projecção Equal Earth: as áreas no mapa são proporcionais às áreas reais."
+    },
+    {
+      "tag": "p",
+      "text": "O pontilhado indica p < 0,05, sem correcção para testes múltiplos: em milhares de células, cerca de 5% aparecem assim só por acaso."
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Critério de significância"
+    },
+    {
+      "tag": "button@aria-label",
+      "text": "Mostrar só significativas"
+    },
+    {
+      "tag": "svg@aria-label",
+      "text": "Mapa de tendências: Temperatura do ar. Cor da descida: arrefece; cor da subida: aquece; pontos: tendência significativa. As regiões estão também listadas em botões abaixo do mapa."
+    },
+    {
+      "tag": "path@aria-label",
+      "text": "Explorar Árctico"
+    },
+    {
+      "tag": "path@aria-label",
+      "text": "Explorar Ásia central"
+    },
+    {
+      "tag": "path@aria-label",
+      "text": "Explorar Pacífico Sul"
+    },
+    {
+      "tag": "path@aria-label",
+      "text": "Explorar Atlântico Norte subpolar"
+    },
+    {
+      "tag": "button@aria-label",
+      "text": "Ampliar mapa"
+    },
+    {
+      "tag": "button@title",
+      "text": "Ampliar mapa"
+    },
+    {
+      "tag": "button@aria-label",
+      "text": "Reduzir mapa"
+    },
+    {
+      "tag": "button@title",
+      "text": "Reduzir mapa"
+    },
+    {
+      "tag": "button@aria-label",
+      "text": "Repor mapa"
+    },
+    {
+      "tag": "button@title",
+      "text": "Repor mapa"
+    }
+  ],
+  "quando": [
+    {
+      "tag": "span",
+      "text": "03"
+    },
+    {
+      "tag": "h2",
+      "text": "Quando saberemos"
+    },
+    {
+      "tag": "span",
+      "text": "TEMPO DE EMERGÊNCIA · JANELAS DE"
+    },
+    {
+      "tag": "span",
+      "text": "10"
+    },
+    {
+      "tag": "span",
+      "text": "A"
+    },
+    {
+      "tag": "span",
+      "text": "24"
+    },
+    {
+      "tag": "span",
+      "text": "ANOS"
+    },
+    {
+      "tag": "h3",
+      "text": "Quando é que a mudança"
+    },
+    {
+      "tag": "em",
+      "text": "deixa de ser ruído?"
+    },
+    {
+      "tag": "p",
+      "text": "Uma tendência não aparece de repente. Repetimos o teste ano após ano, com dados cada vez mais longos, e registámos quando cada célula passou a ser detectável e assim ficou. Onde ainda não é, estimamos quantos anos de dados faltam."
+    },
+    {
+      "tag": "div",
+      "text": "75"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "span",
+      "text": "DA ÁREA JÁ TEM TENDÊNCIA DETECTÁVEL"
+    },
+    {
+      "tag": "span",
+      "text": "metade emergiu até 2018"
+    },
+    {
+      "tag": "div",
+      "text": "21"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "span",
+      "text": "SE VIA EM"
+    },
+    {
+      "tag": "span",
+      "text": "2010"
+    },
+    {
+      "tag": "span",
+      "text": "o puro acaso explicaria ~"
+    },
+    {
+      "tag": "span",
+      "text": "5"
+    },
+    {
+      "tag": "span",
+      "text": "%"
+    },
+    {
+      "tag": "div",
+      "text": "18"
+    },
+    {
+      "tag": "div",
+      "text": "%"
+    },
+    {
+      "tag": "span",
+      "text": "PODE FICAR CLARA EM ATÉ 20 ANOS"
+    },
+    {
+      "tag": "span",
+      "text": "se as tendências actuais persistirem"
+    },
+    {
+      "tag": "span",
+      "text": "VISTA"
+    },
+    {
+      "tag": "button",
+      "text": "Quando emergiu"
+    },
+    {
+      "tag": "button",
+      "text": "Quanto falta"
+    },
+    {
+      "tag": "label",
+      "text": "ANO"
+    },
+    {
+      "tag": "output",
+      "text": "2024"
+    },
+    {
+      "tag": "text",
+      "text": "60° N"
+    },
+    {
+      "tag": "text",
+      "text": "30° N"
+    },
+    {
+      "tag": "text",
+      "text": "0°"
+    },
+    {
+      "tag": "text",
+      "text": "30° S"
+    },
+    {
+      "tag": "text",
+      "text": "60° S"
+    },
+    {
+      "tag": "span",
+      "text": "← Emergiu cedo"
+    },
+    {
+      "tag": "span",
+      "text": "Emergiu tarde →"
+    },
+    {
+      "tag": "span",
+      "text": "2010"
+    },
+    {
+      "tag": "span",
+      "text": "2024"
+    },
+    {
+      "tag": "p",
+      "text": "ano em que passou a ser detectável"
+    },
+    {
+      "tag": "span",
+      "text": "Ainda não detectável"
+    },
+    {
+      "tag": "span",
+      "text": "ÁREA COM TENDÊNCIA DETECTÁVEL, ANO A ANO"
+    },
+    {
+      "tag": "li",
+      "text": "Já emergida (p < 0,05)"
+    },
+    {
+      "tag": "li",
+      "text": "Já emergida (com FDR)"
+    },
+    {
+      "tag": "li",
+      "text": "O que se via nesse ano"
+    },
+    {
+      "tag": "li",
+      "text": "Nível do acaso"
+    },
+    {
+      "tag": "p",
+      "text": "O sinal só conta quando fica acima do nível do acaso. Em"
+    },
+    {
+      "tag": "p",
+      "text": "2010"
+    },
+    {
+      "tag": "p",
+      "text": ","
+    },
+    {
+      "tag": "p",
+      "text": "21"
+    },
+    {
+      "tag": "p",
+      "text": "% da área já parecia significativa; em"
+    },
+    {
+      "tag": "p",
+      "text": "2024"
+    },
+    {
+      "tag": "p",
+      "text": ","
+    },
+    {
+      "tag": "p",
+      "text": "75"
+    },
+    {
+      "tag": "p",
+      "text": "%."
+    },
+    {
+      "tag": "tspan",
+      "text": "2010"
+    },
+    {
+      "tag": "tspan",
+      "text": "2014"
+    },
+    {
+      "tag": "tspan",
+      "text": "2018"
+    },
+    {
+      "tag": "tspan",
+      "text": "2024"
+    },
+    {
+      "tag": "tspan",
+      "text": "0%"
+    },
+    {
+      "tag": "tspan",
+      "text": "20%"
+    },
+    {
+      "tag": "tspan",
+      "text": "40%"
+    },
+    {
+      "tag": "tspan",
+      "text": "60%"
+    },
+    {
+      "tag": "tspan",
+      "text": "80%"
+    },
+    {
+      "tag": "tspan",
+      "text": "nível do acaso"
+    },
+    {
+      "tag": "p",
+      "text": "O ano de emergência é descritivo: olhar para os dados ano após ano é espreitar várias vezes, o que infla falsos positivos. Por isso exigimos que a tendência se mantenha detectável até ao fim, e uma célula só emerge se o teste do período completo for significativo. «Quanto falta» é uma projecção condicional (se o declive e o ruído actuais persistirem): uma ordem de grandeza, nunca uma previsão do clima."
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Vista do mapa de emergência"
+    },
+    {
+      "tag": "button@aria-label",
+      "text": "Reproduzir a linha do tempo"
+    },
+    {
+      "tag": "svg@aria-label",
+      "text": "Mapa do ano em que a tendência de cada célula passou a ser detectável. Cor forte: cedo; pálida: tarde; cinzento: ainda não."
+    },
+    {
+      "tag": "ul@aria-label",
+      "text": "Legenda do gráfico"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Percentagem da área do planeta com tendência detectável em cada ano, comparada com o nível esperado só por acaso"
+    }
+  ],
+  "regioes": [
+    {
+      "tag": "span",
+      "text": "04"
+    },
+    {
+      "tag": "h2",
+      "text": "Contraste entre regiões"
+    },
+    {
+      "tag": "span",
+      "text": "4"
+    },
+    {
+      "tag": "span",
+      "text": "REGIÕES · MESMA ESCALA"
+    },
+    {
+      "tag": "h3",
+      "text": "O mesmo período,"
+    },
+    {
+      "tag": "em",
+      "text": "histórias diferentes."
+    },
+    {
+      "tag": "p",
+      "text": "Cada região tem a sua estimativa e a sua incerteza. Uma tendência só merece confiança quando o intervalo fica de um dos lados do zero."
+    },
+    {
+      "tag": "figcaption",
+      "text": "TENDÊNCIA E INCERTEZA ·"
+    },
+    {
+      "tag": "figcaption",
+      "text": "°C por década"
+    },
+    {
+      "tag": "span",
+      "text": "Árctico"
+    },
+    {
+      "tag": "span",
+      "text": "+0,57"
+    },
+    {
+      "tag": "span",
+      "text": "Ásia central"
+    },
+    {
+      "tag": "span",
+      "text": "+0,37"
+    },
+    {
+      "tag": "span",
+      "text": "Pacífico Sul"
+    },
+    {
+      "tag": "span",
+      "text": "+0,06"
+    },
+    {
+      "tag": "span",
+      "text": "Atlântico Norte subpolar"
+    },
+    {
+      "tag": "span",
+      "text": "+0,14"
+    },
+    {
+      "tag": "span",
+      "text": "−"
+    },
+    {
+      "tag": "span",
+      "text": "0,68"
+    },
+    {
+      "tag": "span",
+      "text": "0"
+    },
+    {
+      "tag": "span",
+      "text": "+"
+    },
+    {
+      "tag": "span",
+      "text": "0,68"
+    },
+    {
+      "tag": "h3",
+      "text": "Árctico"
+    },
+    {
+      "tag": "span",
+      "text": "Aumento"
+    },
+    {
+      "tag": "div",
+      "text": "+0,57"
+    },
+    {
+      "tag": "small",
+      "text": "°C por década"
+    },
+    {
+      "tag": "p",
+      "text": "A temperatura sobe 0,57 °C por década (IC 95%: 0,56 a 0,59). Com p < 0,001, o acaso explica mal esta mudança."
+    },
+    {
+      "tag": "span",
+      "text": "A tendência tornou-se detectável em 2010 (com dados desde 2001) e assim se manteve."
+    },
+    {
+      "tag": "dt",
+      "text": "Média"
+    },
+    {
+      "tag": "dd",
+      "text": "-18,37"
+    },
+    {
+      "tag": "dd",
+      "text": "°C"
+    },
+    {
+      "tag": "dt",
+      "text": "Variação"
+    },
+    {
+      "tag": "dd",
+      "text": "—"
+    },
+    {
+      "tag": "dt",
+      "text": "Valor-p"
+    },
+    {
+      "tag": "dd",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "dt",
+      "text": "Células"
+    },
+    {
+      "tag": "dd",
+      "text": "272"
+    },
+    {
+      "tag": "h3",
+      "text": "Ásia central"
+    },
+    {
+      "tag": "span",
+      "text": "Aumento"
+    },
+    {
+      "tag": "div",
+      "text": "+0,37"
+    },
+    {
+      "tag": "small",
+      "text": "°C por década"
+    },
+    {
+      "tag": "p",
+      "text": "A temperatura sobe 0,37 °C por década (IC 95%: 0,33 a 0,42). Com p < 0,001, o acaso explica mal esta mudança."
+    },
+    {
+      "tag": "span",
+      "text": "A tendência tornou-se detectável em 2010 (com dados desde 2001) e assim se manteve."
+    },
+    {
+      "tag": "dt",
+      "text": "Média"
+    },
+    {
+      "tag": "dd",
+      "text": "10,57"
+    },
+    {
+      "tag": "dd",
+      "text": "°C"
+    },
+    {
+      "tag": "dt",
+      "text": "Variação"
+    },
+    {
+      "tag": "dd",
+      "text": "—"
+    },
+    {
+      "tag": "dt",
+      "text": "Valor-p"
+    },
+    {
+      "tag": "dd",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "dt",
+      "text": "Células"
+    },
+    {
+      "tag": "dd",
+      "text": "12"
+    },
+    {
+      "tag": "h3",
+      "text": "Pacífico Sul"
+    },
+    {
+      "tag": "span",
+      "text": "Aumento"
+    },
+    {
+      "tag": "div",
+      "text": "+0,06"
+    },
+    {
+      "tag": "small",
+      "text": "°C por década"
+    },
+    {
+      "tag": "p",
+      "text": "A temperatura sobe 0,06 °C por década (IC 95%: 0,03 a 0,09). Com p < 0,001, o acaso explica mal esta mudança."
+    },
+    {
+      "tag": "span",
+      "text": "A tendência tornou-se detectável em 2021 (com dados desde 2001) e assim se manteve."
+    },
+    {
+      "tag": "dt",
+      "text": "Média"
+    },
+    {
+      "tag": "dd",
+      "text": "-4,10"
+    },
+    {
+      "tag": "dd",
+      "text": "°C"
+    },
+    {
+      "tag": "dt",
+      "text": "Variação"
+    },
+    {
+      "tag": "dd",
+      "text": "—"
+    },
+    {
+      "tag": "dt",
+      "text": "Valor-p"
+    },
+    {
+      "tag": "dd",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "dt",
+      "text": "Células"
+    },
+    {
+      "tag": "dd",
+      "text": "36"
+    },
+    {
+      "tag": "h3",
+      "text": "Atlântico Norte subpolar"
+    },
+    {
+      "tag": "span",
+      "text": "Aumento"
+    },
+    {
+      "tag": "div",
+      "text": "+0,14"
+    },
+    {
+      "tag": "small",
+      "text": "°C por década"
+    },
+    {
+      "tag": "p",
+      "text": "A temperatura sobe 0,14 °C por década (IC 95%: 0,10 a 0,18). Com p < 0,001, o acaso explica mal esta mudança."
+    },
+    {
+      "tag": "span",
+      "text": "A tendência tornou-se detectável em 2010 (com dados desde 2001) e assim se manteve."
+    },
+    {
+      "tag": "dt",
+      "text": "Média"
+    },
+    {
+      "tag": "dd",
+      "text": "-4,08"
+    },
+    {
+      "tag": "dd",
+      "text": "°C"
+    },
+    {
+      "tag": "dt",
+      "text": "Variação"
+    },
+    {
+      "tag": "dd",
+      "text": "—"
+    },
+    {
+      "tag": "dt",
+      "text": "Valor-p"
+    },
+    {
+      "tag": "dd",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "dt",
+      "text": "Células"
+    },
+    {
+      "tag": "dd",
+      "text": "18"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Árctico: +0,57 com intervalo de +0,56 a +0,59"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Ásia central: +0,37 com intervalo de +0,33 a +0,42"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Pacífico Sul: +0,06 com intervalo de +0,03 a +0,09"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Atlântico Norte subpolar: +0,14 com intervalo de +0,10 a +0,18"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Anomalias mensais de Árctico, com tendência"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Anomalias mensais de Ásia central, com tendência"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Anomalias mensais de Pacífico Sul, com tendência"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Anomalias mensais de Atlântico Norte subpolar, com tendência"
+    }
+  ],
+  "significativo": [
+    {
+      "tag": "span",
+      "text": "05"
+    },
+    {
+      "tag": "h2",
+      "text": "É significativo?"
+    },
+    {
+      "tag": "span",
+      "text": "DEMONSTRAÇÃO · RECALCULA NO BROWSER"
+    },
+    {
+      "tag": "h3",
+      "text": "Uma tendência não é"
+    },
+    {
+      "tag": "em",
+      "text": "um número"
+    },
+    {
+      "tag": "h3",
+      "text": ". É um número e a sua dúvida."
+    },
+    {
+      "tag": "p",
+      "text": "Inventámos uma série com uma tendência conhecida e juntámos ruído. Mexa nos controlos e veja o teste de Mann-Kendall (o mesmo do mapa) decidir se a tendência se distingue do acaso."
+    },
+    {
+      "tag": "button",
+      "text": "Sinal claro"
+    },
+    {
+      "tag": "button",
+      "text": "Ruído a esconder o sinal"
+    },
+    {
+      "tag": "button",
+      "text": "Sem tendência"
+    },
+    {
+      "tag": "span",
+      "text": "Tendência verdadeira"
+    },
+    {
+      "tag": "output",
+      "text": "+0,60 unid./déc."
+    },
+    {
+      "tag": "span",
+      "text": "Ruído mensal"
+    },
+    {
+      "tag": "output",
+      "text": "0,3 unid."
+    },
+    {
+      "tag": "span",
+      "text": "Anos de dados"
+    },
+    {
+      "tag": "output",
+      "text": "20 anos"
+    },
+    {
+      "tag": "button",
+      "text": "Nova amostra de ruído"
+    },
+    {
+      "tag": "tspan",
+      "text": "2001"
+    },
+    {
+      "tag": "tspan",
+      "text": "2006"
+    },
+    {
+      "tag": "tspan",
+      "text": "2011"
+    },
+    {
+      "tag": "tspan",
+      "text": "2016"
+    },
+    {
+      "tag": "tspan",
+      "text": "-0,60"
+    },
+    {
+      "tag": "tspan",
+      "text": "0,00"
+    },
+    {
+      "tag": "tspan",
+      "text": "0,60"
+    },
+    {
+      "tag": "tspan",
+      "text": "1,20"
+    },
+    {
+      "tag": "tspan",
+      "text": "1,80"
+    },
+    {
+      "tag": "strong",
+      "text": "Significativa: o acaso explica mal esta tendência."
+    },
+    {
+      "tag": "dt",
+      "text": "Imposta"
+    },
+    {
+      "tag": "dd",
+      "text": "+0,60 unid. por década"
+    },
+    {
+      "tag": "dt",
+      "text": "Estimada"
+    },
+    {
+      "tag": "dd",
+      "text": "+0,53"
+    },
+    {
+      "tag": "dt",
+      "text": "IC 95%"
+    },
+    {
+      "tag": "dd",
+      "text": "["
+    },
+    {
+      "tag": "dd",
+      "text": "+0,46"
+    },
+    {
+      "tag": "dd",
+      "text": ";"
+    },
+    {
+      "tag": "dd",
+      "text": "+0,60"
+    },
+    {
+      "tag": "dd",
+      "text": "]"
+    },
+    {
+      "tag": "dt",
+      "text": "Valor-p"
+    },
+    {
+      "tag": "dd",
+      "text": "< 0,001"
+    },
+    {
+      "tag": "p",
+      "text": "O intervalo fica de um lado do zero: a direcção da mudança é fiável, mesmo que o tamanho seja incerto."
+    },
+    {
+      "tag": "strong",
+      "text": "Emergência."
+    },
+    {
+      "tag": "p",
+      "text": "A tendência tornou-se detectável em 2010 (com dados desde 2001) e assim se manteve."
+    },
+    {
+      "tag": "h4",
+      "text": "E num mapa inteiro?"
+    },
+    {
+      "tag": "p",
+      "text": "Com p <"
+    },
+    {
+      "tag": "p",
+      "text": "0,05"
+    },
+    {
+      "tag": "p",
+      "text": "em cada célula, cerca de 5% aparecem significativas só por acaso. Simulámos"
+    },
+    {
+      "tag": "p",
+      "text": "400"
+    },
+    {
+      "tag": "p",
+      "text": "células de ruído puro, sem nenhuma tendência real:"
+    },
+    {
+      "tag": "button",
+      "text": "Simular"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Exemplos"
+    },
+    {
+      "tag": "div@aria-label",
+      "text": "Série sintética com a recta de tendência estimada"
+    }
+  ],
+  "metodo": [
+    {
+      "tag": "span",
+      "text": "06"
+    },
+    {
+      "tag": "h2",
+      "text": "Método e dados"
+    },
+    {
+      "tag": "span",
+      "text": "REPRODUTÍVEL ·"
+    },
+    {
+      "tag": "span",
+      "text": "2001–2024"
+    },
+    {
+      "tag": "h4",
+      "text": "Anomalias"
+    },
+    {
+      "tag": "p",
+      "text": "Anomalia = valor menos a média do mesmo mês do calendário. Assim sai o ciclo das estações e sobra a mudança."
+    },
+    {
+      "tag": "h4",
+      "text": "Tendência"
+    },
+    {
+      "tag": "p",
+      "text": "Theil-Sen: a mediana dos declives de todos os pares de meses. Um mês extremo quase não a move."
+    },
+    {
+      "tag": "h4",
+      "text": "Teste"
+    },
+    {
+      "tag": "p",
+      "text": "Mann-Kendall: conta quantos pares sobem menos quantos descem e pergunta se o acaso explicaria um saldo assim (α = 0.05)."
+    },
+    {
+      "tag": "h4",
+      "text": "Autocorrelação"
+    },
+    {
+      "tag": "p",
+      "text": "Hamed-Rao: meses vizinhos parecem-se, o que dá menos informação independente do que parece; a correcção alarga a incerteza, nunca a reduz."
+    },
+    {
+      "tag": "h4",
+      "text": "Testes múltiplos"
+    },
+    {
+      "tag": "p",
+      "text": "Benjamini-Hochberg com q = 0.1: controla a proporção de falsos positivos entre as 2592 células."
+    },
+    {
+      "tag": "h4",
+      "text": "Emergência"
+    },
+    {
+      "tag": "p",
+      "text": "Repetimos o teste em janelas que crescem (10 anos, 11, ... até ao fim) e registamos o início da sequência final de janelas significativas. Uma célula só emerge se o período completo for significativo."
+    },
+    {
+      "tag": "h4",
+      "text": "Quanto falta"
+    },
+    {
+      "tag": "p",
+      "text": "Se o declive e o ruído actuais persistirem, o erro-padrão do declive encolhe com n^(-3/2); resolvemos em quantos anos fica abaixo do declive (limite de 100 anos). É uma ordem de grandeza condicional, não uma previsão."
+    },
+    {
+      "tag": "h4",
+      "text": "Áreas"
+    },
+    {
+      "tag": "p",
+      "text": "Médias globais e percentagens de área pesam cada célula por cos(latitude), porque os meridianos convergem para os pólos."
+    },
+    {
+      "tag": "h4",
+      "text": "Fonte"
+    },
+    {
+      "tag": "strong",
+      "text": "Dados sintéticos de demonstração"
+    },
+    {
+      "tag": "p",
+      "text": "· Gerador terratempo.synthetic"
+    },
+    {
+      "tag": "p",
+      "text": "· v1"
+    },
+    {
+      "tag": "p",
+      "text": "Estes dados são inventados para testar o pipeline e o site. NÃO são medições da NASA e não descrevem o clima real."
+    },
+    {
+      "tag": "h4",
+      "text": "Limites"
+    },
+    {
+      "tag": "li",
+      "text": "Significância estatística não é atribuição causal: o teste diz se a mudança é distinguível do acaso, não porquê."
+    },
+    {
+      "tag": "li",
+      "text": "Poucas décadas misturam tendência com variabilidade natural lenta, como o El Niño: um período diferente pode dar outro resultado."
+    },
+    {
+      "tag": "li",
+      "text": "A grelha de 5° suaviza detalhes locais; uma célula é uma média, não um sítio."
+    },
+    {
+      "tag": "li",
+      "text": "Os intervalos de confiança assumem que o modelo (tendência monótona) descreve bem a série."
+    },
+    {
+      "tag": "li",
+      "text": "O ano de emergência é descritivo: espreitar os dados ano a ano infla falsos positivos, por isso exigimos persistência até ao fim."
+    },
+    {
+      "tag": "li",
+      "text": "«Quanto falta» assume que declive e ruído se mantêm; o declive estimado é ele próprio incerto, logo é uma ordem de grandeza."
+    },
+    {
+      "tag": "h4",
+      "text": "Descarregar"
+    },
+    {
+      "tag": "button",
+      "text": "Grelha (CSV)"
+    },
+    {
+      "tag": "button",
+      "text": "Regiões (CSV)"
+    },
+    {
+      "tag": "a",
+      "text": "Grelha de tendências"
+    },
+    {
+      "tag": "a",
+      "text": "·"
+    },
+    {
+      "tag": "a",
+      "text": "grid_trend.json"
+    },
+    {
+      "tag": "a",
+      "text": "↗"
+    },
+    {
+      "tag": "a",
+      "text": "Regiões"
+    },
+    {
+      "tag": "a",
+      "text": "·"
+    },
+    {
+      "tag": "a",
+      "text": "regions.json"
+    },
+    {
+      "tag": "a",
+      "text": "↗"
+    },
+    {
+      "tag": "a",
+      "text": "Série global"
+    },
+    {
+      "tag": "a",
+      "text": "·"
+    },
+    {
+      "tag": "a",
+      "text": "series_global.json"
+    },
+    {
+      "tag": "a",
+      "text": "↗"
+    },
+    {
+      "tag": "a",
+      "text": "Metadados"
+    },
+    {
+      "tag": "a",
+      "text": "·"
+    },
+    {
+      "tag": "a",
+      "text": "meta.json"
+    },
+    {
+      "tag": "a",
+      "text": "↗"
+    }
+  ],
+  "_rodape": [
+    {
+      "tag": "a",
+      "text": "NASA GPM · IMERG"
+    },
+    {
+      "tag": "p",
+      "text": "é a fonte de referência do atlas."
+    },
+    {
+      "tag": "p",
+      "text": "Esta edição usa dados sintéticos; não permite inferências sobre o clima real."
+    },
+    {
+      "tag": "p",
+      "text": "Média e áreas ponderadas pelo co-seno da latitude. Grelha de"
+    },
+    {
+      "tag": "p",
+      "text": "5"
+    },
+    {
+      "tag": "p",
+      "text": "° ×"
+    },
+    {
+      "tag": "p",
+      "text": "5"
+    },
+    {
+      "tag": "p",
+      "text": "°."
+    },
+    {
+      "tag": "p",
+      "text": "Significância estatística não é atribuição causal."
+    },
+    {
+      "tag": "div",
+      "text": "EDIÇÃO DEMONSTRATIVA"
+    },
+    {
+      "tag": "div",
+      "text": "· ESQUEMA v"
+    },
+    {
+      "tag": "div",
+      "text": "3"
+    },
+    {
+      "tag": "div",
+      "text": "2001"
+    },
+    {
+      "tag": "div",
+      "text": "–"
+    },
+    {
+      "tag": "div",
+      "text": "2024"
+    },
+    {
+      "tag": "div",
+      "text": "/"
+    },
+    {
+      "tag": "div",
+      "text": "288"
+    },
+    {
+      "tag": "div",
+      "text": "MESES"
+    },
+    {
+      "tag": "div",
+      "text": "Gerado a"
+    },
+    {
+      "tag": "div",
+      "text": "2026-10-22"
+    }
+  ],
+  "_title": [
+    {
+      "tag": "title",
+      "text": "Atlas de Tendências — A geografia da mudança"
+    }
+  ],
+  "_meta": [
+    {
+      "tag": "meta",
+      "text": "Onde o planeta está a mudar, quanto, e se a mudança é distinguível do acaso: temperatura, chuva, vegetação, gelo, aerossóis e nível do mar. Mapas interactivos, regiões em contraste e método explicado."
+    }
+  ]
+}

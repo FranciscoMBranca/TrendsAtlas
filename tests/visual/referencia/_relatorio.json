@@ -1,0 +1,94 @@
+{
+  "url": "https://terra-tempo.vercel.app",
+  "date": "2026-11-14T17:33:17.171Z",
+  "widths": {
+    "375": {
+      "readyMs": 8450,
+      "anchors": {
+        "abertura": {
+          "height": 807
+        },
+        "panorama": {
+          "height": 1792
+        },
+        "o-que": {
+          "height": 764
+        },
+        "onde": {
+          "height": 1102
+        },
+        "quando": {
+          "height": 1777
+        },
+        "regioes": {
+          "height": 2472
+        },
+        "significativo": {
+          "height": 1493
+        },
+        "metodo": {
+          "height": 1793
+        }
+      }
+    },
+    "768": {
+      "readyMs": 5433,
+      "anchors": {
+        "abertura": {
+          "height": 675
+        },
+        "panorama": {
+          "height": 918
+        },
+        "o-que": {
+          "height": 727
+        },
+        "onde": {
+          "height": 1068
+        },
+        "quando": {
+          "height": 1554
+        },
+        "regioes": {
+          "height": 2166
+        },
+        "significativo": {
+          "height": 1323
+        },
+        "metodo": {
+          "height": 1344
+        }
+      }
+    },
+    "1280": {
+      "readyMs": 4692,
+      "anchors": {
+        "abertura": {
+          "height": 699
+        },
+        "panorama": {
+          "height": 811
+        },
+        "o-que": {
+          "height": 475
+        },
+        "onde": {
+          "height": 1215
+        },
+        "quando": {
+          "height": 1526
+        },
+        "regioes": {
+          "height": 1389
+        },
+        "significativo": {
+          "height": 871
+        },
+        "metodo": {
+          "height": 882
+        }
+      }
+    }
+  },
+  "missing": []
+}
