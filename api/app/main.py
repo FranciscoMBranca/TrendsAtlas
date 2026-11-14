@@ -27,10 +27,25 @@ from terratempo.export import load_datasets
 from terratempo.maps import preset_years, trend_map
 from terratempo.regions import MAX_VERTICES, region_series
 
-ALLOWED_ORIGINS = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",") if o.strip()]
-# Optional regex for preview deployments, e.g. ^https://terra-tempo-[a-z0-9-]+\.vercel\.app$
-ALLOWED_ORIGIN_REGEX = os.getenv("ALLOWED_ORIGIN_REGEX") or None
-RATE_LIMIT_PER_MIN = int(os.getenv("RATE_LIMIT_PER_MIN", "60"))
+def _env(name: str, default: str = "") -> str:
+    """Env value without surrounding spaces or quotes (dashboards often keep the quotes)."""
+    return (os.getenv(name) or default).strip().strip("\"'").strip()
+
+
+def parse_origins(raw: str) -> list[str]:
+    """Comma-separated origins. An origin is scheme://host[:port]: no path, no trailing slash."""
+    out = []
+    for item in raw.split(","):
+        item = item.strip().strip("\"'").strip().rstrip("/")
+        if item:
+            out.append(item)
+    return out
+
+
+ALLOWED_ORIGINS = parse_origins(_env("ALLOWED_ORIGINS", "http://localhost:3000"))
+# Optional ONE regex for preview deployments, e.g. ^https://trends-atlas-[a-z0-9-]+\.vercel\.app$
+ALLOWED_ORIGIN_REGEX = _env("ALLOWED_ORIGIN_REGEX") or None
+RATE_LIMIT_PER_MIN = int(_env("RATE_LIMIT_PER_MIN", "60") or "60")
 
 app = FastAPI(title="Terra Tempo API", version=SCHEMA_VERSION)
 app.add_middleware(

@@ -19,7 +19,8 @@ from .readers import load_cube
 from .synthetic import DEMO_VARIABLES, make_dataset
 
 
-CUBES_DIR = Path(os.getenv("TERRATEMPO_CUBES", Path(__file__).resolve().parents[2] / "data" / "cubes"))
+# An empty TERRATEMPO_CUBES (as left by some dashboards) means "use the default".
+CUBES_DIR = Path((os.getenv("TERRATEMPO_CUBES") or "").strip().strip("\"'") or Path(__file__).resolve().parents[2] / "data" / "cubes")
 
 
 def load_datasets() -> dict:
