@@ -1,0 +1,178 @@
+.regions-section {
+  border-top: 1px solid var(--border);
+  padding-block: 30px 56px;
+}
+
+/* Gráfico de floresta: estimativa + intervalo de confiança no mesmo eixo. */
+.forest {
+  margin: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.forest-rows {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.forest-row {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 70px;
+  align-items: center;
+  gap: 20px;
+}
+
+.forest-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.forest-value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: right;
+}
+
+.forest-track {
+  position: relative;
+  height: 22px;
+}
+
+.forest-zero {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  border-left: 1px dashed var(--muted-foreground);
+}
+
+.forest-interval {
+  position: absolute;
+  top: 10px;
+  height: 2px;
+}
+
+.forest-dot {
+  position: absolute;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--background);
+}
+
+.forest-rising {
+  background: var(--trend-up);
+}
+
+.forest-falling {
+  background: var(--trend-down);
+}
+
+.forest-unclear {
+  background: var(--muted-foreground);
+}
+
+/* Alinhado com a coluna da pista: margem = coluna do nome + coluna do valor + folgas. */
+.forest-axis {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 90px 0 220px;
+}
+
+.region-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+  margin-top: 28px;
+}
+
+.region-card {
+  padding: 24px 24px 22px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.region-card:first-child {
+  padding-left: 0;
+}
+
+.region-card:last-child {
+  border-right: 0;
+}
+
+.region-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.region-card h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.verdict {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+}
+
+.verdict-rising {
+  color: var(--trend-up);
+}
+
+.verdict-falling {
+  color: var(--trend-down);
+}
+
+.verdict-unclear {
+  color: var(--muted-foreground);
+}
+
+.region-figure {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.region-figure small {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+
+.region-sentence {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+  min-height: 6.8em;
+}
+
+.region-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin: 4px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.region-facts dt {
+  color: var(--muted-foreground);
+}
+
+.region-facts dd {
+  margin: 0;
+}

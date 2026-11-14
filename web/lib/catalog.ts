@@ -7,6 +7,19 @@ export const LANGS: Lang[] = ["pt", "en"];
 type Catalog = Record<string, string>;
 
 const pt: Catalog = {
+  "inv.rotulo": "Investigue",
+  "inv.titulo": "A sua pergunta.",
+  "inv.titulo_em": "Os mesmos testes.",
+  "inv.intro": "Escolha onde, quando e, se quiser, só alguns meses. Calculamos a tendência, dois testes de significância e quanto tempo falta, sempre que a tendência ainda não se distingue do ruído.",
+  "inv.indisponivel": "{variavel}: a análise de regiões ainda não existe para esta variável. Escolha temperatura, precipitação ou aerossóis.",
+  "inv.onde": "Onde",
+  "inv.quando": "Período",
+  "inv.exemplo": "Região do atlas",
+  "inv.rectangulo": "Rectângulo",
+  "inv.oeste": "Oeste (°)",
+  "inv.sul": "Sul (°)",
+  "inv.este": "Este (°)",
+  "inv.norte": "Norte (°)",
   "app.titulo": "Terra Tempo",
   "app.subtitulo": "O que está a mudar aqui, quanto, e é mais do que ruído?",
   "app.demo": "DEMONSTRAÇÃO: dados sintéticos, não são medições reais da NASA.",
@@ -97,6 +110,19 @@ const pt: Catalog = {
 };
 
 const en: Catalog = {
+  "inv.rotulo": "Investigate",
+  "inv.titulo": "Your question.",
+  "inv.titulo_em": "The same tests.",
+  "inv.intro": "Choose where, when and, if you like, only some months. We compute the trend, two significance tests and, when the trend cannot yet be told apart from noise, how long it would take.",
+  "inv.indisponivel": "{variavel}: region analysis is not available for this variable yet. Choose temperature, precipitation or aerosols.",
+  "inv.onde": "Where",
+  "inv.quando": "Period",
+  "inv.exemplo": "Atlas region",
+  "inv.rectangulo": "Rectangle",
+  "inv.oeste": "West (°)",
+  "inv.sul": "South (°)",
+  "inv.este": "East (°)",
+  "inv.norte": "North (°)",
   "app.titulo": "Terra Tempo",
   "app.subtitulo": "What is changing here, by how much, and is it more than noise?",
   "app.demo": "DEMO: synthetic data, not real NASA measurements.",

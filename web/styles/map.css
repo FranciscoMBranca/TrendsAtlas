@@ -1,0 +1,355 @@
+.map-section {
+  border-top: 1px solid var(--border);
+  padding-top: 30px;
+  padding-bottom: 48px;
+}
+
+.map-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.map-intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 24px 0;
+}
+
+.map-intro h3 {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.map-intro h3 em {
+  color: var(--primary);
+}
+
+.map-intro p {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+
+.map-controls {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.control-group .technical {
+  font-size: 9px;
+}
+
+.control-value {
+  font-size: 12px;
+}
+
+.period-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.significance-control {
+  font-size: 12px;
+  gap: 10px;
+}
+
+.control-note {
+  margin-left: auto;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--border);
+}
+
+.segmented button {
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-foreground);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background 250ms ease-out,
+    color 250ms ease-out;
+}
+
+.segmented button + button {
+  border-left: 1px solid var(--border);
+}
+
+.segmented button[aria-checked="true"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.map-canvas {
+  position: relative;
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.world-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.map-sphere {
+  fill: var(--background);
+}
+
+.map-frame {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-graticule {
+  fill: none;
+  stroke: var(--background);
+  stroke-opacity: 0.55;
+  stroke-width: 0.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-land {
+  fill: none;
+  stroke: var(--map-ink);
+  stroke-width: 0.65;
+  pointer-events: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-dot {
+  fill: var(--map-ink);
+  opacity: 0.6;
+}
+
+.map-stipple {
+  pointer-events: none;
+}
+
+.map-hover {
+  fill: none;
+  stroke: var(--map-ink);
+  stroke-width: 1.4;
+  pointer-events: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-parallel {
+  font-family: var(--font-mono);
+  fill: var(--map-ink);
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: var(--background);
+  stroke-width: 3px;
+}
+
+.region-outline {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+  cursor: pointer;
+  pointer-events: stroke;
+  vector-effect: non-scaling-stroke;
+}
+
+.region-outline:hover,
+.region-outline.selected {
+  stroke-width: 2.2;
+  stroke-dasharray: none;
+}
+
+.map-tools {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 5px;
+}
+
+.map-tooltip {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  pointer-events: none;
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.map-tooltip strong {
+  display: block;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.tooltip-mode {
+  color: var(--muted-foreground);
+}
+
+.map-selection {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--background);
+  padding: 4px 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-legend {
+  display: flex;
+  justify-content: center;
+  gap: 55px;
+  align-items: center;
+  padding: 25px 0 27px;
+}
+
+.legend-scale {
+  width: 340px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.legend-directions,
+.legend-values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.legend-directions {
+  margin-bottom: 7px;
+  color: var(--muted-foreground);
+}
+
+.legend-bar {
+  height: 8px;
+  background: var(--legend-gradient);
+  border: 1px solid var(--border);
+}
+
+.legend-values {
+  margin-top: 5px;
+}
+
+.legend-scale p {
+  text-align: center;
+  margin-top: 3px;
+  color: var(--muted-foreground);
+  font-size: 8px;
+}
+
+.stippling-key {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  max-width: 260px;
+}
+
+.dot-sample {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-image: radial-gradient(var(--map-ink) 0.7px, transparent 0.7px);
+  background-size: 5px 5px;
+  border: 1px solid var(--border);
+}
+
+.region-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.region-button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: initial;
+  height: auto;
+  padding: 17px 24px;
+  border-radius: 0;
+  text-align: left;
+  border-right: 1px solid var(--border);
+  white-space: normal;
+  gap: 4px 12px;
+  transition: background 250ms ease-out;
+}
+
+.region-button:last-child {
+  border-right: 0;
+}
+
+.region-button:hover,
+.region-button[aria-pressed="true"] {
+  background: var(--secondary);
+}
+
+.region-button > span {
+  grid-column: 1;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.region-button > .region-name {
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--foreground);
+}
+
+.region-unit,
+.region-button > .region-p {
+  font-size: 9px;
+  color: var(--muted-foreground);
+}
+
+.region-button svg {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  color: var(--primary);
+}
+
+.map-footnote {
+  font-size: 10px;
+  color: var(--muted-foreground);
+  margin-top: 14px;
+  max-width: 840px;
+}

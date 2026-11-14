@@ -54,6 +54,7 @@ def manifest(datasets: dict) -> dict:
             "periodo": {"inicio": int(ds.years.min()), "fim": int(ds.years.max())},
             "rotulo": ds.label,
             "camada": meta["camada"],
+            "citacao": ds.meta.get("citation"),
         })
     any_demo = any(i["rotulo"] == LABEL_DEMO for i in items)
     return {"schemaVersion": SCHEMA_VERSION, "contem_demonstracao": any_demo,

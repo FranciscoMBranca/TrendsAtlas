@@ -1,0 +1,121 @@
+/* Secção 03: tempo de emergência. Reutiliza .metrics, .map-controls, .map-canvas e .map-legend. */
+.emergence-section {
+  border-top: 1px solid var(--border);
+  padding-block: 30px 56px;
+}
+
+.emergence-metrics {
+  margin-top: 8px;
+}
+
+.emergence-controls {
+  margin-top: 24px;
+}
+
+.timeline-control {
+  flex: 1;
+  min-width: 320px;
+}
+
+.timeline-control input[type="range"] {
+  flex: 1;
+  accent-color: var(--primary);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--primary);
+  min-width: 3.2em;
+}
+
+.swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.swatch-legend {
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.swatch-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emergence-tooltip {
+  max-width: 280px;
+  white-space: normal;
+}
+
+.emergence-chart-block {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 8px;
+}
+
+.emergence-note {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+}
+
+.region-emergence {
+  display: block;
+  margin-top: 8px;
+}
+
+.demo-verdict .demo-emergence {
+  margin-top: 8px;
+}
+
+.demo-emergence strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+@media (max-width: 1100px) {
+  .emergence-chart-block {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Em ecrãs estreitos a linha do tempo desce para uma segunda linha, em vez de ficar escondida. */
+  .emergence-controls {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 14px 24px;
+  }
+
+  .timeline-control {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+
+  .swatch-legend {
+    padding-inline: 18px;
+    gap: 10px 18px;
+  }
+}
+
+.emergence-caveat {
+  max-width: 720px;
+  margin: 0 auto 28px;
+  text-align: center;
+}

@@ -13,7 +13,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pymannkendall>=1.4"]
+dev = ["pytest>=8", "pymannkendall>=1.4", "h5py>=3.10", "netCDF4>=1.6"]
+# Only needed to read and download real NASA files.
+nasa = ["h5py>=3.10", "netCDF4>=1.6", "earthaccess>=0.9"]
 
 [tool.setuptools.packages.find]
 include = ["terratempo*"]

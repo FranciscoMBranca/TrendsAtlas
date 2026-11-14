@@ -1,0 +1,89 @@
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-plex-sans), "IBM Plex Sans", sans-serif;
+  --font-display: var(--font-newsreader), "Newsreader", Georgia, serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--secondary);
+  --color-accent-foreground: var(--primary);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --color-card: var(--background);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--background);
+  --color-popover-foreground: var(--foreground);
+  --color-destructive: var(--trend-down);
+  --color-destructive-foreground: var(--background);
+  --color-trend-down: var(--trend-down);
+  --color-trend-up: var(--trend-up);
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+}
+
+:root {
+  --background: oklch(0.965 0.01 87);
+  --foreground: oklch(0.237 0.009 248);
+  --muted-foreground: oklch(0.504 0.022 238);
+  --border: oklch(0.871 0.018 88);
+  --primary: oklch(0.386 0.062 220);
+  --primary-foreground: var(--background);
+  --secondary: oklch(0.928 0.013 85);
+  --map-ink: oklch(0.25 0.025 190);
+}
+
+/*
+ * Paletas por variável. `--trend-down` é a cor das descidas e `--trend-up` a das
+ * subidas; o mapa, os gráficos e as legendas usam só estes dois nomes.
+ * Regra de desenho: a cor diz a DIRECÇÃO, nunca "bom" ou "mau" (menos gelo não é
+ * "vermelho" por decreto). Cada variável tem a sua paleta para que o utilizador
+ * veja logo que mudou de assunto; precipitação é a paleta por defeito (em :root).
+ */
+:root {
+  --trend-down: oklch(0.491 0.112 66); /* castanho: menos chuva */
+  --trend-up: oklch(0.457 0.079 184); /* verde-azulado: mais chuva */
+}
+[data-palette="temperature"] {
+  --trend-down: oklch(0.47 0.1 250); /* azul: arrefece */
+  --trend-up: oklch(0.52 0.15 35); /* laranja-avermelhado: aquece */
+}
+[data-palette="precipitation"] {
+  --trend-down: oklch(0.491 0.112 66);
+  --trend-up: oklch(0.457 0.079 184);
+}
+[data-palette="vegetation"] {
+  --trend-down: oklch(0.49 0.11 55); /* castanho-alaranjado: menos verde */
+  --trend-up: oklch(0.46 0.11 145); /* verde: mais verde */
+}
+[data-palette="sea_ice"] {
+  --trend-down: oklch(0.5 0.13 50); /* laranja: gelo que recua */
+  --trend-up: oklch(0.45 0.1 245); /* azul: gelo que avança */
+}
+[data-palette="aerosols"] {
+  --trend-down: oklch(0.46 0.07 225); /* azul-acinzentado: ar mais limpo */
+  --trend-up: oklch(0.45 0.12 330); /* púrpura: ar mais carregado */
+}
+[data-palette="sea_level"] {
+  --trend-down: oklch(0.5 0.1 90); /* azeitona: desce */
+  --trend-up: oklch(0.4 0.11 255); /* azul profundo: sobe */
+}
+
+/* Redefinido em cada paleta: um var() é resolvido onde a propriedade é declarada. */
+:root,
+[data-palette] {
+  --legend-gradient: linear-gradient(
+    90deg,
+    var(--trend-down),
+    var(--background) 50%,
+    var(--trend-up)
+  );
+}

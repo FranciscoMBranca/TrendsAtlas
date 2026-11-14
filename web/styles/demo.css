@@ -1,0 +1,128 @@
+.demo-section {
+  border-top: 1px solid var(--border);
+  padding-block: 30px 56px;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 48px;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+}
+
+.demo-controls {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
+.demo-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-button {
+  font-size: 11px;
+  height: auto;
+  padding: 6px 12px;
+  white-space: normal;
+  text-align: left;
+}
+
+.demo-slider label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.demo-slider output {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--primary);
+}
+
+.demo-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.demo-result {
+  min-width: 0;
+}
+
+.demo-verdict {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--muted-foreground);
+  background: var(--secondary);
+  font-size: 13px;
+}
+
+.demo-verdict.is-significant {
+  border-left-color: var(--trend-up);
+}
+
+.demo-verdict.is-noise {
+  border-left-color: var(--trend-down);
+}
+
+.demo-verdict dl {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  gap: 8px 32px;
+  margin: 12px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.demo-verdict dt {
+  color: var(--muted-foreground);
+  font-size: 9px;
+}
+
+.demo-verdict dd {
+  margin: 0;
+}
+
+.demo-verdict p {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+
+.alarm-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.alarm-box h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.alarm-box p {
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+
+.alarm-action {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  justify-items: start;
+}
+
+.alarm-action strong {
+  color: var(--primary);
+}

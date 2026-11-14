@@ -18,3 +18,8 @@ data/raw/
 *.nc4
 *.HDF5
 *.hdf
+
+# Scratch outputs of the visual scripts
+tests/visual/_*
+# Large local data
+data/raw/

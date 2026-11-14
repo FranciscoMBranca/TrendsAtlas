@@ -6,6 +6,7 @@ Usage:  python -m terratempo.export --out ../web/public/data
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import time
 from pathlib import Path
@@ -14,12 +15,20 @@ from . import SCHEMA_VERSION
 from .anomaly import monthly_anomaly, weighted_mean
 from .catalog import PRESETS, manifest
 from .maps import preset_years, trend_map
+from .readers import load_cube
 from .synthetic import DEMO_VARIABLES, make_dataset
 
 
+CUBES_DIR = Path(os.getenv("TERRATEMPO_CUBES", Path(__file__).resolve().parents[2] / "data" / "cubes"))
+
+
 def load_datasets() -> dict:
-    # Real readers (P02, P03) will replace these per variable once P00 is done.
-    return {vid: make_dataset(vid) for vid in DEMO_VARIABLES}
+    """Real cube (data/cubes/<id>.npz, label "real") when it exists, labelled synthetic otherwise."""
+    out = {}
+    for vid in DEMO_VARIABLES:
+        cube = CUBES_DIR / f"{vid}.npz"
+        out[vid] = load_cube(cube) if cube.exists() else make_dataset(vid)
+    return out
 
 
 def main() -> None:

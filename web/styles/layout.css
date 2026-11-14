@@ -1,0 +1,149 @@
+/* Estrutura comum: largura, cabeçalho, rodapé e tipografia técnica. */
+.atlas-width {
+  width: calc(100% - 112px);
+  max-width: 1360px;
+  margin-inline: auto;
+}
+
+.technical,
+.eyebrow,
+.data-badge,
+.section-label,
+.metric-label,
+.metric-p {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.technical {
+  color: var(--muted-foreground);
+}
+
+.atlas-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  height: 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.atlas-mark {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  flex-shrink: 0;
+  transform: rotate(-7deg);
+}
+
+.atlas-mark span {
+  background: var(--primary);
+}
+
+.atlas-mark span:nth-child(3),
+.atlas-mark span:nth-child(7) {
+  background: var(--trend-down);
+}
+
+.wordmark-text {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 13px;
+}
+
+.header-nav a {
+  transition: color 250ms ease-out;
+}
+
+.header-nav a:hover {
+  color: var(--primary);
+}
+
+.header-nav .nav-map {
+  color: var(--primary);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.header-nav svg {
+  width: 14px;
+}
+
+.section-label {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  color: var(--primary);
+}
+
+.section-label span {
+  color: var(--muted-foreground);
+}
+
+.section-label h2 {
+  font: inherit;
+  font-size: 12px;
+}
+
+.atlas-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0 30px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+
+.footer-inner p {
+  max-width: 560px;
+}
+
+.footer-inner a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-meta {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+
+.data-state {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.data-state strong {
+  color: var(--foreground);
+}

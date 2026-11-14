@@ -36,10 +36,10 @@ export default function Result({ a, lang }: { a: Analysis; lang: Lang }) {
   ];
 
   return (
-    <section className="result" aria-live="polite">
-      <h2>
+    <div className="result" aria-live="polite">
+      <h4 className="technical">
         {t("res.titulo")} {isDemo && <span className="badge demo">{t("rotulo.demonstracao")}</span>}
-      </h2>
+      </h4>
       <p className="sentence">{resultSentence(a, lang)}</p>
 
       <div className={`seal seal-${a.selo}`}>
@@ -69,9 +69,9 @@ export default function Result({ a, lang }: { a: Analysis; lang: Lang }) {
           ))}
         </tbody>
       </table>
-      <button type="button" onClick={() => downloadCsv(a)}>
+      <button type="button" className="investigate-run secondary" onClick={() => downloadCsv(a)}>
         {t("res.exportar")}
       </button>
-    </section>
+    </div>
   );
 }

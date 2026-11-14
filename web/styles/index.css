@@ -1,0 +1,21 @@
+/*
+ * Ponto de entrada dos estilos.
+ * Tailwind v4 em modo CSS-first: os tokens vivem em styles/tokens.css (@theme),
+ * não num tailwind.config. O resto está dividido por área do atlas.
+ */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./layout.css";
+@import "./variables.css";
+@import "./opening.css";
+@import "./sections.css";
+@import "./map.css";
+@import "./emergence.css";
+@import "./regions.css";
+@import "./demo.css";
+@import "./method.css";
+@import "./investigate.css";
+@import "./responsive.css";
