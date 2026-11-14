@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
+// Fonts are bundled from npm (@fontsource) and served by this site: no request to
+// Google Fonts at build or run time (light mode, W26; reliable CI builds).
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/newsreader/400.css";
+import "@fontsource/newsreader/500.css";
+import "@fontsource/newsreader/500-italic.css";
 import "../styles/index.css";
 import Providers from "./providers";
-
-// next/font downloads the files at build time and serves them from this site:
-// no request to Google Fonts at runtime (light mode, W26).
-const plexSans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex-sans", display: "swap" });
-const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono", display: "swap" });
-const newsreader = Newsreader({ subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], variable: "--font-newsreader", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Atlas de Tendências — A geografia da mudança",
@@ -17,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt" className={`${plexSans.variable} ${plexMono.variable} ${newsreader.variable}`}>
+    <html lang="pt">
       <body>
         <Providers>{children}</Providers>
       </body>
