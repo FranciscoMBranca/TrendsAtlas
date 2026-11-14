@@ -2,9 +2,14 @@
 
 // Set NEXT_PUBLIC_API_URL in Vercel (e.g. the Railway URL). Without it, production never
 // calls the visitor's localhost: the API is treated as unavailable (degraded mode, B07).
-export const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")
-).replace(/\/+$/, "");
+export function normaliseApiUrl(raw: string | undefined, dev: boolean): string {
+  let url = (raw ?? (dev ? "http://localhost:8000" : "")).trim().replace(/\/+$/, "");
+  // A value saved without a scheme ("x.up.railway.app") would be read as a path on this site.
+  if (url && !/^https?:\/\//i.test(url)) url = `${/^(localhost|127\.0\.0\.1)(:|$)/.test(url) ? "http" : "https"}://${url}`;
+  return url;
+}
+
+export const API_URL = normaliseApiUrl(process.env.NEXT_PUBLIC_API_URL, process.env.NODE_ENV === "development");
 
 export type Label = "real" | "demonstracao";
 

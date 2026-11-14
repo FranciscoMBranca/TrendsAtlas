@@ -24,7 +24,15 @@ Variables (lista completa em [`api/.env.example`](../api/.env.example)):
 | `ALLOWED_ORIGIN_REGEX` | opcional, para as pré-visualizações: `^https://<projecto>-[a-z0-9-]+\.vercel\.app$` |
 | `RATE_LIMIT_PER_MIN` | `60` |
 
-Não defina `PORT` (a Railway define). Verificação: `https://<api>.up.railway.app/saude` deve responder `{"estado":"ok",…}` e `/docs` mostra a documentação OpenAPI.
+**Porta (causa do erro 502 "A solicitação não respondeu"):** a porta do domínio público tem de ser a porta onde o uvicorn ouve. A forma mais simples:
+
+1. Variables: `PORT` = `8000`.
+2. Settings > Networking > no domínio `….up.railway.app`, editar a porta de destino para `8000`.
+3. Nos Deploy Logs deve aparecer `Uvicorn running on http://0.0.0.0:8000`.
+
+Uma resposta com o cabeçalho `x-railway-fallback: true` quer dizer que o proxy da Railway não chegou à aplicação: porta errada, ou nenhum deployment activo (ver se o último está "Active" e não "Crashed").
+
+Verificação: `https://<api>.up.railway.app/saude` deve responder `{"estado":"ok",…}` e `/docs` mostra a documentação OpenAPI.
 
 ## 2. Site na Vercel
 
@@ -42,7 +50,7 @@ Environment Variables (Production e Preview; ver [`web/.env.example`](../web/.en
 
 | Variável | Valor |
 | --- | --- |
-| `NEXT_PUBLIC_API_URL` | o URL da Railway, sem barra no fim |
+| `NEXT_PUBLIC_API_URL` | o URL completo da Railway, **com `https://`** e sem barra no fim, ex.: `https://trendsatlas-production.up.railway.app` (o site acrescenta `https://` se faltar, mas é melhor gravá-lo completo) |
 
 É lida no build: depois de a mudar, faça **Redeploy**. Sem ela, o atlas funciona e a secção Investigue mostra o aviso de modo degradado.
 
