@@ -61,9 +61,26 @@ Environment Variables (Production e Preview; ver [`web/.env.example`](../web/.en
 3. Abrir o site, ir a **Investigue**, carregar em **Analisar**: deve aparecer a frase, o selo e o gráfico. Se aparecer o aviso da API, ver a consola do browser (erro de CORS = `ALLOWED_ORIGINS` errado).
 4. Teste automático contra produção: `cd tests/visual && node investigar.mjs https://<projecto>.vercel.app`.
 
-## 4. Dados reais
+## 4. Dados reais (workflow "Dados NASA")
 
-Quando correr `python -m terratempo.ingest` (ver `docs/estado.md`), os cubos ficam em `data/cubes/*.npz`. Faça commit deles: a Railway reconstrói a imagem (o `railway.toml` vigia `data/cubes/**`) e a API passa a responder com o rótulo `real`. Os ficheiros brutos da NASA (`data/raw/`) nunca vão para o git.
+Uma vez:
+
+1. Settings > Secrets and variables > Actions: segredos `EARTHDATA_USERNAME` e `EARTHDATA_PASSWORD`.
+2. Settings > Actions > General > Workflow permissions: marcar **"Allow GitHub Actions to create and approve pull requests"**.
+3. Em urs.earthdata.nasa.gov > Applications > Authorized Apps: aprovar **"NASA GESDISC DATA ARCHIVE"**.
+
+Depois: Actions > **Dados NASA** > Run workflow (período e produtos). O workflow:
+
+- descarrega o IMERG e o MERRA-2 em paralelo, **um ano de cada vez**, agrega a 5° e apaga os ficheiros brutos;
+- gera os cubos `data/cubes/{precipitacao,temperatura,humidade}.npz` (rótulo `real`);
+- regenera os ficheiros do site: mapas da secção Investigue (`terratempo.export`) e do atlas, temperatura e precipitação (`terratempo.atlas`, esquema v3);
+- abre um pull request `dados/nasa-<n>` para rever.
+
+Ao juntar o PR, a Railway reconstrói a API (vigia `data/cubes/**`) e a Vercel reconstrói o site. Vegetação, gelo marinho, aerossóis e nível do mar continuam com dados de demonstração (sem leitor real ainda) e mantêm o rótulo.
+
+Alternativa local, com as credenciais no terminal: `cd pipeline`, `python -m terratempo.ingest --variable precipitacao` e `--variable temperatura humidade`, depois `python -m terratempo.export --out ../web/public/data` e `python -m terratempo.atlas --out ../web/public/data`.
+
+Os ficheiros brutos da NASA (`data/raw/`) nunca vão para o git.
 
 ## Segredos
 

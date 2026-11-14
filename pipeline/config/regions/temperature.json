@@ -1,0 +1,6 @@
+[
+  {"id": "a-artico", "name": "Árctico", "bbox": [-170, 65, 170, 85]},
+  {"id": "b-asia-central", "name": "Ásia central", "bbox": [85, 28, 115, 42]},
+  {"id": "c-pacifico-sul", "name": "Pacífico Sul", "bbox": [-130, -60, -70, -45]},
+  {"id": "d-atlantico-norte", "name": "Atlântico Norte subpolar", "bbox": [-50, 45, -20, 58]}
+]

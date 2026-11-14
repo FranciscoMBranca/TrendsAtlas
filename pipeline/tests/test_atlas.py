@@ -1,0 +1,57 @@
+import json
+
+import numpy as np
+import pytest
+
+from terratempo import LABEL_REAL
+from terratempo.atlas import analyse_cube, build_files, export_variable, first_persistent_year, write_manifest
+from terratempo.synthetic import make_dataset
+
+
+@pytest.fixture(scope="module")
+def small():
+    # 20° grid (9 x 18 cells) keeps the test fast; same code path as 5°.
+    return make_dataset("temperatura", resolution=20)
+
+
+def test_first_persistent_year_needs_the_final_run():
+    years = np.array([2010, 2011, 2012, 2013])
+    flags = np.array([[True, False], [False, True], [True, True], [True, True]])
+    out = first_persistent_year(flags, years)
+    assert out.tolist() == [2012.0, 2011.0]
+    assert np.isnan(first_persistent_year(np.array([[True], [False]]), np.array([1, 2]))[0])
+
+
+def test_atlas_files_follow_schema_v3(small, tmp_path):
+    folder = export_variable(small, tmp_path)
+    meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
+    grid = json.loads((folder / "grid_trend.json").read_text(encoding="utf-8"))
+    regions = json.loads((folder / "regions.json").read_text(encoding="utf-8"))
+    series = json.loads((folder / "series_global.json").read_text(encoding="utf-8"))
+    assert folder.name == "temperature"
+    assert meta["schemaVersion"] == 3 and meta["isDemo"] is True
+    assert "inventados" in meta["source"]["note"]
+    assert meta["period"] == {"start": "2001-01", "end": "2024-12", "months": 288}
+    assert len(meta["emergence"]["byYear"]) == 15  # windows ending 2010..2024
+    assert len(grid) == 9 * 18
+    assert set(grid[0]) == {"lat", "lon", "trend", "p", "ci", "sig", "sigFdr", "emergence", "emergenceFdr", "yearsToDetect"}
+    assert len(series) == 288 and series[0]["date"] == "2001-01-01"
+    assert regions and len(regions[0]["series"]) == 288
+    # a cell that emerged has no "years to detect"
+    assert all(c["yearsToDetect"] is None for c in grid if c["emergence"] is not None)
+    write_manifest(tmp_path)
+    manifest = json.loads((tmp_path / "variables.json").read_text(encoding="utf-8"))
+    assert manifest["variables"][0]["id"] == "temperature"
+
+
+def test_real_cube_is_labelled_real_in_meta(small):
+    small.label = LABEL_REAL
+    r = analyse_cube(small)
+    meta = build_files(small, "temperature", r, [])["meta.json"]
+    assert meta["isDemo"] is False and meta["source"]["name"] == "NASA MERRA-2"
+
+
+def test_global_trend_sign_matches_synthetic_warming(small):
+    small.label = LABEL_REAL
+    meta = build_files(small, "temperature", analyse_cube(small), [])["meta.json"]
+    assert meta["highlights"]["globalTrend"]["trend"] > 0

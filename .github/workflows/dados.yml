@@ -1,0 +1,130 @@
+name: Dados NASA
+
+# Manual only: downloads real NASA data with the Earthdata secrets, builds the 5° cubes,
+# regenerates the site files and opens a pull request for a human to review (D06).
+# Needs repository secrets EARTHDATA_USERNAME and EARTHDATA_PASSWORD, and
+# Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "Primeiro mês (AAAA-MM)"
+        default: "2001-01"
+        required: true
+      end:
+        description: "Último mês (AAAA-MM)"
+        default: "2024-12"
+        required: true
+      products:
+        description: "Que produtos descarregar"
+        type: choice
+        default: todos
+        options: [todos, imerg, merra2]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dados-nasa
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    name: Ingestão ${{ matrix.product }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - product: imerg
+            variables: precipitacao
+          - product: merra2
+            variables: temperatura humidade
+    steps:
+      - name: Skip product not requested
+        id: want
+        run: |
+          if [ "${{ inputs.products }}" = "todos" ] || [ "${{ inputs.products }}" = "${{ matrix.product }}" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.want.outputs.run == 'true'
+      - uses: actions/setup-python@v5
+        if: steps.want.outputs.run == 'true'
+        with:
+          python-version: "3.12"
+      - name: Install pipeline
+        if: steps.want.outputs.run == 'true'
+        run: pip install -e "./pipeline[nasa]"
+      - name: Check secrets
+        if: steps.want.outputs.run == 'true'
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          if [ -z "$EARTHDATA_USERNAME" ] || [ -z "$EARTHDATA_PASSWORD" ]; then
+            echo "::error::Faltam os segredos EARTHDATA_USERNAME e EARTHDATA_PASSWORD (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+      - name: Download and aggregate (year by year, raw files deleted)
+        if: steps.want.outputs.run == 'true'
+        working-directory: pipeline
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: python -m terratempo.ingest --variable ${{ matrix.variables }} --start "${{ inputs.start }}" --end "${{ inputs.end }}"
+      - uses: actions/upload-artifact@v4
+        if: steps.want.outputs.run == 'true'
+        with:
+          name: cubes-${{ matrix.product }}
+          path: data/cubes/*.npz
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: Ficheiros do site e pull request
+    needs: ingest
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e "./pipeline"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: cubes-*
+          path: data/cubes
+          merge-multiple: true
+      - name: Regenerate site files from the real cubes
+        working-directory: pipeline
+        run: |
+          ls -la ../data/cubes
+          python -m terratempo.export --out ../web/public/data
+          python -m terratempo.atlas --out ../web/public/data
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="dados/nasa-${{ github.run_number }}"
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add data/cubes web/public/data
+          if git diff --cached --quiet; then
+            echo "Sem alterações nos dados."
+            exit 0
+          fi
+          git commit -m "Dados NASA ${{ inputs.start }} a ${{ inputs.end }} (${{ inputs.products }})"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "Dados NASA ${{ inputs.start }} a ${{ inputs.end }}" \
+            --body "Cubos a 5° e ficheiros do site gerados pelo workflow **Dados NASA** (run ${{ github.run_id }}). Produtos: ${{ inputs.products }}. Rever o rótulo \`real\`, o período e os números antes de juntar."

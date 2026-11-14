@@ -1,0 +1,6 @@
+[
+  {"id": "a-pacifico-oeste", "name": "Pacífico oeste tropical", "bbox": [135, -10, 180, 12]},
+  {"id": "b-brasil-central", "name": "Brasil central", "bbox": [-72, -22, -45, 0]},
+  {"id": "c-asia-central", "name": "Ásia central", "bbox": [60, 35, 100, 55]},
+  {"id": "d-sahel", "name": "Sahel", "bbox": [-17, 10, 35, 20]}
+]

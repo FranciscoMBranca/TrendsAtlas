@@ -1,0 +1,1 @@
+{"schemaVersion":3,"variables":[{"id":"temperature","name":"Temperatura do ar","unit":"°C","trendUnit":"°C por década","decimals":2,"coverage":"global","isDemo":true,"source":"Dados sintéticos de demonstração","globalTrend":0.212,"globalP":0.0,"significantAreaPct":66.5,"significantAreaPctFdr":72.6,"pendingAreaPct":33.5,"firstEmergenceYear":2020,"chanceLevelPct":5.0}]}
