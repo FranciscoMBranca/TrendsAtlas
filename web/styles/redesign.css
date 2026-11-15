@@ -711,3 +711,128 @@ h3,
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---------- Como sabemos que está certo ---------- */
+.validation {
+  padding-block: 32px;
+  scroll-margin-top: 110px;
+}
+.validation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.val-card {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  border: 2px solid var(--foreground);
+  border-radius: var(--card-radius);
+  box-shadow: var(--pop-shadow);
+  background: var(--background);
+  padding: 18px;
+}
+.val-card .var-card-icon {
+  --tile: var(--accent-soft);
+}
+.val-card h3 {
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.val-card p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.val-card p.val-big {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 34px;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  line-height: 1;
+}
+.val-wide {
+  grid-column: 1 / -1;
+}
+.val-bars {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.val-bars li {
+  display: grid;
+  gap: 6px;
+}
+.val-bars strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+.val-bar-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 72px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.val-bar {
+  height: 16px;
+  border: 2px solid var(--foreground);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--secondary);
+}
+.val-bar i {
+  display: block;
+  height: 100%;
+  background: var(--muted-foreground);
+}
+.val-bar i.is-real {
+  background: var(--accent);
+}
+.val-bar-n {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+.val-refs {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+.val-refs li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 8px;
+}
+.val-refs code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.val-refs small {
+  grid-column: 1 / -1;
+  font-size: 11px;
+}
+@media (max-width: 1000px) {
+  .validation-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .val-bar-row {
+    grid-template-columns: 96px 1fr 64px;
+  }
+}
+.val-card p.val-limit {
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+  color: var(--foreground);
+}
+.val-card .stats.compact {
+  width: 100%;
+}

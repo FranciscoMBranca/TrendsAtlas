@@ -1,0 +1,104 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-11-15T05:39:58+00:00",
+ "alphaPct": 5.0,
+ "references": [
+  {
+   "id": "theil_sen",
+   "reference": "scipy.stats.theilslopes",
+   "cases": 50,
+   "maxRelDiff": 0.0
+  },
+  {
+   "id": "sen_ci",
+   "reference": "scipy.stats.theilslopes (95 %)",
+   "cases": 50,
+   "maxRelDiff": 0.0
+  },
+  {
+   "id": "linear",
+   "reference": "scipy.stats.linregress",
+   "cases": 50,
+   "maxRelDiff": 1.879541007180347e-14
+  },
+  {
+   "id": "fdr",
+   "reference": "scipy.stats.false_discovery_control",
+   "cases": 50,
+   "maxRelDiff": 0.0
+  },
+  {
+   "id": "mk",
+   "reference": "pymannkendall.original_test",
+   "cases": 50,
+   "maxRelDiff": 0.0
+  },
+  {
+   "id": "hamed_rao",
+   "reference": "pymannkendall.hamed_rao_modification_test",
+   "cases": 45,
+   "maxRelDiff": 1.8384689699586304e-15
+  }
+ ],
+ "falseAlarms": [
+  {
+   "phi": 0.0,
+   "sims": 400,
+   "months": 312,
+   "naivePct": 4.5,
+   "correctedPct": 4.2
+  },
+  {
+   "phi": 0.3,
+   "sims": 400,
+   "months": 312,
+   "naivePct": 13.2,
+   "correctedPct": 8.8
+  },
+  {
+   "phi": 0.6,
+   "sims": 400,
+   "months": 312,
+   "naivePct": 32.8,
+   "correctedPct": 14.0
+  }
+ ],
+ "projection": [
+  {
+   "phi": 0.0,
+   "sims": 400,
+   "horizonYears": 12,
+   "coveragePct": 94.75
+  },
+  {
+   "phi": 0.5,
+   "sims": 400,
+   "horizonYears": 12,
+   "coveragePct": 93.75
+  }
+ ],
+ "shuffledYears": [
+  {
+   "variable": "temperature",
+   "period": {
+    "start": "2000-01",
+    "end": "2025-12"
+   },
+   "realPct": 62.1,
+   "shuffledMeanPct": 15.6,
+   "shuffledMaxPct": 32.3,
+   "shuffles": 10
+  },
+  {
+   "variable": "precipitation",
+   "period": {
+    "start": "2000-01",
+    "end": "2024-12"
+   },
+   "realPct": 29.7,
+   "shuffledMeanPct": 6.9,
+   "shuffledMaxPct": 11.2,
+   "shuffles": 10
+  }
+ ]
+}
