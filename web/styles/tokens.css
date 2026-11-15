@@ -1,8 +1,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "IBM Plex Sans", sans-serif;
-  --font-display: "Newsreader", Georgia, serif;
+  /* Redesign 2026-11: friendlier geometric type (reference: atlas-tendencia.vercel.app). */
+  --font-sans: "DM Sans", "IBM Plex Sans", system-ui, sans-serif;
+  --font-display: "Manrope", "DM Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -31,7 +32,7 @@
 }
 
 :root {
-  --background: oklch(0.965 0.01 87);
+  --background: oklch(0.983 0.004 90);
   --foreground: oklch(0.237 0.009 248);
   --muted-foreground: oklch(0.504 0.022 238);
   --border: oklch(0.871 0.018 88);
@@ -39,6 +40,12 @@
   --primary-foreground: var(--background);
   --secondary: oklch(0.928 0.013 85);
   --map-ink: oklch(0.25 0.025 190);
+  /* Call-to-action coral: #c93a44 keeps AA (5:1) with white text. */
+  --accent: #c93a44;
+  --accent-foreground: #ffffff;
+  --accent-soft: #fbe9ea;
+  --pop-shadow: 3px 3px 0 var(--foreground);
+  --card-radius: 14px;
 }
 
 /*

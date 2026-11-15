@@ -52,7 +52,16 @@ const bboxOfSelection = (sel: Selection, places: Places | undefined, step: numbe
  * The interactive map at the centre of the home page: click a cell, or pick a country or
  * ocean by name, and the card shows that place's trend for the chosen audience and language.
  */
-export function ExploreMap({ data, onInvestigate }: { data: AtlasData; onInvestigate?: (r: ApiRegion, name: string) => void }) {
+export function ExploreMap({
+  data,
+  onInvestigate,
+  pick,
+}: {
+  data: AtlasData;
+  onInvestigate?: (r: ApiRegion, name: string) => void;
+  /** A place to open, from the globe or a mission (applied once per `seq`, for its variable). */
+  pick?: { varId: string; sel: Selection; seq: number } | null;
+}) {
   const { lang, audience, t } = useI18n();
   const places = usePlaces();
   const land = useLand();
@@ -66,7 +75,17 @@ export function ExploreMap({ data, onInvestigate }: { data: AtlasData; onInvesti
   const unit = meta.variable.unit;
   const d = meta.variable.decimals;
 
-  useEffect(() => setSelection(null), [meta.variable.id]);
+  // A new variable clears the selection, unless a place was asked for it (globe or mission).
+  const applied = useRef(0);
+  const prevVar = useRef(meta.variable.id);
+  useEffect(() => {
+    const id = meta.variable.id;
+    if (pick && pick.seq !== applied.current && pick.varId === id) {
+      applied.current = pick.seq;
+      setSelection(pick.sel);
+    } else if (prevVar.current !== id) setSelection(null);
+    prevVar.current = id;
+  }, [pick, meta.variable.id]);
 
   const selectedKey = selection?.kind === "place" ? selection.key : null;
   const paint = useCallback<PaintCell>(
@@ -93,7 +112,7 @@ export function ExploreMap({ data, onInvestigate }: { data: AtlasData; onInvesti
   const varName = t(`var.${meta.variable.id}`);
 
   return (
-    <section className="explore atlas-width" aria-label={t("mapa.descricao", { coisa: varName.toLowerCase() })}>
+    <section id="explorar" className="explore atlas-width" aria-label={t("mapa.descricao", { coisa: varName.toLowerCase() })}>
       <div className="explore-tools">
         <PlaceSearch places={places.data} onPick={(key) => setSelection({ kind: "place", key })} />
         <button type="button" className="explore-chip" onClick={() => setSelection({ kind: "globe" })} aria-pressed={selection?.kind === "globe"}>

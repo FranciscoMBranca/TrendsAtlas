@@ -149,3 +149,36 @@ describe("chat flutuante", () => {
     expect(await screen.findByText(/não está disponível|Não foi possível/)).toBeInTheDocument();
   });
 });
+
+describe("globo, cartões e missões", () => {
+  it("os cartões das variáveis mostram o rótulo real ou DEMONSTRAÇÃO de cada variável", () => {
+    wrap(<ExplorerHome data={data} manifest={manifest} selectedId="temperature" onSelect={() => {}} />, { lang: "pt", audience: "explorador" });
+    const cards = screen.getByRole("region", { name: "O que medimos" });
+    for (const v of manifest.variables) {
+      const card = cards.querySelector(`[data-var="${v.id}"]`)!;
+      expect(card.textContent).toContain(v.isDemo ? "DEMONSTRAÇÃO" : "real");
+    }
+  });
+
+  it("uma missão pede a variável e o lugar certos", () => {
+    const onPick = vi.fn();
+    wrap(<ExplorerHome data={data} manifest={manifest} selectedId="temperature" onSelect={() => {}} onPick={onPick} />, { lang: "pt", audience: "explorador" });
+    fireEvent.click(screen.getByRole("button", { name: /Chove mais ou menos no Brasil/ }));
+    expect(onPick).toHaveBeenCalledWith("precipitation", { kind: "place", key: "bra" });
+  });
+
+  it("o pedido de um lugar abre o cartão no mapa", async () => {
+    wrap(
+      <ExplorerHome data={data} manifest={manifest} selectedId="temperature" onSelect={() => {}} pick={{ varId: "temperature", sel: { kind: "place", key: "ago" }, seq: 1 }} />,
+      { lang: "pt", audience: "explorador" },
+    );
+    expect(await screen.findByRole("complementary", { name: "Angola" }, { timeout: 8000 })).toBeInTheDocument();
+  });
+
+  it("o globo tem nome acessível e roda com o teclado", () => {
+    wrap(<ExplorerHome data={data} manifest={manifest} selectedId="temperature" onSelect={() => {}} />, { lang: "pt", audience: "explorador" });
+    const globe = screen.getByRole("img", { name: /Globo interactivo/ });
+    fireEvent.keyDown(globe, { key: "ArrowLeft" });
+    expect(globe).toHaveAttribute("tabindex", "0");
+  });
+});
