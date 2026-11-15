@@ -14,6 +14,17 @@ Actualizado: 2026-11-14 (segunda actualização). Prioridade: concluir o desafio
 | R4 | O resultado do Detetive fica numa secção própria, **Investigue** (`#investigar`), a seguir a "Quando" | Ligada à API; meses, mundo inteiro, regiões do atlas e rectângulo |
 | — | Tipos de letra servidos pelo próprio site (`next/font`), sem Google Fonts em tempo de execução | Divergência P7 da R0 |
 
+## Página por público, idiomas, mapa interactivo e chat (2026-11-15)
+
+| Item | O que ficou | Decisões a validar |
+| --- | --- | --- |
+| **Entrada e filtros** | Na primeira visita, um ecrã pergunta o público (Criança, Adulto/Explorador, Cientista) e o idioma; depois, uma barra fixa mostra público, idioma e variável. Guardado no navegador e no URL (`?p=`, `?l=`, `?v=`). | O idioma inicial segue o do navegador |
+| **Página principal condicional** | Criança: título simples, botões grandes com ícones, mapa para tocar, ano a ano. Explorador: mapa interactivo, ano a ano e análise. Cientista: tudo isso mais as secções técnicas do atlas (painel, FDR, emergência, regiões, significância, método). | As secções técnicas só existem em português, com aviso nos outros idiomas |
+| **Idiomas (SPEC-140)** | pt, en, es, fr e zh em toda a interface nova, no modo apresentação e na análise. es, fr e zh mostram "tradução automática, ainda não revista". Testes: as 5 línguas têm as mesmas chaves e os mesmos `{marcadores}`. | Revisão humana de es, fr e zh (N04 a N06) |
+| **Mapa interactivo (W23)** | Clicar numa célula ou procurar um país/oceano pelo nome: cartão com frase, selo, gráfico (e estatísticas no modo Cientista); "Ver análise completa" passa o lugar à secção Investigue e corre a análise. | — |
+| **Regiões com nome** | As 2 592 células de 5° têm nome: 868 em 242 países (Natural Earth 1:50m, nomes ISO 3166 em 5 línguas) e as restantes em 8 oceanos e mares. A API aceita `{"tipo": "lugar", "chave": "ago"}` e usa exactamente as células desse país. | Fronteiras dos oceanos são regras simples por latitude e longitude |
+| **Chat flutuante (B11, W14)** | Botão no canto; abre, minimiza e fecha. A API usa o Claude (`claude-opus-5-5`, esforço baixo, *fallback* do servidor em caso de recusa) com 4 ferramentas (variáveis, procurar lugar, analisar região, ranking de países). Só cita números das ferramentas; sem causas; projecção sempre condicional. Limite de 8 perguntas por minuto por visitante. | Precisa de `ANTHROPIC_API_KEY` na Railway (custo por pergunta) |
+
 ## Fase de apresentação dos resultados (2026-11-15)
 
 Dados reais da NASA 2000–2025 em produção (temperatura e humidade MERRA-2, precipitação IMERG até 2025-09).

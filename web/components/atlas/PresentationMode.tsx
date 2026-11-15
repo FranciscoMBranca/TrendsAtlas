@@ -9,6 +9,7 @@ import { useLand } from "@/lib/atlas/data/use-atlas-data";
 import { number, signed } from "@/lib/atlas/format";
 import { createMapGeometry, viewBoxForZoom } from "@/lib/atlas/geo/projection";
 import { trendColor } from "@/lib/atlas/scale";
+import { useI18n } from "@/lib/i18n";
 import { MapCanvas } from "./map/MapCanvas";
 import type { PaintCell } from "./map/CellLayer";
 import { SegmentedControl } from "./map/SegmentedControl";
@@ -18,6 +19,7 @@ const prefersReducedMotion = () =>
 
 /** SPEC-110: full-screen yearly anomaly maps, played like a short film. */
 export function PresentationMode({ data, annual, onClose }: { data: AtlasData; annual: AnnualAnomaly; onClose: () => void }) {
+  const { t } = useI18n();
   const reduced = useMemo(prefersReducedMotion, []);
   const last = annual.years.length - 1;
   const [index, setIndex] = useState(reduced ? last : 0);
@@ -91,22 +93,22 @@ export function PresentationMode({ data, annual, onClose }: { data: AtlasData; a
       className="presentation"
       role="dialog"
       aria-modal="true"
-      aria-label={`Ano a ano: ${meta.variable.name}`}
+      aria-label={`${t("apres.titulo")}: ${t(`var.${meta.variable.id}`)}`}
       tabIndex={-1}
       data-palette={meta.variable.palette}
     >
       <div className="presentation-top">
         <div>
-          <span className="technical">ANO A ANO · {meta.variable.name.toUpperCase()}</span>
-          {annual.isDemo && <span className="demo-label">DEMONSTRAÇÃO</span>}
+          <span className="technical">{t("apres.titulo")} · {t(`var.${meta.variable.id}`).toUpperCase()}</span>
+          {annual.isDemo && <span className="demo-label">{t("rotulo.demonstracao")}</span>}
           <div className="presentation-year" aria-live="polite">
             {year}
           </div>
           <p className="presentation-mean">
-            Média global do ano: <strong>{mean === null ? "—" : `${signed(mean, d)} ${annual.unit}`}</strong> face ao normal
+            {t("apres.media", { valor: mean === null ? "—" : `${signed(mean, d)} ${annual.unit}` })}
           </p>
         </div>
-        <button type="button" className="presentation-close" onClick={onClose} aria-label="Fechar o modo apresentação">
+        <button type="button" className="presentation-close" onClick={onClose} aria-label={t("apres.fechar")}>
           <X />
         </button>
       </div>
@@ -122,21 +124,21 @@ export function PresentationMode({ data, annual, onClose }: { data: AtlasData; a
           viewBox={viewBox}
           hovered={hovered}
           onHover={setHovered}
-          label={`Mapa de ${year}: quanto cada lugar se afastou do normal de ${annual.baseline}, em ${annual.unit}. Média global ${mean === null ? "indisponível" : signed(mean, d)}.`}
+          label={`${year}. ${t("apres.media", { valor: mean === null ? "—" : `${signed(mean, d)} ${annual.unit}` })}. ${t("apres.escala", { min: `−${number(annual.extent, d)}`, max: `+${number(annual.extent, d)} ${annual.unit}`, base: annual.baseline })}`}
         />
       </div>
 
       <div className="presentation-legend">
-        <span>← {meta.variable.copy.down}</span>
+        <span>← {t("apres.frio")}</span>
         <i className="legend-bar" aria-hidden="true" />
-        <span>{meta.variable.copy.up} →</span>
+        <span>{t("apres.quente")} →</span>
         <span className="technical">
-          −{number(annual.extent, d)} … +{number(annual.extent, d)} {annual.unit} face à média de {annual.baseline}
+          {t("apres.escala", { min: `−${number(annual.extent, d)}`, max: `+${number(annual.extent, d)} ${annual.unit}`, base: annual.baseline })}
         </span>
       </div>
 
       <div className="presentation-controls">
-        <button type="button" className="presentation-play" onClick={togglePlay} aria-label={playing ? "Pausar" : "Reproduzir"}>
+        <button type="button" className="presentation-play" onClick={togglePlay} aria-label={playing ? t("apres.pausar") : t("apres.reproduzir")}>
           {playing ? <Pause /> : <Play />}
         </button>
         <input
@@ -144,7 +146,7 @@ export function PresentationMode({ data, annual, onClose }: { data: AtlasData; a
           min={0}
           max={last}
           value={index}
-          aria-label="Ano"
+          aria-label={t("apres.ano")}
           aria-valuetext={String(year)}
           onChange={(e) => {
             setPlaying(false);
@@ -155,27 +157,25 @@ export function PresentationMode({ data, annual, onClose }: { data: AtlasData; a
           {annual.years[0]}–{annual.years[last]}
         </span>
         <SegmentedControl
-          label="Velocidade"
+          label={t("apres.velocidade")}
           value={speed}
           onChange={setSpeed}
           options={[
-            { value: "lento", label: "Lento" },
-            { value: "normal", label: "Normal" },
-            { value: "rapido", label: "Rápido" },
+            { value: "lento", label: t("apres.lento") },
+            { value: "normal", label: t("apres.normal") },
+            { value: "rapido", label: t("apres.rapido") },
           ]}
         />
       </div>
 
-      <p className="presentation-note">
-        Cada cor mostra quanto o ano se afastou da média de {annual.baseline} nesse lugar: desvios do normal, não causas.
-        Fonte: {meta.source.name}. Os anos com menos de 10 meses de dados ficam de fora.
-      </p>
+      <p className="presentation-note">{t("apres.nota", { base: annual.baseline, fonte: meta.source.name })}</p>
     </div>
   );
 }
 
 /** Launcher shown under the trend map; only when the variable has yearly maps (real data). */
 export function PresentationLauncher({ data }: { data: AtlasData }) {
+  const { t } = useI18n();
   const annual = useAnnual(data.meta.variable.id);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -188,9 +188,9 @@ export function PresentationLauncher({ data }: { data: AtlasData }) {
   return (
     <div className="atlas-width presentation-launch">
       <button type="button" className="investigate-run" onClick={() => setOpen(true)}>
-        <Play /> Ver ano a ano ({annual.data.years[0]}–{annual.data.years.at(-1)})
+        <Play /> {t("apres.botao", { inicio: annual.data.years[0]!, fim: annual.data.years.at(-1)! })}
       </button>
-      <span className="technical">Modo apresentação: o mapa de cada ano, como um filme curto.</span>
+      <span className="technical">{t("apres.descricao")}</span>
       {open && <PresentationMode data={data} annual={annual.data} onClose={() => setOpen(false)} />}
     </div>
   );

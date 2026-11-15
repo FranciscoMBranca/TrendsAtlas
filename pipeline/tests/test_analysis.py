@@ -142,3 +142,21 @@ def test_every_synthetic_dataset_is_labelled_demo():
     m = manifest(datasets)
     assert m["contem_demonstracao"] is True
     assert all(v["rotulo"] == LABEL_DEMO for v in m["variaveis"])
+
+
+def test_named_place_uses_exactly_its_cells():
+    from terratempo import places
+    ds = make_dataset("temperatura")
+    _, info = region_series(ds, {"tipo": "lugar", "chave": "ago"})
+    named = sum(1 for k in places.load()["cells"].values() if k == "ago")
+    assert info["n_celulas"] == named > 0 and info["lugar"] == "ago"
+    assert places.name("ago", "pt") == "Angola" and places.search("angola")[0]["chave"] == "ago"
+
+
+def test_tiny_place_falls_back_to_its_centroid_cell():
+    from terratempo import places
+    ds = make_dataset("temperatura")
+    tiny = next(k for k, p in places.load()["places"].items()
+                if p["kind"] == "country" and k not in set(places.load()["cells"].values()))
+    _, info = region_series(ds, {"tipo": "lugar", "chave": tiny})
+    assert info["n_celulas"] == 1 and info["menor_que_resolucao"]

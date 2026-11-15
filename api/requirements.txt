@@ -4,3 +4,4 @@ pydantic>=2.7
 numpy>=1.26
 scipy>=1.11
 # The pipeline package is installed separately: pip install -e ./pipeline
+anthropic>=2.8

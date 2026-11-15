@@ -46,8 +46,16 @@ export interface TrendMap {
   significativa: number[][];
 }
 
+/** Atlas variable id (site data) -> API variable id (pipeline), for variables with real cubes. */
+export const API_VARIABLE: Record<string, string> = {
+  temperature: "temperatura",
+  precipitation: "precipitacao",
+  aerosols: "aerossois",
+};
+
 export type Region =
   | { tipo: "globo" }
+  | { tipo: "lugar"; chave: string }
   | { tipo: "rectangulo"; oeste: number; sul: number; este: number; norte: number }
   | { tipo: "poligono"; coordenadas: number[][][] };
 
@@ -63,7 +71,7 @@ export interface Analysis {
   variavel: string;
   unidade: string;
   rotulo: Label;
-  regiao: { tipo: string; n_celulas: number; resolucao_graus: number; menor_que_resolucao: boolean };
+  regiao: { tipo: string; n_celulas: number; resolucao_graus: number; menor_que_resolucao: boolean; lugar?: string };
   meses: number[] | null;
   passo: "mes" | "ano";
   n_pontos: number;

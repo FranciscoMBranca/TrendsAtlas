@@ -1,20 +1,22 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { analyseRegion, API_URL, type Analysis, type ApiError, type Region } from "@/lib/api";
-import { LANGS } from "@/lib/catalog";
+import { analyseRegion, API_URL, API_VARIABLE, type Analysis, type ApiError, type Region } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { AtlasData } from "@/lib/atlas/data/schema";
 import { SectionHeader } from "./atlas/SectionHeader";
 import { SegmentedControl } from "./atlas/map/SegmentedControl";
-import Result, { type AudienceMode } from "./Result";
+import Result from "./Result";
 
-/** Atlas variable id (prototype data) -> API variable id (Phase 0 pipeline). */
-export const API_VARIABLE: Record<string, string> = {
-  temperature: "temperatura",
-  precipitation: "precipitacao",
-  aerosols: "aerossois",
-};
+export { API_VARIABLE };
+
+/** A place chosen on the explore map, handed over to the full analysis. */
+export interface InvestigatePreset {
+  regiao: Region;
+  nome: string;
+  /** Changes on every hand-over, so choosing the same place twice still re-runs. */
+  seq: number;
+}
 
 const SEASONS: Record<string, number[] | null> = {
   all: null,
@@ -24,14 +26,14 @@ const SEASONS: Record<string, number[] | null> = {
   son: [9, 10, 11],
 };
 
-type RegionMode = "globo" | "exemplo" | "rectangulo";
+type RegionMode = "globo" | "exemplo" | "rectangulo" | "lugar";
 
 /**
  * SPEC-101 / SPEC-102: the data detective. The user picks where, when and which
  * months; the API runs the trend tests and returns numbers and message keys.
  */
-export function Investigate({ data }: { data: AtlasData }) {
-  const { lang, setLang, t } = useI18n();
+export function Investigate({ data, preset }: { data: AtlasData; preset?: InvestigatePreset | null }) {
+  const { lang, audience, t } = useI18n();
   const atlasVar = data.meta.variable.id;
   const apiVar = API_VARIABLE[atlasVar];
   const firstYear = Number(data.meta.period.start.slice(0, 4));
@@ -49,7 +51,7 @@ export function Investigate({ data }: { data: AtlasData }) {
   const [error, setError] = useState<ApiError | null>(null);
   const [busy, setBusy] = useState(false);
   const [apiUp, setApiUp] = useState<boolean | null>(null);
-  const [audience, setAudience] = useState<AudienceMode>("explorador");
+  const [place, setPlace] = useState<{ regiao: Region; nome: string } | null>(null);
 
   useEffect(() => {
     setResult(null);
@@ -67,11 +69,21 @@ export function Investigate({ data }: { data: AtlasData }) {
     };
   }, []);
 
+  // Hand-over from the map: select the place and run the analysis straight away.
+  useEffect(() => {
+    if (!preset) return;
+    setPlace({ regiao: preset.regiao, nome: preset.nome });
+    setMode("lugar");
+    void runFor(preset.regiao);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [preset?.seq]);
+
   const months = season === "custom" ? (custom.length === 0 || custom.length === 12 ? null : custom) : SEASONS[season];
   const shortPeriod = end - start + 1 < 10;
 
   function region(): Region {
     if (mode === "globo") return { tipo: "globo" };
+    if (mode === "lugar" && place) return place.regiao;
     if (mode === "exemplo") {
       const r = data.regions.find((x) => x.id === exampleId) ?? data.regions[0]!;
       const [oeste, sul, este, norte] = r.bbox;
@@ -81,10 +93,14 @@ export function Investigate({ data }: { data: AtlasData }) {
   }
 
   async function run() {
+    await runFor(region());
+  }
+
+  async function runFor(regiao: Region) {
     if (!apiVar) return;
     setBusy(true);
     setError(null);
-    const r = await analyseRegion({ variavel: apiVar, regiao: region(), inicio: start, fim: end, meses: months ?? undefined });
+    const r = await analyseRegion({ variavel: apiVar, regiao, inicio: start, fim: end, meses: months ?? undefined });
     setBusy(false);
     if (r.ok) setResult(r.data);
     else {
@@ -101,25 +117,6 @@ export function Investigate({ data }: { data: AtlasData }) {
     <section id="investigar" className="investigate atlas-width" lang={lang}>
       <div className="section-heading-row">
         <SectionHeader number="→" title={t("inv.rotulo")} />
-        <div className="investigate-toggles">
-        <SegmentedControl
-          label={t("modo.rotulo")}
-          value={audience}
-          onChange={setAudience}
-          options={[
-            { value: "crianca", label: t("modo.crianca") },
-            { value: "explorador", label: t("modo.explorador") },
-            { value: "cientista", label: t("modo.cientista") },
-          ]}
-        />
-        <div className="segmented" role="radiogroup" aria-label="Idioma / Language">
-          {LANGS.map((l) => (
-            <button key={l} type="button" role="radio" aria-checked={l === lang} onClick={() => setLang(l)}>
-              {l.toUpperCase()}
-            </button>
-          ))}
-        </div>
-        </div>
       </div>
 
       <div className="section-intro">
@@ -131,7 +128,7 @@ export function Investigate({ data }: { data: AtlasData }) {
 
       {!apiVar ? (
         <p className="investigate-note" role="status">
-          {t("inv.indisponivel", { variavel: data.meta.variable.name })}
+          {t("inv.indisponivel", { variavel: t(`var.${atlasVar}`) })}
         </p>
       ) : (
         <>
@@ -148,9 +145,10 @@ export function Investigate({ data }: { data: AtlasData }) {
                 value={mode}
                 onChange={setMode}
                 options={[
-                  { value: "globo", label: t("p2.mundo") },
-                  { value: "exemplo", label: t("inv.exemplo") },
-                  { value: "rectangulo", label: t("inv.rectangulo") },
+                  ...(place ? [{ value: "lugar" as const, label: place.nome }] : []),
+                  { value: "globo" as const, label: t("p2.mundo") },
+                  { value: "exemplo" as const, label: t("inv.exemplo") },
+                  { value: "rectangulo" as const, label: t("inv.rectangulo") },
                 ]}
               />
               {mode === "exemplo" && (

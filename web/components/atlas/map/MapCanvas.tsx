@@ -37,6 +37,8 @@ interface MapCanvasProps {
   selectedId?: string | null;
   onHover: (cell: GridCell | null) => void;
   onSelectRegion?: (region: Region) => void;
+  /** Called when a cell is clicked or tapped (interactive explore map). */
+  onSelectCell?: (cell: GridCell) => void;
   /** Descrição para leitores de ecrã. */
   label: string;
 }
@@ -53,6 +55,7 @@ export function MapCanvas({
   selectedId = null,
   onHover,
   onSelectRegion,
+  onSelectCell,
   label,
 }: MapCanvasProps) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -101,7 +104,11 @@ export function MapCanvas({
       aria-label={label}
       onPointerMove={(event) => onHover(cellUnder(event) ?? null)}
       onPointerLeave={() => onHover(null)}
-      onClick={(event) => onHover(cellUnder(event) ?? null)}
+      onClick={(event) => {
+        const cell = cellUnder(event) ?? null;
+        onHover(cell);
+        if (cell && onSelectCell) onSelectCell(cell);
+      }}
     >
       <defs>
         <pattern

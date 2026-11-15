@@ -8,6 +8,7 @@ import { annualSchema, nextYearIndex, yearMean, type AnnualAnomaly } from "@/lib
 import { loadAtlasData } from "@/lib/atlas/data/load";
 import type { AtlasData } from "@/lib/atlas/data/schema";
 import { signed } from "@/lib/atlas/format";
+import { I18nProvider } from "@/lib/i18n";
 import { diskFetcher } from "@/test/disk";
 
 const annual: AnnualAnomaly = annualSchema.parse({
@@ -31,6 +32,8 @@ const annual: AnnualAnomaly = annualSchema.parse({
 
 let data: AtlasData;
 beforeAll(async () => {
+  // Portuguese, explorer: the provider would otherwise follow jsdom's navigator language (en).
+  window.localStorage.setItem("terra-tempo.prefs", JSON.stringify({ lang: "pt", audience: "explorador" }));
   data = await loadAtlasData("temperature", diskFetcher);
 });
 
@@ -52,7 +55,9 @@ const setReducedMotion = (reduce: boolean) =>
 const renderMode = () =>
   render(
     <QueryClientProvider client={new QueryClient()}>
-      <PresentationMode data={data} annual={annual} onClose={() => {}} />
+      <I18nProvider>
+        <PresentationMode data={data} annual={annual} onClose={() => {}} />
+      </I18nProvider>
     </QueryClientProvider>,
   );
 
@@ -78,7 +83,8 @@ describe("modo apresentação", () => {
     setReducedMotion(true);
     renderMode();
     const mean = yearMean(annual, 2)!;
-    expect(screen.getByText(`${signed(mean, data.meta.variable.decimals)} °C`)).toBeInTheDocument();
+    const shown = `${signed(mean, data.meta.variable.decimals)} °C`;
+    expect(screen.getByText((text) => text.includes(shown))).toBeInTheDocument();
   });
 
   it("um ficheiro de demonstração mostra o rótulo (critério 4)", () => {

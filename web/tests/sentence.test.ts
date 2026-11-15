@@ -30,8 +30,15 @@ describe("result sentence", () => {
     }
   });
 
-  it("pt and en catalogues have the same keys", () => {
-    expect(Object.keys(CATALOGS.en).sort()).toEqual(Object.keys(CATALOGS.pt).sort());
+  it("all five catalogues have exactly the same keys (SPEC-140)", () => {
+    const ref = Object.keys(CATALOGS.pt).sort();
+    for (const lang of LANGS) expect(Object.keys(CATALOGS[lang]).sort()).toEqual(ref);
+  });
+
+  it("every translation keeps the same {placeholders} as Portuguese", () => {
+    const ph = (s: string) => (s.match(/\{\w+\}/g) ?? []).sort().join();
+    for (const lang of LANGS)
+      for (const [k, v] of Object.entries(CATALOGS.pt)) expect([lang, k, ph(CATALOGS[lang][k]!)]).toEqual([lang, k, ph(v)]);
   });
 
   it("has the p-value rule in every language (SPEC-101 criterion 9)", () => {

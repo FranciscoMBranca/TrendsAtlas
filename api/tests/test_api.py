@@ -68,3 +68,11 @@ def test_polygon():
                                              "regiao": {"tipo": "poligono", "coordenadas": [ring]}})
     assert r.status_code == 200, r.text
     assert r.json()["regiao"]["n_celulas"] > 1
+
+
+def test_named_place_region():
+    r = client.post("/regiao/analise", json={"variavel": "temperatura", "regiao": {"tipo": "lugar", "chave": "bra"}})
+    assert r.status_code == 200, r.text
+    assert r.json()["regiao"]["lugar"] == "bra" and r.json()["regiao"]["n_celulas"] > 10
+    bad = client.post("/regiao/analise", json={"variavel": "temperatura", "regiao": {"tipo": "lugar", "chave": "xyz"}})
+    assert bad.status_code == 422

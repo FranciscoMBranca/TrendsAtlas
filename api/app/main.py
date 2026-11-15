@@ -20,6 +20,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, model_validator
 
 from terratempo import SCHEMA_VERSION
+
+from . import assistant
 from terratempo.analysis import AnalysisError, analyse
 from terratempo.anomaly import monthly_anomaly, weighted_mean
 from terratempo.catalog import PRESETS, manifest
@@ -46,6 +48,8 @@ ALLOWED_ORIGINS = parse_origins(_env("ALLOWED_ORIGINS", "http://localhost:3000")
 # Optional ONE regex for preview deployments, e.g. ^https://trends-atlas-[a-z0-9-]+\.vercel\.app$
 ALLOWED_ORIGIN_REGEX = _env("ALLOWED_ORIGIN_REGEX") or None
 RATE_LIMIT_PER_MIN = int(_env("RATE_LIMIT_PER_MIN", "60") or "60")
+# The assistant calls a paid model: a stricter per-client limit.
+ASSISTANT_LIMIT_PER_MIN = int(_env("ASSISTANT_LIMIT_PER_MIN", "8") or "8")
 
 app = FastAPI(title="Terra Tempo API", version=SCHEMA_VERSION)
 app.add_middleware(
@@ -126,7 +130,8 @@ def trend_map_route(var_id: str, preset: str = "completo"):
 
 
 class Region(BaseModel):
-    tipo: Literal["globo", "rectangulo", "poligono"]
+    tipo: Literal["globo", "rectangulo", "poligono", "lugar"]
+    chave: str | None = Field(default=None, max_length=40, pattern=r"^[a-z0-9-]+$")
     oeste: float | None = Field(default=None, ge=-180, le=180)
     sul: float | None = Field(default=None, ge=-90, le=90)
     este: float | None = Field(default=None, ge=-180, le=180)
@@ -137,6 +142,8 @@ class Region(BaseModel):
     def check(self):
         if self.tipo == "rectangulo" and None in (self.oeste, self.sul, self.este, self.norte):
             raise ValueError("rectangulo_incompleto")
+        if self.tipo == "lugar" and not self.chave:
+            raise ValueError("lugar_incompleto")
         if self.tipo == "poligono":
             if not self.coordenadas:
                 raise ValueError("poligono_incompleto")
@@ -176,3 +183,55 @@ def region_analysis(req: AnalysisRequest):
         "regiao": info,
         **result,
     }
+
+
+# ---------------------------------------------------------------- assistant (B11)
+class ChatMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str = Field(min_length=1, max_length=2000)
+
+
+class ChatRequest(BaseModel):
+    mensagens: list[ChatMessage] = Field(min_length=1, max_length=20)
+    idioma: Literal["pt", "en", "es", "fr", "zh"] = "pt"
+    publico: Literal["crianca", "explorador", "cientista"] = "explorador"
+    variavel: str | None = Field(default=None, max_length=30)
+
+
+_chat_hits: dict[str, deque] = defaultdict(deque)
+
+
+@lru_cache(maxsize=1)
+def _anthropic_client():
+    import anthropic
+
+    return anthropic.Anthropic(max_retries=2, timeout=60.0)
+
+
+@app.post("/assistente/pergunta")
+def assistant_route(req: ChatRequest, request: Request):
+    if not _env("ANTHROPIC_API_KEY"):
+        raise _error(503, "assistente_indisponivel")
+    if req.mensagens[-1].role != "user":
+        raise _error(422, "ultima_mensagem_nao_e_do_utilizador")
+    ip = request.client.host if request.client else "?"
+    now = time.monotonic()
+    q = _chat_hits[ip]
+    while q and now - q[0] > 60:
+        q.popleft()
+    if len(q) >= ASSISTANT_LIMIT_PER_MIN:
+        raise _error(429, "muitos_pedidos")
+    q.append(now)
+
+    import anthropic
+
+    try:
+        out = assistant.answer(_anthropic_client(), DATASETS, [m.model_dump() for m in req.mensagens],
+                               req.idioma, req.publico, req.variavel)
+    except anthropic.RateLimitError:
+        raise _error(429, "muitos_pedidos") from None
+    except (anthropic.APIStatusError, anthropic.APIConnectionError):
+        raise _error(502, "assistente_falhou") from None
+    if not out.get("resposta"):
+        raise _error(502, "assistente_sem_resposta")
+    return out

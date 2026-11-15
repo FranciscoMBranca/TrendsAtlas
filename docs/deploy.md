@@ -23,6 +23,9 @@ Variables (lista completa em [`api/.env.example`](../api/.env.example)):
 | `ALLOWED_ORIGINS` | domínio de produção da Vercel, ex.: `https://<projecto>.vercel.app` (vários separados por vírgula) |
 | `ALLOWED_ORIGIN_REGEX` | opcional, para as pré-visualizações: `^https://<projecto>-[a-z0-9-]+\.vercel\.app$` |
 | `RATE_LIMIT_PER_MIN` | `60` |
+| `ANTHROPIC_API_KEY` | chave da API da Anthropic, para o chat (segredo; a subscrição Claude não cobre chamadas pela API). Sem ela, o chat diz que o assistente não está disponível |
+| `ASSISTANT_MODEL` | opcional, por defeito `claude-opus-5-5` |
+| `ASSISTANT_LIMIT_PER_MIN` | opcional, perguntas por minuto por visitante, por defeito `8` |
 
 **Porta (causa do erro 502 "A solicitação não respondeu"):** a porta do domínio público tem de ser a porta onde o uvicorn ouve. A forma mais simples:
 

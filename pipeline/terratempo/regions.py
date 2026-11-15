@@ -6,6 +6,7 @@ import numpy as np
 
 from .analysis import Series
 from .anomaly import weighted_mean
+from . import places
 from .grid import bbox_to_ring, polygon_mask
 from .synthetic import Dataset
 
@@ -19,6 +20,7 @@ def region_series(ds: Dataset, region: dict) -> tuple[Series, dict]:
       {"tipo": "globo"}
       {"tipo": "rectangulo", "oeste": .., "sul": .., "este": .., "norte": ..}
       {"tipo": "poligono", "coordenadas": [[[lon, lat], ...], ...]}  (GeoJSON Polygon)
+      {"tipo": "lugar", "chave": "ago"}  (a country by ISO 3166 alpha-3, or an ocean key)
     """
     kind = region.get("tipo")
     small = False
@@ -36,6 +38,8 @@ def region_series(ds: Dataset, region: dict) -> tuple[Series, dict]:
         if sum(len(r) for r in rings) > MAX_VERTICES:
             raise ValueError("poligono_grande")
         mask, small = polygon_mask(ds.grid, rings)
+    elif kind == "lugar":
+        mask, small = places.mask(ds.grid, str(region.get("chave", "")))
     else:
         raise ValueError("regiao_invalida")
     values = weighted_mean(ds.cube, ds.grid.lats, mask)
@@ -46,4 +50,6 @@ def region_series(ds: Dataset, region: dict) -> tuple[Series, dict]:
         "resolucao_graus": ds.grid.resolution,
         "menor_que_resolucao": bool(small),
     }
+    if kind == "lugar":
+        info["lugar"] = region.get("chave")
     return Series(values, ds.years, ds.months), info
