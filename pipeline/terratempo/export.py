@@ -19,12 +19,27 @@ from .readers import load_cube
 from .synthetic import DEMO_VARIABLES, make_dataset
 
 
-# An empty TERRATEMPO_CUBES (as left by some dashboards) means "use the default".
-CUBES_DIR = Path((os.getenv("TERRATEMPO_CUBES") or "").strip().strip("\"'") or Path(__file__).resolve().parents[2] / "data" / "cubes")
+def cubes_dir() -> Path:
+    """Where the real cubes live.
+
+    1. TERRATEMPO_CUBES, when set and not empty (dashboards often leave it empty);
+    2. <repo>/data/cubes, when the package runs from the repository (editable install);
+    3. ./data/cubes from the working directory (/app in the Docker image, where the
+       package is installed in site-packages and the repository path does not exist).
+    """
+    env = (os.getenv("TERRATEMPO_CUBES") or "").strip().strip("\"'")
+    if env:
+        return Path(env)
+    repo = Path(__file__).resolve().parents[2] / "data" / "cubes"
+    return repo if repo.is_dir() else Path.cwd() / "data" / "cubes"
+
+
+CUBES_DIR = cubes_dir()
 
 
 def load_datasets() -> dict:
     """Real cube (data/cubes/<id>.npz, label "real") when it exists, labelled synthetic otherwise."""
+    print(f"terratempo: cubos em {CUBES_DIR} ({'existe' if CUBES_DIR.is_dir() else 'não existe'})", flush=True)
     out = {}
     for vid in DEMO_VARIABLES:
         cube = CUBES_DIR / f"{vid}.npz"
