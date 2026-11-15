@@ -25,9 +25,9 @@ const withQuery = (node: React.ReactNode) => (
 
 describe("componentes do atlas", () => {
   it("a abertura assume dados de exemplo quando meta.isDemo é verdadeiro", async () => {
-    // Sea level stays synthetic until the NASA-SSH files are ingested.
-    const demo = await loadAtlasData("sea_level", diskFetcher);
-    expect(demo.meta.isDemo).toBe(true);
+    // Every variable is real now: build a demo copy to keep the label honest if one ever goes back.
+    const real = await loadAtlasData("sea_level", diskFetcher);
+    const demo: AtlasData = { ...real, meta: { ...real.meta, isDemo: true } };
     render(<Opening data={demo} />);
     expect(screen.getByText("dados de exemplo")).toBeInTheDocument();
     expect(screen.getByText(/aqui com dados sintéticos/i)).toBeInTheDocument();
@@ -114,7 +114,13 @@ describe("várias variáveis", () => {
   });
 
   it("o panorama mostra uma linha por variável e é honesto sobre dados de exemplo", async () => {
-    const manifest = await loadManifest(diskFetcher);
+    const real = await loadManifest(diskFetcher);
+    // With all six variables real, no demo notice; with one marked demo, the notice appears.
+    const { unmount } = render(<Panorama manifest={real} selectedId="temperature" onSelect={() => {}} />);
+    expect(real.variables.every((v) => !v.isDemo)).toBe(true);
+    expect(screen.queryByText(/Dados de demonstração sintéticos/)).not.toBeInTheDocument();
+    unmount();
+    const manifest = { ...real, variables: real.variables.map((v, i) => (i === 0 ? { ...v, isDemo: true } : v)) };
     const picked: string[] = [];
     render(
       <Panorama manifest={manifest} selectedId="temperature" onSelect={(id) => picked.push(id)} />,

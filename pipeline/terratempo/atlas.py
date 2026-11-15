@@ -129,7 +129,7 @@ VARIABLES: dict[str, dict[str, Any]] = {
         "copy": {
             "down": "Desce", "up": "Sobe",
             "headline": "O mar sobe aqui mais depressa do que ali.",
-            "opening": "O mar não sobe *por igual* em todas as costas.",
+            "opening": "O mar não sobe *por igual* em todo o oceano.",
             "subject": "o nível do mar",
             "description": "A anomalia da altura da superfície do oceano medida por altimetria de satélite (média mensal das grelhas semanais). Só há valor no oceano aberto.",
         },
