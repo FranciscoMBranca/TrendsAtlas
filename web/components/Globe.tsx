@@ -10,7 +10,8 @@ import { withUnit } from "@/lib/format";
 import { useI18n } from "@/lib/i18n";
 import { cellPlace, placeName, usePlaces } from "@/lib/places";
 
-const AUTO_SPEED = 0.06; // degrees per frame
+// Auto-rotation in degrees per frame, by audience: lively for children, calm for scientists.
+const AUTO_SPEED = { crianca: 0.14, explorador: 0.06, cientista: 0.025 } as const;
 const unitFor = (u: string) => ({ "°C": "degC", "mm/dia": "mm/day" })[u] ?? u;
 
 type Line = [number, number][];
@@ -40,7 +41,9 @@ const unit = ([lon, lat]: [number, number]) => [Math.cos(lat * RAD) * Math.cos(l
  * and a click (or Enter on the focused globe) picks the cell under the pointer.
  */
 export function Globe({ data, onPick }: { data: AtlasData; onPick?: (cell: GridCell) => void }) {
-  const { lang, t } = useI18n();
+  const { lang, audience, t } = useI18n();
+  const speedRef = useRef<number>(AUTO_SPEED[audience]);
+  speedRef.current = AUTO_SPEED[audience];
   const places = usePlaces();
   const land = useLand();
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -174,7 +177,7 @@ export function Globe({ data, onPick }: { data: AtlasData; onPick?: (cell: GridC
 
     const loop = () => {
       if (!reduce && !dragging.current && !hoverRef.current && !document.hidden) {
-        rotation.current = [rotation.current[0] + AUTO_SPEED, rotation.current[1]];
+        rotation.current = [rotation.current[0] + speedRef.current, rotation.current[1]];
       }
       draw();
       frame = requestAnimationFrame(loop);

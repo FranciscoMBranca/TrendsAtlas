@@ -80,7 +80,7 @@ export function SignificanceDemo({ meta }: { meta: AtlasMeta }) {
     <section id="significativo" className="demo-section atlas-width">
       <div className="section-heading-row">
         <SectionHeader number="05" title="É significativo?" />
-        <span className="technical">DEMONSTRAÇÃO · RECALCULA NO BROWSER</span>
+        <span className="technical">SIMULAÇÃO INTERACTIVA · RECALCULA NO BROWSER</span>
       </div>
       <div className="section-intro">
         <h3>
