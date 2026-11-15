@@ -5,10 +5,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import Chart from "@/components/Chart";
 import { childSentence } from "@/components/Result";
+import { SystemStrip } from "@/components/SystemStrip";
 import { MapCanvas } from "@/components/atlas/map/MapCanvas";
 import type { PaintCell } from "@/components/atlas/map/CellLayer";
 import { API_URL, API_VARIABLE, analyseRegion, type Analysis, type Region as ApiRegion } from "@/lib/api";
-import type { AtlasData, GridCell, Region } from "@/lib/atlas/data/schema";
+import type { AtlasData, GridCell, Manifest, Region } from "@/lib/atlas/data/schema";
 import { useLand } from "@/lib/atlas/data/use-atlas-data";
 import { createMapGeometry, viewBoxForBbox, viewBoxForZoom } from "@/lib/atlas/geo/projection";
 import { areaWeight, trendColor, trendExtent } from "@/lib/atlas/scale";
@@ -56,8 +57,13 @@ export function ExploreMap({
   data,
   onInvestigate,
   pick,
+  manifest,
+  onSwitch,
 }: {
   data: AtlasData;
+  /** With the index of variables, the card adds the same place in all six variables. */
+  manifest?: Manifest;
+  onSwitch?: (varId: string, sel: Selection) => void;
   onInvestigate?: (r: ApiRegion, name: string) => void;
   /** A place to open, from the globe or a mission (applied once per `seq`, for its variable). */
   pick?: { varId: string; sel: Selection; seq: number } | null;
@@ -161,6 +167,9 @@ export function ExploreMap({
           />
         )}
       </div>
+      {selection && places.data && manifest && manifest.variables.length > 1 && (
+        <SystemStrip manifest={manifest} places={places.data} selection={selection} currentId={meta.variable.id} onSwitch={onSwitch} />
+      )}
     </section>
   );
 }

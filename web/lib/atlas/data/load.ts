@@ -58,3 +58,7 @@ export async function loadAtlasData(
   }
   return { meta, grid, regions, series };
 }
+
+/** Só o mapa de tendências de uma variável: para comparar várias no mesmo lugar. */
+export const loadGrid = (variableId: string, fetcher: Fetcher = (url) => fetch(url)) =>
+  loadJson(`${variableId}/grid_trend.json`, gridSchema, fetcher);

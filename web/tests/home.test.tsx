@@ -6,7 +6,9 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { placeSummary } from "@/components/ExploreMap";
 import { FloatingChat } from "@/components/FloatingChat";
+import { signalFor } from "@/components/SystemStrip";
 import { ChildHome, ExplorerHome, ScientistHome } from "@/components/Homes";
 import { Welcome } from "@/components/Shell";
 import { loadAtlasData, loadManifest } from "@/lib/atlas/data/load";
@@ -180,5 +182,34 @@ describe("globo, cartões e missões", () => {
     const globe = screen.getByRole("img", { name: /Globo interactivo/ });
     fireEvent.keyDown(globe, { key: "ArrowLeft" });
     expect(globe).toHaveAttribute("tabindex", "0");
+  });
+});
+
+describe("o mesmo lugar em todas as variáveis", () => {
+  it("o resumo de cada variável usa as mesmas regras do cartão (média por área, maioria significativa)", () => {
+    const entry = manifest.variables.find((v) => v.id === "temperature")!;
+    const s = signalFor(entry, data.grid, { kind: "place", key: "ago" }, places)!;
+    const ref = placeSummary(data.grid, places, "ago")!;
+    expect(s.trend).toBeCloseTo(ref.trend, 10);
+    expect(s.sig).toBe(ref.sigShare >= 0.5);
+    expect(signalFor(entry, data.grid, { kind: "globe" }, places)).toEqual({ trend: entry.globalTrend, sig: entry.globalP < 0.05 });
+    // A variable with no cell in the place says so instead of inventing a value.
+    expect(signalFor(entry, [], { kind: "place", key: "ago" }, places)).toBeNull();
+  });
+
+  it("ao abrir um lugar mostra todas as variáveis, com o rótulo DEMONSTRAÇÃO onde é preciso", async () => {
+    const onPick = vi.fn();
+    wrap(
+      <ExplorerHome data={data} manifest={manifest} selectedId="temperature" onSelect={() => {}} onPick={onPick} pick={{ varId: "temperature", sel: { kind: "place", key: "ago" }, seq: 1 }} />,
+      { lang: "pt", audience: "explorador" },
+    );
+    const strip = await screen.findByRole("region", { name: /Angola: 6 sinais do sistema terrestre/ }, { timeout: 8000 });
+    for (const v of manifest.variables) {
+      const row = strip.querySelector(`[data-var="${v.id}"]`)!;
+      expect(row).toBeTruthy();
+      if (v.isDemo) expect(row.textContent).toContain("DEMONSTRAÇÃO");
+    }
+    fireEvent.click(strip.querySelector('[data-var="precipitation"]')!);
+    expect(onPick).toHaveBeenCalledWith("precipitation", { kind: "place", key: "ago" });
   });
 });

@@ -34,7 +34,7 @@ export function ChildHome({ data, manifest, selectedId, onSelect, pick, onPick =
     <div className="home home-crianca">
       <Hero data={data} manifest={manifest} child onPick={onPick} />
       <VariableCards manifest={manifest} selectedId={selectedId} onSelect={onSelect} child />
-      <ExploreMap data={data} pick={pick} />
+      <ExploreMap data={data} pick={pick} manifest={manifest} onSwitch={onPick} />
       <Missions manifest={manifest} onMission={onPick} />
       <PresentationLauncher data={data} />
     </div>
@@ -53,7 +53,7 @@ export function ExplorerHome({ data, manifest, selectedId, onSelect, pick, onPic
       <Hero data={data} manifest={manifest} onPick={onPick} />
       <Steps />
       <VariableCards manifest={manifest} selectedId={selectedId} onSelect={onSelect} />
-      <ExploreMap data={data} onInvestigate={handOver} pick={pick} />
+      <ExploreMap data={data} onInvestigate={handOver} pick={pick} manifest={manifest} onSwitch={onPick} />
       <Missions manifest={manifest} onMission={onPick} />
       <PresentationLauncher data={data} />
       <Investigate data={data} preset={preset} />
@@ -73,7 +73,7 @@ export function ScientistHome({ data, manifest, selectedId, onSelect, pick, onPi
     <div className="home home-cientista">
       <Hero data={data} manifest={manifest} onPick={onPick} />
       <VariableCards manifest={manifest} selectedId={selectedId} onSelect={onSelect} />
-      <ExploreMap data={data} onInvestigate={handOver} pick={pick} />
+      <ExploreMap data={data} onInvestigate={handOver} pick={pick} manifest={manifest} onSwitch={onPick} />
       <Missions manifest={manifest} onMission={onPick} />
       <PresentationLauncher data={data} />
       <Investigate data={data} preset={preset} />
