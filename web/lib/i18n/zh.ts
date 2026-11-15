@@ -274,4 +274,12 @@ export const zh: Catalog = {
   "val.ref.fdr": "错误发现率控制",
   "val.ref.mk": "Mann-Kendall 检验",
   "val.ref.hamed_rao": "Hamed-Rao 校正",
+  "fontes.titulo": "数据来源",
+  "fontes.sub": "所有数据均来自 NASA 的公开产品。每个产品的名称、版本和 DOI 已于 {data} 在 NASA 目录（CMR）中核实。",
+  "fontes.real": "真实数据 · {inicio} 至 {fim}",
+  "fontes.pendente": "即将接入 · 目前仍为演示数据",
+  "fontes.produto": "产品",
+  "fontes.versao": "版本与字段",
+  "fontes.citar": "引用方式：",
+  "fontes.outros": "其他资源：边界和海岸线来自 Natural Earth；国家名称来自 i18n-iso-countries 软件包（ISO 3166）。数据处理流程和网站代码均已开源。",
 };

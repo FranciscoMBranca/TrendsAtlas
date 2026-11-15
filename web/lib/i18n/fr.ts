@@ -274,4 +274,12 @@ export const fr: Catalog = {
   "val.ref.fdr": "Contrôle des fausses découvertes",
   "val.ref.mk": "Test de Mann-Kendall",
   "val.ref.hamed_rao": "Correction de Hamed-Rao",
+  "fontes.titulo": "Sources des données",
+  "fontes.sub": "Toutes les données proviennent de produits publics de la NASA. Le nom, la version et le DOI de chacun ont été vérifiés dans le catalogue de la NASA (CMR) le {data}.",
+  "fontes.real": "données réelles · de {inicio} à {fim}",
+  "fontes.pendente": "à venir · encore en DÉMONSTRATION",
+  "fontes.produto": "Produit",
+  "fontes.versao": "Version et champ",
+  "fontes.citar": "Comment citer :",
+  "fontes.outros": "Autres ressources : frontières et côtes de Natural Earth ; noms des pays du paquet i18n-iso-countries (ISO 3166). Le code du pipeline et du site est ouvert.",
 };

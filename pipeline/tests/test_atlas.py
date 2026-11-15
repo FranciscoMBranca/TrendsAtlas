@@ -82,3 +82,18 @@ def test_annual_anomaly_file_for_presentation_mode(small, tmp_path):
     first = np.nanmean([v for v in a["values"][0] if v is not None])
     last = np.nanmean([v for v in a["values"][-1] if v is not None])
     assert last > first
+
+
+def test_sources_file_lists_every_variable_with_its_nasa_doi(tmp_path):
+    import json
+
+    from terratempo.atlas import VARIABLES, write_sources
+
+    data = json.loads(write_sources(tmp_path).read_text(encoding="utf-8"))
+    ids = [r["id"] for r in data["sources"]]
+    assert ids == list(VARIABLES)
+    for r in data["sources"]:
+        assert r["doi"].startswith("10.5067/") and r["product"] and r["version"]
+        assert r["status"] == "pending" and r["period"] is None  # no meta.json in tmp_path: nothing real
+    sea = next(r for r in data["sources"] if r["id"] == "sea_level")
+    assert sea["product"] == "NASA_SSH_REF_SIMPLE_GRID_V11" and sea["doi"] == "10.5067/NSREF-SG0V11"

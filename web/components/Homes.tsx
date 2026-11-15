@@ -13,6 +13,7 @@ import { VariableSection } from "@/components/atlas/VariableSection";
 import { ExploreMap } from "@/components/ExploreMap";
 import { Hero, Missions, Steps, VariableCards, type OnPick, type Pick } from "@/components/HomeParts";
 import { Investigate, type InvestigatePreset } from "@/components/Investigate";
+import { Sources } from "@/components/Sources";
 import { Validation } from "@/components/Validation";
 import type { Region } from "@/lib/api";
 import type { AtlasData, Manifest } from "@/lib/atlas/data/schema";
@@ -39,6 +40,7 @@ export function ChildHome({ data, manifest, selectedId, onSelect, pick, onPick =
       <Missions manifest={manifest} onMission={onPick} />
       <PresentationLauncher data={data} />
       <Validation />
+      <Sources />
     </div>
   );
 }
@@ -60,6 +62,7 @@ export function ExplorerHome({ data, manifest, selectedId, onSelect, pick, onPic
       <PresentationLauncher data={data} />
       <Investigate data={data} preset={preset} />
       <Validation />
+      <Sources />
     </div>
   );
 }
@@ -81,6 +84,7 @@ export function ScientistHome({ data, manifest, selectedId, onSelect, pick, onPi
       <PresentationLauncher data={data} />
       <Investigate data={data} preset={preset} />
       <Validation />
+      <Sources />
       {lang !== "pt" && (
         <p className="atlas-width secoes-notice" role="note">
           {t("secoes.so_pt")}

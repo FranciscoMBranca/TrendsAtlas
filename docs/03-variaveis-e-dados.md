@@ -17,16 +17,16 @@ Sem leitor real, a variável pode existir como **demonstração rotulada**, nunc
 
 | Camada | Variável | Produto candidato | Leitor | Notas |
 | --- | --- | --- | --- | --- |
-| **1 (MVP)** | Temperatura do ar | MERRA-2 `M2TMNXSLV` (T2M, kelvin para °C) | Desenhado, nunca testado com dados reais | Reanálise: modelo ajustado a observações, não medição directa |
-| **1 (MVP)** | Precipitação | GPM IMERG `GPM_3IMERGM` v07 (mm/hora para mm/dia) | Desenhado, nunca testado com dados reais | Medida por satélite |
-| **1 (se confirmado)** | Humidade do ar | MERRA-2 `M2TMNXSLV`, campo de humidade específica a 2 m (a confirmar o nome, `QV2M`) | O mesmo ficheiro e quase o mesmo leitor da temperatura | Custo baixo se o campo existir no mesmo ficheiro |
-| 2 (prioridade alta, D13) | Aerossóis (AOD) | MERRA-2, colecção de aerossóis (a confirmar), **ou** MODIS no satélite **Aqua**, que é o do exemplo do vídeo (desde 2002; produto mensal provavelmente `MYD08_M3`; o plano listava `MOD08_M3`, do Terra; **confirmar em P00**) | MERRA-2: reutiliza o leitor; MODIS: HDF4, por fazer | Reproduz o exemplo do vídeo (AOD, Wisconsin, verão). Começar pelo MERRA-2 pelo custo; MODIS só se o HDF4 não atrasar. Se não for o MODIS, dizê-lo no ecrã e na verificação com o Giovanni |
+| **1 (MVP)** | Temperatura do ar | MERRA-2 `M2TMNXSLV` (T2M, kelvin para °C) | **Real, 2000–2025** | Reanálise: modelo ajustado a observações, não medição directa |
+| **1 (MVP)** | Precipitação | GPM IMERG `GPM_3IMERGM` v07 (mm/hora para mm/dia) | **Real, 2000–2025-09** (a NASA ainda não publicou os meses seguintes) | Medida por satélite |
+| **1** | Humidade do ar | MERRA-2 `M2TMNXSLV`, humidade específica a 2 m (`QV2M`) | **Real, 2000–2025** (cubo no pipeline; ainda não aparece no site) | O mesmo ficheiro da temperatura |
+| 2 (prioridade alta, D13; **escolhido: MERRA-2 `M2TMNXAER`, `TOTEXTTAU`; leitor pronto, falta correr o workflow**) | Aerossóis (AOD) | MERRA-2, colecção de aerossóis (a confirmar), **ou** MODIS no satélite **Aqua**, que é o do exemplo do vídeo (desde 2002; produto mensal provavelmente `MYD08_M3`; o plano listava `MOD08_M3`, do Terra; **confirmar em P00**) | MERRA-2: reutiliza o leitor; MODIS: HDF4, por fazer | Reproduz o exemplo do vídeo (AOD, Wisconsin, verão). Começar pelo MERRA-2 pelo custo; MODIS só se o HDF4 não atrasar. Se não for o MODIS, dizê-lo no ecrã e na verificação com o Giovanni |
 | 2 | Humidade do solo e evapotranspiração | GLDAS (modelo citado no enunciado; produto a confirmar) | Por fazer | O enunciado nomeia o GLDAS |
-| 2 | Vegetação (NDVI) | MODIS `MOD13C2` v061 | HDF4, por fazer | Alternativa: AppEEARS |
+| 2 | Vegetação (NDVI) | MODIS `MOD13C2` v061 (`CMG 0.05 Deg Monthly NDVI`) | Leitor HDF4 pronto; falta correr o workflow | |
 | 3 | Perfis de temperatura e humidade da atmosfera | AIRS (instrumento citado no pacote anterior; produto a confirmar) | Por fazer | Só se sobrar tempo |
 | 3 | Ozono | OMI (instrumento citado no enunciado; produto a confirmar) | Por fazer | Variável da atmosfera |
-| 3 | Gelo marinho | NSIDC-0051 | Projecção polar, por fazer | Precisa de reprojecção; a fórmula confirma-se na documentação |
-| 3 | Nível do mar | MEaSUREs (grelhas de 5 dias) | Por fazer | Precisa de média mensal (F5) |
+| 2 | Gelo marinho | MERRA-2 `M2TMNXOCN` (`FRSEAICE`, fracção para %) | Leitor pronto; falta correr o workflow | Escolhido em vez do NSIDC-0051 para evitar a reprojecção polar |
+| 3 | Nível do mar | NASA-SSH simple grid v1.1 (grelhas semanais, 0,5°; substitui o MEaSUREs JPL2205, retirado do catálogo) | Leitor pronto | Média mensal das grelhas semanais (F5) |
 | Fora do MVP | Caudal de rios | Séries hidrológicas (recurso do enunciado; produto a confirmar) | Por fazer | Dados por estação ou bacia, não em grelha |
 | 3 (P38) | Nuvens, radiação solar, vento, pressão, vapor de água | Possivelmente colecções do MERRA-2 (nomes dos campos por confirmar) | Reutiliza o leitor do MERRA-2 | Citadas no vídeo; só entram depois de P00 |
 | Fora do MVP (P38) | Neve (profundidade, água armazenada), temperatura da superfície do mar, cor do oceano, água subterrânea | Produtos a confirmar | Por fazer | Citadas no vídeo; a aplicação pode trabalhar só com um tipo de dados |
@@ -98,3 +98,22 @@ Sem ficha completa, não há spec do leitor.
 - Têm rótulo "DEMONSTRAÇÃO" em todos os ecrãs, em todas as exportações e no manifesto da API.
 - Nunca são exportados como reais; um teste automático falha se um ficheiro sintético não tiver o rótulo.
 - Nunca entram em nenhuma validação ou número do pitch.
+
+
+## Fontes confirmadas no catálogo da NASA (CMR, 2026-11-15)
+
+Nomes curtos, versões e DOI verificados no catálogo público da NASA (CMR). O site mostra-os na secção
+"Fontes" a partir de `web/public/data/sources.json`, gerado por `terratempo.atlas`.
+
+| Variável no site | Produto (nome curto) | Versão | Campo | DOI |
+| --- | --- | --- | --- | --- |
+| Temperatura do ar | `M2TMNXSLV` (MERRA-2 tavgM_2d_slv_Nx) | 5.12.4 | `T2M` | 10.5067/AP1B0BA5PD2K |
+| Precipitação | `GPM_3IMERGM` (IMERG Final, mensal, 0,1°) | 07 | `precipitation` | 10.5067/GPM/IMERG/3B-MONTH/07 |
+| Vegetação | `MOD13C2` (MODIS Terra, CMG 0,05°) | 061 | `CMG 0.05 Deg Monthly NDVI` | 10.5067/MODIS/MOD13C2.061 |
+| Gelo marinho | `M2TMNXOCN` (MERRA-2 tavgM_2d_ocn_Nx) | 5.12.4 | `FRSEAICE` | 10.5067/4IASLIDL8EEC |
+| Aerossóis | `M2TMNXAER` (MERRA-2 tavgM_2d_aer_Nx) | 5.12.4 | `TOTEXTTAU` | 10.5067/FH9A0MLJPC7N |
+| Nível do mar | `NASA_SSH_REF_SIMPLE_GRID_V11` (NASA-SSH, semanal, 0,5°) | 1.1 | `ssha` | 10.5067/NSREF-SG0V11 |
+
+O produto do nível do mar previsto antes (MEaSUREs `SEA_SURFACE_HEIGHT_ALT_GRIDS_L4_2SATS_5DAY_6THDEG_V_JPL2205`,
+DOI 10.5067/SLREF-CDRV3) já não aparece no catálogo; o NASA-SSH v1.1 é o produto actual da PO.DAAC.
+Os nomes dos campos do NASA-SSH vêm do guia do utilizador (tabela 2); confirmam-se na primeira execução real.

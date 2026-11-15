@@ -51,6 +51,7 @@ def test_month_from_new_file_names():
     assert month_of("MOD13C2.A2000032.061.2020061141300.hdf") == (2000, 2)
     assert month_of("MOD13C2.A2024336.061.2025005000000.hdf") == (2024, 12)
     assert month_of("ssh_grids_v2205_2010011512.nc") == (2010, 1)
+    assert month_of("NASA-SSH_alt_ref_simple_grid_v1_1_19921026.nc") == (1992, 10)
     assert month_of("MERRA2_400.tavgM_2d_aer_Nx.202305.nc4") == (2023, 5)
 
 
@@ -119,3 +120,31 @@ def test_modis_ndvi_hdf4(tmp_path):
     out = read_file(PRODUCTS["vegetacao"], dest, G)
     assert np.isnan(out[:, :36]).all()
     assert np.allclose(out[:, 36:], 0.6, atol=1e-4)
+
+
+def nasa_ssh_file(path, ssha_m, counts=200):
+    """Layout of the NASA-SSH simple grid v1.1 (user guide, table 2)."""
+    nc = netCDF4.Dataset("fake.nc", "w", memory=1024)
+    nc.createDimension("latitude", 360)
+    nc.createDimension("longitude", 720)
+    nc.createVariable("latitude", "f4", ("latitude",))[:] = -89.75 + 0.5 * np.arange(360)
+    nc.createVariable("longitude", "f4", ("longitude",))[:] = 0.25 + 0.5 * np.arange(720)
+    v = nc.createVariable("ssha", "f4", ("latitude", "longitude"), fill_value=np.float32(np.nan))
+    v.units = "m"
+    v[:] = np.full((360, 720), ssha_m, dtype=np.float32)
+    c = nc.createVariable("counts", "f4", ("latitude", "longitude"))
+    cnt = np.full((360, 720), counts, dtype=np.float32)
+    cnt[:, :200] = 0  # no altimeter data here: must come out missing, not as the ssha value
+    c[:] = cnt
+    path.write_bytes(bytes(nc.close()))
+
+
+def test_nasa_ssh_weekly_grids_metres_to_mm_and_counts_mask(tmp_path):
+    assert PRODUCTS["nivel_mar"].short_name == "NASA_SSH_REF_SIMPLE_GRID_V11"
+    nasa_ssh_file(tmp_path / "NASA-SSH_alt_ref_simple_grid_v1_1_20100104.nc", 0.010)
+    nasa_ssh_file(tmp_path / "NASA-SSH_alt_ref_simple_grid_v1_1_20100111.nc", 0.030)
+    ds = build_dataset("nivel_mar", sorted(tmp_path.glob("*.nc")))
+    assert ds.cube.shape[0] == 1 and ds.unit == "mm"
+    vals = ds.cube[0][np.isfinite(ds.cube[0])]
+    assert vals.size > 0 and np.allclose(vals, 20.0, atol=1e-2)
+    assert np.isnan(ds.cube[0]).any()  # counts = 0 stays missing

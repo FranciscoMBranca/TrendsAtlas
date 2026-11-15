@@ -76,6 +76,7 @@ def ingest(var_ids: list[str], start: str, end: str, skip_download: bool, keep_r
     sums = {v: np.zeros((n, *grid.shape), dtype=np.float64) for v in var_ids}
     counts = {v: np.zeros((n, *grid.shape), dtype=np.int32) for v in var_ids}
     got = set()
+    seen: set[str] = set()
     ea = None if skip_download else _login()
     pattern = product.pattern
 
@@ -86,6 +87,10 @@ def ingest(var_ids: list[str], start: str, end: str, skip_download: bool, keep_r
         files = (sorted(folder.glob(pattern)) + sorted(raw.glob(pattern))) if skip_download else \
             download_year(ea, product.short_name, product.version, year, m_start, m_end, folder)
         for path in files:
+            # Weekly sea level files near New Year are found by both years' searches: count once.
+            if path.name in seen:
+                continue
+            seen.add(path.name)
             try:
                 yy, mm = month_of(path)
             except ValueError:

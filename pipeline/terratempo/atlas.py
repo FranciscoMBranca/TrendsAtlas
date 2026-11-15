@@ -131,11 +131,11 @@ VARIABLES: dict[str, dict[str, Any]] = {
             "headline": "O mar sobe aqui mais depressa do que ali.",
             "opening": "O mar não sobe *por igual* em todas as costas.",
             "subject": "o nível do mar",
-            "description": "A anomalia da altura da superfície do oceano medida por altimetria de satélite (média mensal de grelhas de 5 dias). Só há valor no oceano aberto.",
+            "description": "A anomalia da altura da superfície do oceano medida por altimetria de satélite (média mensal das grelhas semanais). Só há valor no oceano aberto.",
         },
-        "source": {"name": "NASA MEaSUREs", "product": "Gridded Sea Surface Height Anomalies (SLA)", "version": "JPL2205",
-                   "doi": "10.5067/SLREF-CDRV3",
-                   "note": "Altimetria por satélite; anomalias face a uma média de referência do produto."},
+        "source": {"name": "NASA-SSH (PO.DAAC)", "product": "NASA_SSH_REF_SIMPLE_GRID_V11 (ssha, semanal, 0,5°)",
+                   "version": "1.1", "doi": "10.5067/NSREF-SG0V11",
+                   "note": "Altimetria por satélite (TOPEX/Poseidon, Jason, Sentinel-6); anomalias face à superfície média DTU21."},
     },
 }
 
@@ -448,6 +448,35 @@ def write_manifest(out: Path) -> Path:
         })
     path = out / "variables.json"
     _write(path, {"schemaVersion": SCHEMA_VERSION, "variables": entries})
+    write_sources(out)
+    return path
+
+
+# Date the short names, versions and DOIs below were checked in NASA's CMR catalogue.
+SOURCES_CHECKED = "2026-11-15"
+
+
+def write_sources(out: Path) -> Path:
+    """sources.json: the NASA product behind every variable, with its DOI and citation, and whether
+    the site already shows it (real) or still shows labelled demo data (pending)."""
+    from .readers import PRODUCTS
+
+    pipeline_id = {v: k for k, v in ATLAS_ID.items()}
+    rows = []
+    for vid, spec in VARIABLES.items():
+        mp = out / vid / "meta.json"
+        meta = json.loads(mp.read_text(encoding="utf-8")) if mp.exists() else None
+        real = bool(meta) and not meta["isDemo"]
+        prod = PRODUCTS[pipeline_id[vid]]
+        rows.append({
+            "id": vid, "status": "real" if real else "pending",
+            "name": spec["source"]["name"], "product": prod.short_name, "field": prod.field,
+            "version": prod.version, "doi": spec["source"]["doi"], "citation": prod.citation,
+            "note": spec["source"]["note"],
+            "period": meta["period"] if real else None,
+        })
+    path = out / "sources.json"
+    _write(path, {"schemaVersion": 1, "checkedInCmr": SOURCES_CHECKED, "sources": rows})
     return path
 
 

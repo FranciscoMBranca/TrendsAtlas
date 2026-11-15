@@ -8,11 +8,12 @@
 | aerossois     | MERRA-2 tavgM_2d_aer_Nx (M2TMNXAER)                    | TOTEXTTAU   | none (AOD 550 nm)     |
 | gelo_marinho  | MERRA-2 tavgM_2d_ocn_Nx (M2TMNXOCN)                    | FRSEAICE    | fraction -> %         |
 | vegetacao     | MODIS Terra CMG monthly NDVI (MOD13C2 v061, HDF4)      | CMG 0.05 Deg Monthly NDVI | /10000  |
-| nivel_mar     | MEaSUREs SSH grids, 5-day, 1/6° (JPL2205, NetCDF)      | SLA         | m -> mm, monthly mean of 5-day grids (F5) |
+| nivel_mar     | NASA-SSH simple grid, weekly, 0.5° (NASA_SSH_REF_SIMPLE_GRID_V11, NetCDF) | ssha | m -> mm, monthly mean of weekly grids (F5) |
 
-Product and field names come from docs/03 and still have to be confirmed against the
-official catalogue (P00): every reader checks units and shapes and fails loudly when
-they do not match. Raw files never go into git; only the aggregated cubes do.
+Short names, versions and DOIs were checked against NASA's CMR catalogue on 2026-11-15
+(the MEaSUREs JPL2205 sea level grids are no longer listed; NASA-SSH v1.1 replaces them).
+Field names inside the files are confirmed on the first real run: every reader checks units
+and shapes and fails loudly when they do not match. Raw files never go into git; only the aggregated cubes do.
 """
 
 from __future__ import annotations
@@ -33,7 +34,7 @@ from .synthetic import Dataset
 _IMERG_DATE = re.compile(r"\.(\d{4})(\d{2})\d{2}-S")
 _MERRA_DATE = re.compile(r"\.(\d{4})(\d{2})\.nc4$")
 _MODIS_DATE = re.compile(r"\.A(\d{4})(\d{3})\.")
-_SSH_DATE = re.compile(r"_(\d{4})(\d{2})(\d{2})\d{2}\.nc$")
+_SSH_DATE = re.compile(r"_(\d{4})(\d{2})(\d{2})(?:\d{2})?\.nc$")
 
 MERRA_CITATION = "Global Modeling and Assimilation Office (GMAO), MERRA-2 {coll}, NASA GES DISC, doi:{doi}"
 
@@ -79,16 +80,16 @@ PRODUCTS = {
         kind="modis_cmg", pattern="*.hdf",
     ),
     "nivel_mar": Product(
-        "nivel_mar", "SEA_SURFACE_HEIGHT_ALT_GRIDS_L4_2SATS_5DAY_6THDEG_V_JPL2205", "2205", "SLA", "mm",
-        "Fournier, S., et al. MEaSUREs Gridded Sea Surface Height Anomalies Version 2205, "
-        "NASA PO.DAAC, doi:10.5067/SLREF-CDRV3",
+        "nivel_mar", "NASA_SSH_REF_SIMPLE_GRID_V11", "1.1", "ssha", "mm",
+        "Willis, J. K., S. Fournier, K. Marlis and E. Killett, NASA-SSH Simple Gridded Sea Surface "
+        "Height from Standardized Reference Missions Only, Version 1.1, PO.DAAC, doi:10.5067/NSREF-SG0V11",
         kind="ssh5day", pattern="*.nc",
     ),
 }
 
 
 def month_of(path: Path | str) -> tuple[int, int]:
-    """(year, month) from an IMERG, MERRA-2, MODIS (AYYYYDDD) or SSH (_YYYYMMDDHH) file name."""
+    """(year, month) from an IMERG, MERRA-2, MODIS (AYYYYDDD) or SSH (_YYYYMMDD[HH].nc) file name."""
     name = Path(path).name
     m = _IMERG_DATE.search(name) or _MERRA_DATE.search(name)
     if m:
@@ -242,16 +243,20 @@ def read_modis_ndvi_month(path: Path | str, field: str, grid: Grid) -> np.ndarra
 
 
 def read_ssh_5day(path: Path | str, field: str, grid: Grid) -> np.ndarray:
-    """MEaSUREs SSH 5-day 1/6° grid: SLA in metres -> mm, on the 5° grid (one 5-day snapshot)."""
+    """Gridded sea surface height anomaly (NASA-SSH weekly 0.5°, or the older MEaSUREs 5-day 1/6°):
+    metres -> mm, on the 5° grid. Grid points with no altimeter data (counts = 0) are missing."""
     with _open_nc(path) as nc:
-        var = nc.variables[field]
+        var = nc.variables[field if field in nc.variables else "SLA"]  # SLA: older MEaSUREs files
         var.set_auto_mask(True)
         data = np.ma.filled(var[:].astype(float), np.nan)
-        lat_name = "Latitude" if "Latitude" in nc.variables else "lat"
-        lon_name = "Longitude" if "Longitude" in nc.variables else "lon"
-        lats, lons = nc.variables[lat_name][:], nc.variables[lon_name][:]
+        pick = lambda *names: next(n for n in names if n in nc.variables)  # noqa: E731
+        lats = np.asarray(nc.variables[pick("latitude", "Latitude", "lat")][:], dtype=float)
+        lons = np.asarray(nc.variables[pick("longitude", "Longitude", "lon")][:], dtype=float)
         units = str(getattr(var, "units", "")).strip().lower()
+        n_obs = np.ma.filled(nc.variables["counts"][:].astype(float), 0.0) if "counts" in nc.variables else None
     data = _orient(data, lats.size, lons.size)
+    if n_obs is not None:
+        data = np.where(_orient(n_obs, lats.size, lons.size) > 0, data, np.nan)
     if units in {"m", "meters", "metre", "metres"}:
         data = data * 1000.0
     elif units not in {"mm", "millimeters"}:

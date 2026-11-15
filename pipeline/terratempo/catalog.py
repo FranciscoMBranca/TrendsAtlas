@@ -21,7 +21,7 @@ VARIABLES = {
     },
     "humidade": {
         "unidade": "g/kg",
-        "produto_candidato": "MERRA-2 M2TMNXSLV (QV2M, a confirmar)",
+        "produto_candidato": "MERRA-2 M2TMNXSLV (QV2M)",
         "relativa": True,
         "camada": 1,
     },
@@ -45,7 +45,7 @@ VARIABLES = {
     },
     "nivel_mar": {
         "unidade": "mm",
-        "produto_candidato": "MEaSUREs SSH grids JPL2205 (SLA)",
+        "produto_candidato": "NASA-SSH NASA_SSH_REF_SIMPLE_GRID_V11 (ssha)",
         "relativa": False,
         "camada": 2,
     },
