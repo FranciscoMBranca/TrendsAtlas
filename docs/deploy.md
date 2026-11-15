@@ -23,8 +23,10 @@ Variables (lista completa em [`api/.env.example`](../api/.env.example)):
 | `ALLOWED_ORIGINS` | domínio de produção da Vercel, ex.: `https://<projecto>.vercel.app` (vários separados por vírgula) |
 | `ALLOWED_ORIGIN_REGEX` | opcional, para as pré-visualizações: `^https://<projecto>-[a-z0-9-]+\.vercel\.app$` |
 | `RATE_LIMIT_PER_MIN` | `60` |
-| `ANTHROPIC_API_KEY` | chave da API da Anthropic, para o chat (segredo; a subscrição Claude não cobre chamadas pela API). Sem ela, o chat diz que o assistente não está disponível |
-| `ASSISTANT_MODEL` | opcional, por defeito `claude-opus-5-5` |
+| `GROQ_API_KEY` | chave do Groq para o chat (segredo; há plano gratuito em console.groq.com). Sem esta nem a do OpenRouter, o chat fica escondido |
+| `OPENROUTER_API_KEY` | alternativa: chave do OpenRouter (segredo; tem modelos gratuitos em openrouter.ai) |
+| `AI_PROVIDER` | opcional: `groq` ou `openrouter`; vazio = o primeiro com chave (Groq primeiro) |
+| `AI_MODEL` | opcional; por defeito `openai/gpt-oss-120b` no Groq e `openrouter/free` no OpenRouter |
 | `ASSISTANT_LIMIT_PER_MIN` | opcional, perguntas por minuto por visitante, por defeito `8` |
 
 **Porta (causa do erro 502 "A solicitação não respondeu"):** a porta do domínio público tem de ser a porta onde o uvicorn ouve. A forma mais simples:

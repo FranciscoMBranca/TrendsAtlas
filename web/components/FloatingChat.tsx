@@ -18,7 +18,7 @@ export function FloatingChat({ variable }: { variable: string }) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  // The chat is off until the API says the assistant is configured (ANTHROPIC_API_KEY).
+  // The chat is off until the API says the assistant is configured (GROQ_API_KEY or OPENROUTER_API_KEY).
   const [available, setAvailable] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);

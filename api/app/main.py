@@ -21,7 +21,7 @@ from pydantic import BaseModel, Field, model_validator
 
 from terratempo import SCHEMA_VERSION
 
-from . import assistant
+from . import assistant, llm
 from terratempo.analysis import AnalysisError, analyse
 from terratempo.anomaly import monthly_anomaly, weighted_mean
 from terratempo.catalog import PRESETS, manifest
@@ -48,7 +48,7 @@ ALLOWED_ORIGINS = parse_origins(_env("ALLOWED_ORIGINS", "http://localhost:3000")
 # Optional ONE regex for preview deployments, e.g. ^https://trends-atlas-[a-z0-9-]+\.vercel\.app$
 ALLOWED_ORIGIN_REGEX = _env("ALLOWED_ORIGIN_REGEX") or None
 RATE_LIMIT_PER_MIN = int(_env("RATE_LIMIT_PER_MIN", "60") or "60")
-# The assistant calls a paid model: a stricter per-client limit.
+# The assistant calls an external model (free tiers are tight): a stricter per-client limit.
 ASSISTANT_LIMIT_PER_MIN = int(_env("ASSISTANT_LIMIT_PER_MIN", "8") or "8")
 
 app = FastAPI(title="Terra Tempo API", version=SCHEMA_VERSION)
@@ -201,22 +201,22 @@ class ChatRequest(BaseModel):
 _chat_hits: dict[str, deque] = defaultdict(deque)
 
 
-@lru_cache(maxsize=1)
-def _anthropic_client():
-    import anthropic
-
-    return anthropic.Anthropic(max_retries=2, timeout=60.0)
+@lru_cache(maxsize=4)
+def _chat_client(provider_id: str):
+    return llm.ChatClient(llm.PROVIDERS[provider_id])
 
 
 @app.get("/assistente/estado")
 def assistant_status():
     """Whether the chat can answer (the site hides the chat button when it cannot)."""
-    return {"disponivel": bool(_env("ANTHROPIC_API_KEY"))}
+    p = llm.pick_provider()
+    return {"disponivel": p is not None, "fornecedor": p.id if p else None}
 
 
 @app.post("/assistente/pergunta")
 def assistant_route(req: ChatRequest, request: Request):
-    if not _env("ANTHROPIC_API_KEY"):
+    provider = llm.pick_provider()
+    if provider is None:
         raise _error(503, "assistente_indisponivel")
     if req.mensagens[-1].role != "user":
         raise _error(422, "ultima_mensagem_nao_e_do_utilizador")
@@ -229,14 +229,12 @@ def assistant_route(req: ChatRequest, request: Request):
         raise _error(429, "muitos_pedidos")
     q.append(now)
 
-    import anthropic
-
     try:
-        out = assistant.answer(_anthropic_client(), DATASETS, [m.model_dump() for m in req.mensagens],
+        out = assistant.answer(_chat_client(provider.id), DATASETS, [m.model_dump() for m in req.mensagens],
                                req.idioma, req.publico, req.variavel)
-    except anthropic.RateLimitError:
+    except llm.RateLimited:
         raise _error(429, "muitos_pedidos") from None
-    except (anthropic.APIStatusError, anthropic.APIConnectionError):
+    except llm.ProviderError:
         raise _error(502, "assistente_falhou") from None
     if not out.get("resposta"):
         raise _error(502, "assistente_sem_resposta")

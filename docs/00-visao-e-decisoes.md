@@ -62,7 +62,7 @@ Cada decisão tem uma proposta. Decide quem vai manter o código; os agentes só
 - [ ] Repositório GitHub novo e vazio, com o ramo principal protegido.
 - [ ] Projecto Vercel ligado ao repositório.
 - [ ] Escolher o hospedeiro do backend e confirmar os limites do plano gratuito.
-- [ ] Criar a chave de API da Anthropic (se D9 incluir os pontos 3 ou 4), com tecto de custo, guardada como segredo.
+- [ ] Criar uma chave do Groq ou do OpenRouter (planos gratuitos) para o assistente, guardada como segredo na Railway.
 - [ ] Atribuir um responsável humano a cada papel (`06-agentes-e-processo.md`).
 - [ ] Acordar o tecto de custo dos agentes por fase.
 

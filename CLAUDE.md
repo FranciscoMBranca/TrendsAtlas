@@ -4,7 +4,7 @@
 Terra Tempo: tendências do sistema terrestre com dados da NASA. Ver `docs/00-visao-e-decisoes.md`.
 
 ## Regras que nunca se quebram
-- Segredos nunca no código nem nos registos. Só os nomes das variáveis de ambiente (`EARTHDATA_USERNAME`, `EARTHDATA_PASSWORD`, `ANTHROPIC_API_KEY`, `NEXT_PUBLIC_API_URL`); os valores ficam nos cofres.
+- Segredos nunca no código nem nos registos. Só os nomes das variáveis de ambiente (`EARTHDATA_USERNAME`, `EARTHDATA_PASSWORD`, `GROQ_API_KEY`, `OPENROUTER_API_KEY`, `NEXT_PUBLIC_API_URL`); os valores ficam nos cofres.
 - Nunca reescrever o histórico do git (sem `push --force`, sem `reset --hard` em ramos partilhados).
 - Nunca juntar, publicar, apagar dados ou mexer em segredos sem aprovação humana.
 - Dados de demonstração têm sempre o rótulo "DEMONSTRAÇÃO"; nunca aparecem como reais.
