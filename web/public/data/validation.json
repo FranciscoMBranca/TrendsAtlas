@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-15T08:26:02+00:00",
+ "generatedAt": "2026-11-15T08:58:22+00:00",
  "alphaPct": 5.0,
  "references": [
   {
@@ -26,18 +26,6 @@
    "reference": "scipy.stats.false_discovery_control",
    "cases": 50,
    "maxRelDiff": 0.0
-  },
-  {
-   "id": "mk",
-   "reference": "pymannkendall.original_test",
-   "cases": 50,
-   "maxRelDiff": 0.0
-  },
-  {
-   "id": "hamed_rao",
-   "reference": "pymannkendall.hamed_rao_modification_test",
-   "cases": 45,
-   "maxRelDiff": 1.8384689699586304e-15
   }
  ],
  "falseAlarms": [
@@ -131,6 +119,17 @@
    "realPct": 54.6,
    "shuffledMeanPct": 12.4,
    "shuffledMaxPct": 33.3,
+   "shuffles": 10
+  },
+  {
+   "variable": "sea_level",
+   "period": {
+    "start": "2000-01",
+    "end": "2025-12"
+   },
+   "realPct": 97.2,
+   "shuffledMeanPct": 21.0,
+   "shuffledMaxPct": 54.0,
    "shuffles": 10
   }
  ]
