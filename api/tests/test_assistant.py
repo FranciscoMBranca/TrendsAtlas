@@ -81,3 +81,10 @@ def test_refusal_is_not_shown_as_an_answer(monkeypatch):
     monkeypatch.setattr(api, "_anthropic_client", lambda: fake)
     r = client.post("/assistente/pergunta", json={"mensagens": [{"role": "user", "content": "x"}]})
     assert r.status_code == 502
+
+
+def test_status_route_follows_the_key(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    assert client.get("/assistente/estado").json() == {"disponivel": False}
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    assert client.get("/assistente/estado").json() == {"disponivel": True}

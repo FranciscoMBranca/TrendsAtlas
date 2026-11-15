@@ -18,8 +18,22 @@ export function FloatingChat({ variable }: { variable: string }) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  // The chat is off until the API says the assistant is configured (ANTHROPIC_API_KEY).
+  const [available, setAvailable] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!API_URL) return;
+    let alive = true;
+    fetch(`${API_URL}/assistente/estado`)
+      .then((r) => (r.ok ? r.json() : { disponivel: false }))
+      .then((b: { disponivel?: boolean }) => alive && setAvailable(Boolean(b.disponivel)))
+      .catch(() => alive && setAvailable(false));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   useEffect(() => {
     listRef.current?.scrollTo?.({ top: listRef.current.scrollHeight });
@@ -65,6 +79,8 @@ export function FloatingChat({ variable }: { variable: string }) {
     e.preventDefault();
     void ask(input);
   };
+
+  if (!available) return null;
 
   if (status === "closed") {
     return (

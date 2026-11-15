@@ -112,10 +112,26 @@ describe("página principal condicional", () => {
 });
 
 describe("chat flutuante", () => {
-  it("abre, minimiza e fecha", async () => {
+  const assistantUp = (answer: Response | null) =>
+    vi.stubGlobal("fetch", (url: string) =>
+      url.endsWith("/assistente/estado")
+        ? Promise.resolve(new Response(JSON.stringify({ disponivel: true })))
+        : answer
+          ? Promise.resolve(answer)
+          : Promise.reject(new Error("offline")),
+    );
+
+  it("fica escondido enquanto o assistente não está configurado", async () => {
     wrap(<FloatingChat variable="temperature" />, { lang: "pt", audience: "explorador" });
     await act(async () => {});
-    fireEvent.click(screen.getByRole("button", { name: "Abrir o assistente" }));
+    expect(screen.queryByRole("button", { name: "Abrir o assistente" })).not.toBeInTheDocument();
+  });
+
+  it("abre, minimiza e fecha", async () => {
+    assistantUp(null);
+    wrap(<FloatingChat variable="temperature" />, { lang: "pt", audience: "explorador" });
+    await act(async () => {});
+    fireEvent.click(await screen.findByRole("button", { name: "Abrir o assistente" }));
     expect(screen.getByRole("dialog", { name: "Pergunte ao atlas" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Minimizar" }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -124,10 +140,11 @@ describe("chat flutuante", () => {
     expect(screen.getByRole("button", { name: "Abrir o assistente" })).toBeInTheDocument();
   });
 
-  it("sem API mostra que o assistente não está disponível", async () => {
+  it("se a pergunta falhar, diz que não foi possível responder", async () => {
+    assistantUp(new Response("{}", { status: 502 }));
     wrap(<FloatingChat variable="temperature" />, { lang: "pt", audience: "explorador" });
     await act(async () => {});
-    fireEvent.click(screen.getByRole("button", { name: "Abrir o assistente" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Abrir o assistente" }));
     fireEvent.click(screen.getByRole("button", { name: "A temperatura em Angola está a subir?" }));
     expect(await screen.findByText(/não está disponível|Não foi possível/)).toBeInTheDocument();
   });

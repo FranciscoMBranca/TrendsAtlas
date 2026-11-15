@@ -208,6 +208,12 @@ def _anthropic_client():
     return anthropic.Anthropic(max_retries=2, timeout=60.0)
 
 
+@app.get("/assistente/estado")
+def assistant_status():
+    """Whether the chat can answer (the site hides the chat button when it cannot)."""
+    return {"disponivel": bool(_env("ANTHROPIC_API_KEY"))}
+
+
 @app.post("/assistente/pergunta")
 def assistant_route(req: ChatRequest, request: Request):
     if not _env("ANTHROPIC_API_KEY"):
