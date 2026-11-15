@@ -25,8 +25,8 @@ const withQuery = (node: React.ReactNode) => (
 
 describe("componentes do atlas", () => {
   it("a abertura assume dados de exemplo quando meta.isDemo é verdadeiro", async () => {
-    // Vegetation still has no real reader: its files stay synthetic.
-    const demo = await loadAtlasData("vegetation", diskFetcher);
+    // Sea level stays synthetic until the NASA-SSH files are ingested.
+    const demo = await loadAtlasData("sea_level", diskFetcher);
     expect(demo.meta.isDemo).toBe(true);
     render(<Opening data={demo} />);
     expect(screen.getByText("dados de exemplo")).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe("várias variáveis", () => {
   it("a abertura e o mapa usam os textos e unidades da variável", async () => {
     const sea = await loadAtlasData("sea_ice", diskFetcher);
     render(withQuery(<TrendMap data={sea} />));
-    expect(screen.getByText(/O gelo recua aqui/)).toBeInTheDocument();
+    expect(screen.getAllByText(sea.meta.variable.copy.headline, { exact: false }).length).toBeGreaterThan(0);
     expect(screen.getByText("← Menos gelo")).toBeInTheDocument();
     expect(screen.getByText("% por década")).toBeInTheDocument();
     expect(screen.getByText("OCEANOS POLARES", { exact: false })).toBeInTheDocument();

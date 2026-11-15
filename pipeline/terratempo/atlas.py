@@ -86,8 +86,8 @@ VARIABLES: dict[str, dict[str, Any]] = {
         "coverage": "land", "relative": True,
         "copy": {
             "down": "Menos verde", "up": "Mais verde",
-            "headline": "Mais verde aqui. Menos verde ali.",
-            "opening": "A Terra não esverdece *nem escurece* por igual.",
+            "headline": "Mais verde em muitos sítios, mas não em todos.",
+            "opening": "A Terra não fica mais verde *por igual*.",
             "subject": "a vegetação",
             "description": "O NDVI mede o quão verde e densa é a vegetação vista do espaço (0 = solo nu, perto de 1 = floresta densa). Só existe em terra.",
         },
@@ -100,8 +100,8 @@ VARIABLES: dict[str, dict[str, Any]] = {
         "coverage": "polar-ocean", "relative": False,
         "copy": {
             "down": "Menos gelo", "up": "Mais gelo",
-            "headline": "O gelo marinho não muda por igual nos dois pólos.",
-            "opening": "Os dois pólos não perdem gelo *do mesmo modo*.",
+            "headline": "O gelo do mar recua muito em alguns mares e pouco noutros.",
+            "opening": "O gelo do mar não recua *por igual*.",
             "subject": "o gelo marinho",
             "description": "A fracção de cada célula coberta por gelo do mar, segundo a reanálise MERRA-2 (que usa observações de satélite). Só conta o oceano onde há gelo em algum momento.",
         },

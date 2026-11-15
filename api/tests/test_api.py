@@ -13,7 +13,8 @@ def test_health():
 def test_manifest_marks_demo():
     m = client.get("/variaveis").json()
     assert m["schemaVersion"]
-    assert m["contem_demonstracao"] is True
+    # True exactly when some variable is still synthetic (labelled demo).
+    assert m["contem_demonstracao"] is any(v["rotulo"] == "demonstracao" for v in m["variaveis"])
     assert {v["id"] for v in m["variaveis"]} >= {"temperatura", "precipitacao"}
 
 

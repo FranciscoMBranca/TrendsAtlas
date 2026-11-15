@@ -88,6 +88,12 @@ export function Validation({ data }: { data?: ValidationData }) {
                     <span className="val-bar"><i style={{ width: `${Math.min(100, s.shuffledMaxPct)}%` }} /></span>
                     <span className="val-bar-n">≤ {p(s.shuffledMaxPct)} %</span>
                   </div>
+                  {/* Verdict from the numbers: above every shuffle, or within what chance produces. */}
+                  <p className={`val-verdict ${s.realPct > s.shuffledMaxPct ? "is-above" : "is-within"}`}>
+                    {s.realPct > s.shuffledMaxPct
+                      ? t(child ? "val.baralhar.acima_crianca" : "val.baralhar.acima")
+                      : t(child ? "val.baralhar.dentro_crianca" : "val.baralhar.dentro")}
+                  </p>
                   {!child && (
                     <small className="technical">
                       {t("val.baralhar.nota", {

@@ -949,3 +949,15 @@ h3,
     grid-template-columns: minmax(0, 1fr);
   }
 }
+.val-card p.val-verdict {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+.val-card p.val-verdict.is-above::before {
+  content: "● ";
+  color: var(--accent);
+}
+.val-card p.val-verdict.is-within::before {
+  content: "○ ";
+}

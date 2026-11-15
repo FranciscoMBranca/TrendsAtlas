@@ -24,9 +24,9 @@ const wrap = (audience: string) => {
 beforeEach(() => window.localStorage.clear());
 
 describe("como sabemos que está certo", () => {
-  it("o ficheiro cumpre o contrato e os anos baralhados ficam abaixo dos reais", () => {
+  it("o ficheiro cumpre o contrato e cada variável real tem a sua experiência de baralhar", () => {
     expect(v.shuffledYears.length).toBeGreaterThan(0);
-    for (const s of v.shuffledYears) expect(s.shuffledMaxPct).toBeLessThan(s.realPct);
+    for (const s of v.shuffledYears) expect(s.shuffledMeanPct).toBeLessThanOrEqual(s.shuffledMaxPct);
     for (const r of v.references.filter((x) => ["theil_sen", "sen_ci", "linear", "fdr"].includes(x.id))) expect(r.maxRelDiff).toBeLessThan(1e-8);
   });
 
@@ -38,6 +38,13 @@ describe("como sabemos que está certo", () => {
     expect(screen.getAllByText(`${real} %`).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "Alarmes falsos em ruído sem tendência" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A banda da projecção acerta" })).toBeInTheDocument();
+  });
+
+  it("o veredicto de cada variável vem dos números, sem dizer 'não é sorte' onde o acaso chega lá", () => {
+    wrap("explorador");
+    const above = v.shuffledYears.filter((s) => s.realPct > s.shuffledMaxPct).length;
+    expect(screen.queryAllByText(/Acima de todos os baralhados/)).toHaveLength(above);
+    expect(screen.queryAllByText(/Dentro do que o acaso dá/)).toHaveLength(v.shuffledYears.length - above);
   });
 
   it("a criança só vê a experiência de baralhar", () => {
