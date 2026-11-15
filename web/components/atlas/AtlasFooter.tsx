@@ -9,9 +9,16 @@ export function AtlasFooter({ meta }: { meta: AtlasMeta | undefined }) {
           {meta ? (
             <>
               <p>
-                {meta.isDemo
-                  ? "Esta edição usa dados sintéticos; não permite inferências sobre o clima real."
-                  : `Dados: ${meta.source.name}, ${meta.source.product}.`}
+                Dados: {meta.source.name}, {meta.source.product}, versão {meta.source.version}
+                {meta.source.doi && (
+                  <>
+                    {" "}· DOI{" "}
+                    <a href={`https://doi.org/${meta.source.doi}`} target="_blank" rel="noopener noreferrer">
+                      {meta.source.doi}
+                    </a>
+                  </>
+                )}
+                .
               </p>
               <p className="mt-2">
                 Média e áreas ponderadas pelo co-seno da latitude. Grelha de {meta.grid.stepDeg}° ×{" "}
@@ -26,7 +33,7 @@ export function AtlasFooter({ meta }: { meta: AtlasMeta | undefined }) {
         </div>
         {meta && (
           <div className="footer-meta">
-            {meta.isDemo ? "EDIÇÃO DEMONSTRATIVA" : "DADOS OBSERVADOS"} · ESQUEMA v
+            DADOS OBSERVADOS · ESQUEMA v
             {meta.schemaVersion}
             <br />
             {yearOf(meta.period.start)}–{yearOf(meta.period.end)} / {meta.period.months} MESES
