@@ -1,0 +1,32 @@
+[
+  {
+    "id": "a-pacifico-oeste",
+    "name": "Pacífico oeste",
+    "bbox": [
+      140,
+      -15,
+      180,
+      10
+    ]
+  },
+  {
+    "id": "b-pacifico-leste",
+    "name": "Pacífico leste",
+    "bbox": [
+      -130,
+      -5,
+      -90,
+      15
+    ]
+  },
+  {
+    "id": "c-atlantico-norte",
+    "name": "Atlântico Norte subpolar",
+    "bbox": [
+      -50,
+      45,
+      -20,
+      60
+    ]
+  }
+]

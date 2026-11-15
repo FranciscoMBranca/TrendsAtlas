@@ -13,7 +13,7 @@ from pathlib import Path
 
 from . import SCHEMA_VERSION
 from .anomaly import monthly_anomaly, weighted_mean
-from .catalog import PRESETS, manifest
+from .catalog import PRESETS, VARIABLES, manifest
 from .maps import preset_years, trend_map
 from .readers import load_cube
 from .synthetic import DEMO_VARIABLES, make_dataset
@@ -41,9 +41,12 @@ def load_datasets() -> dict:
     """Real cube (data/cubes/<id>.npz, label "real") when it exists, labelled synthetic otherwise."""
     print(f"terratempo: cubos em {CUBES_DIR} ({'existe' if CUBES_DIR.is_dir() else 'não existe'})", flush=True)
     out = {}
-    for vid in DEMO_VARIABLES:
+    for vid in VARIABLES:
         cube = CUBES_DIR / f"{vid}.npz"
-        out[vid] = load_cube(cube) if cube.exists() else make_dataset(vid)
+        if cube.exists():
+            out[vid] = load_cube(cube)
+        elif vid in DEMO_VARIABLES:  # no real cube yet: labelled synthetic data
+            out[vid] = make_dataset(vid)
     return out
 
 

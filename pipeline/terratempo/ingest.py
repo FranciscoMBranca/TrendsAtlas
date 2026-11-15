@@ -27,7 +27,7 @@ import numpy as np
 
 from . import LABEL_REAL
 from .grid import Grid
-from .readers import PRODUCTS, month_of, read_imerg_month, read_merra2_month, save_cube
+from .readers import PRODUCTS, mask_never_ice, month_of, read_file, save_cube
 from .synthetic import Dataset
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -71,10 +71,13 @@ def ingest(var_ids: list[str], start: str, end: str, skip_download: bool, keep_r
     n = (y1 - y0) * 12 + (mo1 - mo0) + 1
     years = np.array([y0 + (mo0 - 1 + k) // 12 for k in range(n)])
     months = np.array([(mo0 - 1 + k) % 12 + 1 for k in range(n)])
-    cubes = {v: np.full((n, *grid.shape), np.nan, dtype=np.float32) for v in var_ids}
+    # Sums and counts per month: products with several files a month (5-day sea level)
+    # are averaged (formula F5); monthly products have one file a month.
+    sums = {v: np.zeros((n, *grid.shape), dtype=np.float64) for v in var_ids}
+    counts = {v: np.zeros((n, *grid.shape), dtype=np.int32) for v in var_ids}
     got = set()
     ea = None if skip_download else _login()
-    pattern = "*.HDF5" if product.short_name == "GPM_3IMERGM" else "*.nc4"
+    pattern = product.pattern
 
     for year in range(y0, y1 + 1):
         m_start = mo0 if year == y0 else 1
@@ -91,8 +94,10 @@ def ingest(var_ids: list[str], start: str, end: str, skip_download: bool, keep_r
             if not 0 <= k < n:
                 continue
             for v, p in products.items():
-                cubes[v][k] = read_imerg_month(path, grid) if p.short_name == "GPM_3IMERGM" \
-                    else read_merra2_month(path, p.field, grid)
+                field = read_file(p, path, grid)
+                ok = np.isfinite(field)
+                sums[v][k][ok] += field[ok]
+                counts[v][k][ok] += 1
             got.add(k)
         print(f"  {year}: {len(files)} ficheiros, {len(got)}/{n} meses", flush=True)
         if not skip_download and not keep_raw:
@@ -103,7 +108,11 @@ def ingest(var_ids: list[str], start: str, end: str, skip_download: bool, keep_r
     CUBES.mkdir(parents=True, exist_ok=True)
     written = []
     for v, p in products.items():
-        ds = Dataset(v, p.unit, grid, years, months, cubes[v], LABEL_REAL,
+        with np.errstate(invalid="ignore", divide="ignore"):
+            cube = np.where(counts[v] > 0, sums[v] / np.maximum(counts[v], 1), np.nan).astype(np.float32)
+        if v == "gelo_marinho":
+            cube = mask_never_ice(cube).astype(np.float32)
+        ds = Dataset(v, p.unit, grid, years, months, cube, LABEL_REAL,
                      source=f"{p.short_name} v{p.version}",
                      meta={"citation": p.citation, "missing_months": n - len(got)})
         out = CUBES / f"{v}.npz"

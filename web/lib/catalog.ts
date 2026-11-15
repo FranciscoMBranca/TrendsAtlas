@@ -14,6 +14,7 @@ import { fr } from "./i18n/fr";
 import { zh } from "./i18n/zh";
 
 const pt: Catalog = {
+  "erro.variavel_desconhecida": "Ainda não há dados reais desta variável para analisar regiões. Mostramos a tendência do mapa.",
   "apres.titulo": "ANO A ANO",
   "apres.media": "Média global do ano: {valor} face ao normal",
   "apres.nota": "Cada cor mostra quanto o ano se afastou da média de {base} nesse lugar: desvios do normal, não causas. Fonte: {fonte}. Os anos com menos de 10 meses de dados ficam de fora.",
@@ -223,6 +224,7 @@ const pt: Catalog = {
 };
 
 const en: Catalog = {
+  "erro.variavel_desconhecida": "There are no real data for this variable to analyse regions yet. Showing the map trend.",
   "apres.titulo": "YEAR BY YEAR",
   "apres.media": "Global mean of the year: {valor} compared with normal",
   "apres.nota": "Each colour shows how far the year was from the {base} average at that place: departures from normal, not causes. Source: {fonte}. Years with fewer than 10 months of data are left out.",

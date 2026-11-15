@@ -1,0 +1,32 @@
+[
+  {
+    "id": "a-barents-kara",
+    "name": "Barents e Kara",
+    "bbox": [
+      40,
+      70,
+      80,
+      80
+    ]
+  },
+  {
+    "id": "b-chukchi",
+    "name": "Chukchi",
+    "bbox": [
+      -180,
+      72,
+      -150,
+      80
+    ]
+  },
+  {
+    "id": "c-weddell",
+    "name": "Weddell",
+    "bbox": [
+      -60,
+      -72,
+      -20,
+      -60
+    ]
+  }
+]

@@ -3,6 +3,7 @@
 import type { Catalog } from "../catalog";
 
 export const es: Catalog = {
+  "erro.variavel_desconhecida": "Aún no hay datos reales de esta variable para analizar regiones. Mostramos la tendencia del mapa.",
   "apres.titulo": "AÑO A AÑO",
   "apres.media": "Media global del año: {valor} respecto a lo normal",
   "apres.nota": "Cada color muestra cuánto se alejó el año de la media de {base} en ese lugar: desviaciones de lo normal, no causas. Fuente: {fonte}. Los años con menos de 10 meses de datos quedan fuera.",

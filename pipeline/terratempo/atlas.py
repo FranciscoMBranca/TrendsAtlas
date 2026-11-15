@@ -41,7 +41,14 @@ MIN_VALID_FRACTION = 0.8  # a cell needs 80 % of its months to get a trend
 REGIONS_DIR = Path(__file__).resolve().parents[1] / "config" / "regions"
 
 # Pipeline id -> atlas id (the site and its colour palettes use the atlas ids).
-ATLAS_ID = {"temperatura": "temperature", "precipitacao": "precipitation"}
+ATLAS_ID = {
+    "temperatura": "temperature",
+    "precipitacao": "precipitation",
+    "vegetacao": "vegetation",
+    "gelo_marinho": "sea_ice",
+    "aerossois": "aerosols",
+    "nivel_mar": "sea_level",
+}
 
 VARIABLES: dict[str, dict[str, Any]] = {
     "temperature": {
@@ -73,6 +80,62 @@ VARIABLES: dict[str, dict[str, Any]] = {
         "source": {"name": "NASA GPM IMERG", "product": "GPM_3IMERGM (Final, mensal, 0,1°)",
                    "version": "07", "doi": "10.5067/GPM/IMERG/3B-MONTH/07",
                    "note": "Estimativa de precipitação por satélite, calibrada com pluviómetros."},
+    },
+    "vegetation": {
+        "name": "Vegetação (NDVI)", "unit": "NDVI", "trendUnit": "NDVI por década", "decimals": 3,
+        "coverage": "land", "relative": True,
+        "copy": {
+            "down": "Menos verde", "up": "Mais verde",
+            "headline": "Mais verde aqui. Menos verde ali.",
+            "opening": "A Terra não esverdece *nem escurece* por igual.",
+            "subject": "a vegetação",
+            "description": "O NDVI mede o quão verde e densa é a vegetação vista do espaço (0 = solo nu, perto de 1 = floresta densa). Só existe em terra.",
+        },
+        "source": {"name": "NASA MODIS (Terra)", "product": "MOD13C2 (NDVI mensal, 0,05°)", "version": "061",
+                   "doi": "10.5067/MODIS/MOD13C2.061",
+                   "note": "Índice de vegetação a partir de reflectâncias do satélite Terra."},
+    },
+    "sea_ice": {
+        "name": "Gelo marinho", "unit": "% da célula", "trendUnit": "% por década", "decimals": 2,
+        "coverage": "polar-ocean", "relative": False,
+        "copy": {
+            "down": "Menos gelo", "up": "Mais gelo",
+            "headline": "O gelo marinho não muda por igual nos dois pólos.",
+            "opening": "Os dois pólos não perdem gelo *do mesmo modo*.",
+            "subject": "o gelo marinho",
+            "description": "A fracção de cada célula coberta por gelo do mar, segundo a reanálise MERRA-2 (que usa observações de satélite). Só conta o oceano onde há gelo em algum momento.",
+        },
+        "source": {"name": "NASA MERRA-2", "product": "M2TMNXOCN (FRSEAICE)", "version": "5.12.4",
+                   "doi": "10.5067/4IASLIDL8EEC",
+                   "note": "Reanálise: um modelo ajustado a observações, não uma medição directa."},
+    },
+    "aerosols": {
+        "name": "Aerossóis (AOD)", "unit": "AOD", "trendUnit": "AOD por década", "decimals": 3,
+        "coverage": "global", "relative": True,
+        "copy": {
+            "down": "Ar mais limpo", "up": "Ar mais carregado",
+            "headline": "Mais partículas no ar aqui. Menos ali.",
+            "opening": "O ar não se carrega *de partículas* por igual.",
+            "subject": "a carga de aerossóis",
+            "description": "A profundidade óptica dos aerossóis (AOD) mede quanta luz as partículas em suspensão bloqueiam na coluna de ar. Não diz de que partículas se trata.",
+        },
+        "source": {"name": "NASA MERRA-2", "product": "M2TMNXAER (TOTEXTTAU, 550 nm)", "version": "5.12.4",
+                   "doi": "10.5067/FH9A0MLJPC7N",
+                   "note": "Reanálise com assimilação de observações de aerossóis por satélite."},
+    },
+    "sea_level": {
+        "name": "Nível do mar", "unit": "mm", "trendUnit": "mm por década", "decimals": 1,
+        "coverage": "ocean", "relative": False,
+        "copy": {
+            "down": "Desce", "up": "Sobe",
+            "headline": "O mar sobe aqui mais depressa do que ali.",
+            "opening": "O mar não sobe *por igual* em todas as costas.",
+            "subject": "o nível do mar",
+            "description": "A anomalia da altura da superfície do oceano medida por altimetria de satélite (média mensal de grelhas de 5 dias). Só há valor no oceano aberto.",
+        },
+        "source": {"name": "NASA MEaSUREs", "product": "Gridded Sea Surface Height Anomalies (SLA)", "version": "JPL2205",
+                   "doi": "10.5067/SLREF-CDRV3",
+                   "note": "Altimetria por satélite; anomalias face a uma média de referência do produto."},
     },
 }
 

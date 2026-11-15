@@ -27,8 +27,26 @@ VARIABLES = {
     },
     "aerossois": {
         "unidade": "1",
-        "produto_candidato": "MERRA-2 aerossóis ou MODIS Aqua MYD08_M3 (a confirmar, D13)",
+        "produto_candidato": "MERRA-2 M2TMNXAER (TOTEXTTAU)",
         "relativa": True,
+        "camada": 2,
+    },
+    "gelo_marinho": {
+        "unidade": "%",
+        "produto_candidato": "MERRA-2 M2TMNXOCN (FRSEAICE)",
+        "relativa": False,
+        "camada": 2,
+    },
+    "vegetacao": {
+        "unidade": "NDVI",
+        "produto_candidato": "MODIS Terra MOD13C2 v061 (NDVI)",
+        "relativa": True,
+        "camada": 2,
+    },
+    "nivel_mar": {
+        "unidade": "mm",
+        "produto_candidato": "MEaSUREs SSH grids JPL2205 (SLA)",
+        "relativa": False,
         "camada": 2,
     },
 }

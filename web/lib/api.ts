@@ -51,6 +51,9 @@ export const API_VARIABLE: Record<string, string> = {
   temperature: "temperatura",
   precipitation: "precipitacao",
   aerosols: "aerossois",
+  vegetation: "vegetacao",
+  sea_ice: "gelo_marinho",
+  sea_level: "nivel_mar",
 };
 
 export type Region =

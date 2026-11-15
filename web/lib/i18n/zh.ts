@@ -3,6 +3,7 @@
 import type { Catalog } from "../catalog";
 
 export const zh: Catalog = {
+  "erro.variavel_desconhecida": "此变量尚无可用于区域分析的真实数据。此处显示地图上的趋势。",
   "apres.titulo": "逐年",
   "apres.media": "当年全球平均：较常年 {valor}",
   "apres.nota": "每种颜色表示该年在该地与 {base} 平均值的偏离程度：是偏离常年，而非原因。来源：{fonte}。数据少于 10 个月的年份不计入。",

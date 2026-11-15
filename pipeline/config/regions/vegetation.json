@@ -1,0 +1,32 @@
+[
+  {
+    "id": "a-india",
+    "name": "Índia",
+    "bbox": [
+      70,
+      15,
+      90,
+      28
+    ]
+  },
+  {
+    "id": "b-amazonia-sul",
+    "name": "Sul da Amazónia",
+    "bbox": [
+      -65,
+      -16,
+      -52,
+      -5
+    ]
+  },
+  {
+    "id": "c-sara",
+    "name": "Sara",
+    "bbox": [
+      -10,
+      18,
+      30,
+      28
+    ]
+  }
+]

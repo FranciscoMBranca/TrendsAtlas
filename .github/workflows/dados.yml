@@ -19,8 +19,9 @@ on:
       products:
         description: "Que produtos descarregar"
         type: choice
-        default: todos
-        options: [todos, imerg, merra2]
+        default: novas
+        # novas = the four variables added last (aerosols, sea ice, vegetation, sea level)
+        options: [todos, novas, imerg, merra2, merra2aer, merra2ocn, modis, ssh]
 
 permissions:
   contents: read
@@ -33,7 +34,7 @@ jobs:
   ingest:
     name: Ingestão ${{ matrix.product }}
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 350
     strategy:
       fail-fast: false
       matrix:
@@ -42,11 +43,23 @@ jobs:
             variables: precipitacao
           - product: merra2
             variables: temperatura humidade
+          - product: merra2aer
+            variables: aerossois
+            group: novas
+          - product: merra2ocn
+            variables: gelo_marinho
+            group: novas
+          - product: modis
+            variables: vegetacao
+            group: novas
+          - product: ssh
+            variables: nivel_mar
+            group: novas
     steps:
       - name: Skip product not requested
         id: want
         run: |
-          if [ "${{ inputs.products }}" = "todos" ] || [ "${{ inputs.products }}" = "${{ matrix.product }}" ]; then
+          if [ "${{ inputs.products }}" = "todos" ] || [ "${{ inputs.products }}" = "${{ matrix.product }}" ] || [ "${{ inputs.products }}" = "${{ matrix.group }}" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
           else
             echo "run=false" >> "$GITHUB_OUTPUT"

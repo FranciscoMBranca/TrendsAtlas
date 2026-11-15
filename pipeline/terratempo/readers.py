@@ -1,17 +1,25 @@
-"""P02 / P03: readers for real NASA monthly files, aggregated to the 5° grid.
+"""Readers for real NASA files, aggregated to the 5° grid (P02, P03, P18, P19, P20, P21).
 
-- GPM IMERG monthly (GPM_3IMERGM v07, HDF5): Grid/precipitation, mm/hr -> mm/day (formula 12).
-- MERRA-2 monthly single-level diagnostics (M2TMNXSLV, NetCDF4): T2M in K -> °C (formula 12),
-  QV2M in kg/kg -> g/kg.
+| Pipeline id   | Product (short name)                                  | Field       | Conversion            |
+| ------------- | ----------------------------------------------------- | ----------- | --------------------- |
+| precipitacao  | GPM IMERG Final monthly (GPM_3IMERGM v07, HDF5)        | precipitation | mm/hr -> mm/day     |
+| temperatura   | MERRA-2 tavgM_2d_slv_Nx (M2TMNXSLV, NetCDF4)           | T2M         | K -> °C               |
+| humidade      | MERRA-2 tavgM_2d_slv_Nx (M2TMNXSLV)                    | QV2M        | kg/kg -> g/kg         |
+| aerossois     | MERRA-2 tavgM_2d_aer_Nx (M2TMNXAER)                    | TOTEXTTAU   | none (AOD 550 nm)     |
+| gelo_marinho  | MERRA-2 tavgM_2d_ocn_Nx (M2TMNXOCN)                    | FRSEAICE    | fraction -> %         |
+| vegetacao     | MODIS Terra CMG monthly NDVI (MOD13C2 v061, HDF4)      | CMG 0.05 Deg Monthly NDVI | /10000  |
+| nivel_mar     | MEaSUREs SSH grids, 5-day, 1/6° (JPL2205, NetCDF)      | SLA         | m -> mm, monthly mean of 5-day grids (F5) |
 
-Product names and field names come from docs/03 and are still "to confirm" in P00:
-the readers check units and shapes and fail loudly when they do not match.
-Raw files never go into git (see .gitignore); only the aggregated cubes do.
+Product and field names come from docs/03 and still have to be confirmed against the
+official catalogue (P00): every reader checks units and shapes and fails loudly when
+they do not match. Raw files never go into git; only the aggregated cubes do.
 """
 
 from __future__ import annotations
 
+import datetime as dt
 import re
+import warnings
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -24,6 +32,10 @@ from .synthetic import Dataset
 
 _IMERG_DATE = re.compile(r"\.(\d{4})(\d{2})\d{2}-S")
 _MERRA_DATE = re.compile(r"\.(\d{4})(\d{2})\.nc4$")
+_MODIS_DATE = re.compile(r"\.A(\d{4})(\d{3})\.")
+_SSH_DATE = re.compile(r"_(\d{4})(\d{2})(\d{2})\d{2}\.nc$")
+
+MERRA_CITATION = "Global Modeling and Assimilation Office (GMAO), MERRA-2 {coll}, NASA GES DISC, doi:{doi}"
 
 
 @dataclass(frozen=True)
@@ -34,34 +46,61 @@ class Product:
     field: str
     unit: str
     citation: str
+    kind: str = "merra2"  # imerg | merra2 | modis_cmg | ssh5day
+    pattern: str = "*.nc4"
 
 
 PRODUCTS = {
     "precipitacao": Product(
         "precipitacao", "GPM_3IMERGM", "07", "precipitation", "mm/day",
         "Huffman, G.J., et al. GPM IMERG Final Precipitation L3 1 month 0.1 degree x 0.1 degree V07, "
-        "NASA GES DISC, doi:10.5067/GPM/IMERG/3B-MONTH/07",
+        "NASA GES DISC, doi:10.5067/GPM/IMERG/3B-MONTH/07", kind="imerg", pattern="*.HDF5",
     ),
     "temperatura": Product(
         "temperatura", "M2TMNXSLV", "5.12.4", "T2M", "degC",
-        "Global Modeling and Assimilation Office (GMAO), MERRA-2 tavgM_2d_slv_Nx, NASA GES DISC, "
-        "doi:10.5067/AP1B0BA5PD2K",
+        MERRA_CITATION.format(coll="tavgM_2d_slv_Nx", doi="10.5067/AP1B0BA5PD2K"),
     ),
     "humidade": Product(
         "humidade", "M2TMNXSLV", "5.12.4", "QV2M", "g/kg",
-        "Global Modeling and Assimilation Office (GMAO), MERRA-2 tavgM_2d_slv_Nx, NASA GES DISC, "
-        "doi:10.5067/AP1B0BA5PD2K",
+        MERRA_CITATION.format(coll="tavgM_2d_slv_Nx", doi="10.5067/AP1B0BA5PD2K"),
+    ),
+    "aerossois": Product(
+        "aerossois", "M2TMNXAER", "5.12.4", "TOTEXTTAU", "1",
+        MERRA_CITATION.format(coll="tavgM_2d_aer_Nx", doi="10.5067/FH9A0MLJPC7N"),
+    ),
+    "gelo_marinho": Product(
+        "gelo_marinho", "M2TMNXOCN", "5.12.4", "FRSEAICE", "%",
+        MERRA_CITATION.format(coll="tavgM_2d_ocn_Nx", doi="10.5067/4IASLIDL8EEC"),
+    ),
+    "vegetacao": Product(
+        "vegetacao", "MOD13C2", "061", "CMG 0.05 Deg Monthly NDVI", "NDVI",
+        "Didan, K. MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061, "
+        "NASA EOSDIS Land Processes DAAC, doi:10.5067/MODIS/MOD13C2.061",
+        kind="modis_cmg", pattern="*.hdf",
+    ),
+    "nivel_mar": Product(
+        "nivel_mar", "SEA_SURFACE_HEIGHT_ALT_GRIDS_L4_2SATS_5DAY_6THDEG_V_JPL2205", "2205", "SLA", "mm",
+        "Fournier, S., et al. MEaSUREs Gridded Sea Surface Height Anomalies Version 2205, "
+        "NASA PO.DAAC, doi:10.5067/SLREF-CDRV3",
+        kind="ssh5day", pattern="*.nc",
     ),
 }
 
 
 def month_of(path: Path | str) -> tuple[int, int]:
-    """(year, month) from an IMERG or MERRA-2 file name."""
+    """(year, month) from an IMERG, MERRA-2, MODIS (AYYYYDDD) or SSH (_YYYYMMDDHH) file name."""
     name = Path(path).name
     m = _IMERG_DATE.search(name) or _MERRA_DATE.search(name)
-    if not m:
-        raise ValueError(f"data_no_nome_desconhecida: {name}")
-    return int(m.group(1)), int(m.group(2))
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    m = _MODIS_DATE.search(name)
+    if m:
+        d = dt.date(int(m.group(1)), 1, 1) + dt.timedelta(days=int(m.group(2)) - 1)
+        return d.year, d.month
+    m = _SSH_DATE.search(name)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    raise ValueError(f"data_no_nome_desconhecida: {name}")
 
 
 def to_grid(field: np.ndarray, lats: np.ndarray, lons: np.ndarray, grid: Grid) -> np.ndarray:
@@ -79,6 +118,25 @@ def to_grid(field: np.ndarray, lats: np.ndarray, lons: np.ndarray, grid: Grid) -
     den = np.zeros(grid.shape)
     np.add.at(num, (i[ok], j[ok]), (field * w)[ok])
     np.add.at(den, (i[ok], j[ok]), w[ok])
+    with np.errstate(invalid="ignore", divide="ignore"):
+        out = num / den
+    out[den == 0] = np.nan
+    return out
+
+
+def block_to_grid(field: np.ndarray, north_first: bool, grid: Grid) -> np.ndarray:
+    """Fast aggregation for a global regular grid whose cells nest exactly in ``grid``
+    (e.g. MODIS CMG 0.05°: 100 x 100 points per 5° cell). Memory stays near one copy."""
+    ny, nx = field.shape
+    fy, fx = ny // grid.lats.size, nx // grid.lons.size
+    if fy * grid.lats.size != ny or fx * grid.lons.size != nx:
+        raise ValueError(f"forma_inesperada: {field.shape}")
+    data = field[::-1] if north_first else field  # south to north, like grid.lats
+    lat = -90 + (np.arange(ny) + 0.5) * 180.0 / ny
+    w = np.cos(np.deg2rad(lat))[:, None].astype(np.float32)
+    ok = np.isfinite(data)
+    num = np.where(ok, data * w, 0).reshape(grid.lats.size, fy, grid.lons.size, fx).sum(axis=(1, 3))
+    den = np.where(ok, w, 0).reshape(grid.lats.size, fy, grid.lons.size, fx).sum(axis=(1, 3))
     with np.errstate(invalid="ignore", divide="ignore"):
         out = num / den
     out[den == 0] = np.nan
@@ -118,11 +176,15 @@ def read_imerg_month(path: Path | str, grid: Grid) -> np.ndarray:
     return to_grid(data, lats, lons, grid)
 
 
-def read_merra2_month(path: Path | str, field: str, grid: Grid) -> np.ndarray:
+def _open_nc(path: Path | str):
     from netCDF4 import Dataset as NC
 
     # In-memory open, for the same non-ASCII path reason as above.
-    with NC("merra2.nc4", memory=Path(path).read_bytes()) as nc:
+    return NC("in-memory.nc", memory=Path(path).read_bytes())
+
+
+def read_merra2_month(path: Path | str, field: str, grid: Grid) -> np.ndarray:
+    with _open_nc(path) as nc:
         var = nc.variables[field]
         var.set_auto_mask(True)
         data = np.ma.filled(var[:].astype(float), np.nan)
@@ -138,14 +200,94 @@ def read_merra2_month(path: Path | str, field: str, grid: Grid) -> np.ndarray:
         if units not in {"kg kg-1", "kg/kg"}:
             raise ValueError(f"unidades_inesperadas: '{units}'")
         data = data * 1000.0
+    elif field == "TOTEXTTAU":
+        if units not in {"1", ""}:
+            raise ValueError(f"unidades_inesperadas: '{units}'")
+        data[data < 0] = np.nan
+    elif field == "FRSEAICE":
+        if units not in {"1", ""}:
+            raise ValueError(f"unidades_inesperadas: '{units}'")
+        data = np.clip(data, 0, 1) * 100.0  # fraction of the tile -> % of the cell
     return to_grid(data, lats, lons, grid)
 
 
+def read_modis_ndvi_month(path: Path | str, field: str, grid: Grid) -> np.ndarray:
+    """MOD13C2 CMG (HDF4): NDVI stored as int16 x 10000 on a 0.05° global grid, north first."""
+    import os
+    import shutil
+    import tempfile
+
+    from pyhdf.SD import SD, SDC
+
+    # pyhdf only opens paths: copy to an ASCII temporary path first (non-ASCII user folders).
+    tmp = tempfile.mkdtemp(prefix="tt_")
+    local = os.path.join(tmp, "f.hdf")
+    shutil.copyfile(path, local)
+    try:
+        sd = SD(local, SDC.READ)
+        sds = sd.select(field)
+        raw = sds.get().astype(np.float32)
+        attrs = sds.attributes()
+        sd.end()
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    fill = attrs.get("_FillValue", -3000)
+    lo, hi = attrs.get("valid_range", (-2000, 10000))
+    raw[(raw == fill) | (raw < lo) | (raw > hi)] = np.nan
+    scale = float(attrs.get("scale_factor", 10000.0))
+    data = raw / scale if scale > 1 else raw * scale  # MODIS writes 10000 meaning "divide by"
+    if raw.shape != (3600, 7200):
+        raise ValueError(f"forma_inesperada: {raw.shape}")
+    return block_to_grid(data, north_first=True, grid=grid)
+
+
+def read_ssh_5day(path: Path | str, field: str, grid: Grid) -> np.ndarray:
+    """MEaSUREs SSH 5-day 1/6° grid: SLA in metres -> mm, on the 5° grid (one 5-day snapshot)."""
+    with _open_nc(path) as nc:
+        var = nc.variables[field]
+        var.set_auto_mask(True)
+        data = np.ma.filled(var[:].astype(float), np.nan)
+        lat_name = "Latitude" if "Latitude" in nc.variables else "lat"
+        lon_name = "Longitude" if "Longitude" in nc.variables else "lon"
+        lats, lons = nc.variables[lat_name][:], nc.variables[lon_name][:]
+        units = str(getattr(var, "units", "")).strip().lower()
+    data = _orient(data, lats.size, lons.size)
+    if units in {"m", "meters", "metre", "metres"}:
+        data = data * 1000.0
+    elif units not in {"mm", "millimeters"}:
+        raise ValueError(f"unidades_inesperadas: '{units}'")
+    return to_grid(data, lats, lons, grid)
+
+
+def read_file(product: Product, path: Path | str, grid: Grid) -> np.ndarray:
+    if product.kind == "imerg":
+        return read_imerg_month(path, grid)
+    if product.kind == "modis_cmg":
+        return read_modis_ndvi_month(path, product.field, grid)
+    if product.kind == "ssh5day":
+        return read_ssh_5day(path, product.field, grid)
+    return read_merra2_month(path, product.field, grid)
+
+
+def mask_never_ice(cube: np.ndarray, threshold: float = 1.0) -> np.ndarray:
+    """Sea ice: cells that never reach ``threshold`` % ice are outside the variable's coverage."""
+    with np.errstate(invalid="ignore"):
+        peak = np.nanmax(cube, axis=0)
+    out = cube.copy()
+    out[:, ~(peak >= threshold)] = np.nan
+    return out
+
+
 def build_dataset(var_id: str, files: Iterable[Path | str], resolution: float = 5.0) -> Dataset:
-    """Read every monthly file of one variable into a labelled ``real`` cube."""
+    """Read every file of one variable into a labelled ``real`` monthly cube.
+
+    Several files in the same month (5-day sea-level grids) are averaged (formula F5).
+    """
     product = PRODUCTS[var_id]
     grid = Grid.regular(resolution)
-    by_month = {month_of(p): Path(p) for p in files}
+    by_month: dict[tuple[int, int], list[Path]] = {}
+    for p in files:
+        by_month.setdefault(month_of(p), []).append(Path(p))
     if not by_month:
         raise ValueError("sem_ficheiros")
     months_sorted = sorted(by_month)
@@ -155,12 +297,14 @@ def build_dataset(var_id: str, files: Iterable[Path | str], resolution: float = 
     cube = np.full((n, *grid.shape), np.nan, dtype=np.float32)
     years = np.array([y0 + (m0 - 1 + k) // 12 for k in range(n)])
     months = np.array([(m0 - 1 + k) % 12 + 1 for k in range(n)])
-    for (y, m), path in by_month.items():
+    for (y, m), paths in by_month.items():
         k = (y - y0) * 12 + (m - m0)
-        if product.short_name == "GPM_3IMERGM":
-            cube[k] = read_imerg_month(path, grid)
-        else:
-            cube[k] = read_merra2_month(path, product.field, grid)
+        stack = np.stack([read_file(product, p, grid) for p in paths])
+        with warnings.catch_warnings():  # cells with no data in any file stay NaN
+            warnings.simplefilter("ignore", RuntimeWarning)
+            cube[k] = np.nanmean(stack, axis=0) if len(paths) > 1 else stack[0]
+    if var_id == "gelo_marinho":
+        cube = mask_never_ice(cube).astype(np.float32)
     return Dataset(var_id, product.unit, grid, years, months, cube, LABEL_REAL,
                    source=f"{product.short_name} v{product.version}",
                    meta={"citation": product.citation, "missing_months": n - len(by_month)})

@@ -35,7 +35,7 @@ AUDIENCE_STYLE = {
 
 SYSTEM = """You are the assistant of "Atlas de Tendências" (Terra Tempo), a NASA Space Apps project that shows where Earth's climate variables are changing, by how much, and whether the change is more than chance.
 
-Data: NASA MERRA-2 (air temperature, humidity) and NASA GPM IMERG (precipitation), monthly, 2000-2025, on a 5-degree grid. Some variables are demos (synthetic): the tools say so with "rotulo": "demonstracao".
+Data: NASA MERRA-2 (air temperature, humidity, aerosols, sea ice), NASA GPM IMERG (precipitation), MODIS (vegetation NDVI) and MEaSUREs altimetry (sea level), monthly, 2000-2025, on a 5-degree grid. Some variables are demos (synthetic): the tools say so with "rotulo": "demonstracao".
 
 Rules you must always follow:
 - Use the tools for every number. Never write a number that a tool did not return in this conversation. If a tool cannot answer, say so.
@@ -71,7 +71,7 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "variavel": {"type": "string", "enum": ["temperatura", "precipitacao", "humidade", "aerossois"]},
+                "variavel": {"type": "string", "enum": ["temperatura", "precipitacao", "humidade", "aerossois", "vegetacao", "gelo_marinho", "nivel_mar"]},
                 "lugar": {"type": "string", "description": "Place key from procurar_lugar (e.g. 'ago'), or 'globo' for the whole world."},
                 "inicio": {"type": "integer", "description": "First year (optional)."},
                 "fim": {"type": "integer", "description": "Last year (optional)."},
@@ -87,7 +87,7 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "variavel": {"type": "string", "enum": ["temperatura", "precipitacao", "humidade", "aerossois"]},
+                "variavel": {"type": "string", "enum": ["temperatura", "precipitacao", "humidade", "aerossois", "vegetacao", "gelo_marinho", "nivel_mar"]},
                 "n": {"type": "integer", "minimum": 1, "maximum": 10},
             },
             "required": ["variavel"],
@@ -176,7 +176,8 @@ def make_tools(datasets: dict) -> dict[str, Callable[[dict], Any]]:
 
 def system_prompt(lang: str, audience: str, variable: str | None) -> str:
     extra = [f"Always answer in {LANG_NAMES.get(lang, 'Portuguese (Portugal)')}.", AUDIENCE_STYLE.get(audience, AUDIENCE_STYLE["explorador"])]
-    site_to_api = {"temperature": "temperatura", "precipitation": "precipitacao", "aerosols": "aerossois"}
+    site_to_api = {"temperature": "temperatura", "precipitation": "precipitacao", "aerosols": "aerossois",
+                   "vegetation": "vegetacao", "sea_ice": "gelo_marinho", "sea_level": "nivel_mar"}
     if variable in site_to_api:
         extra.append(f"The variable open on the site is '{site_to_api[variable]}'; prefer it when the question does not name one.")
     return SYSTEM + "\n\n" + "\n".join(extra)
