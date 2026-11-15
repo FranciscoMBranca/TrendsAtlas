@@ -129,7 +129,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          branch="dados/nasa-${{ github.run_number }}"
+          # Include the attempt: "Re-run" keeps the run number, and the first attempt's branch already exists.
+          branch="dados/nasa-${{ github.run_number }}-${{ github.run_attempt }}"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            branch="$branch-$(date +%H%M%S)"
+          fi
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git checkout -b "$branch"
