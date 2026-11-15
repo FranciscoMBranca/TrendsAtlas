@@ -116,8 +116,8 @@ def ingest(var_ids: list[str], start: str, end: str, skip_download: bool, keep_r
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--variable", required=True, nargs="+", choices=sorted(PRODUCTS))
-    ap.add_argument("--start", default="2001-01")
-    ap.add_argument("--end", default="2024-12")
+    ap.add_argument("--start", default="2000-01")
+    ap.add_argument("--end", default="2025-12")
     ap.add_argument("--skip-download", action="store_true")
     ap.add_argument("--keep-raw", action="store_true")
     args = ap.parse_args()

@@ -55,3 +55,18 @@ def test_global_trend_sign_matches_synthetic_warming(small):
     small.label = LABEL_REAL
     meta = build_files(small, "temperature", analyse_cube(small), [])["meta.json"]
     assert meta["highlights"]["globalTrend"]["trend"] > 0
+
+
+def test_months_not_yet_published_are_trimmed_and_never_null(tmp_path):
+    ds = make_dataset("precipitacao", resolution=20)
+    ds.cube = ds.cube.copy()
+    ds.cube[-3:] = np.nan  # Oct-Dec of the last year not published yet
+    ds.cube[50, :, :] = np.nan  # one missing month inside the series
+    ds.label = LABEL_REAL
+    folder = export_variable(ds, tmp_path)
+    meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
+    series = json.loads((folder / "series_global.json").read_text(encoding="utf-8"))
+    regions = json.loads((folder / "regions.json").read_text(encoding="utf-8"))
+    assert meta["period"]["end"] == "2024-09" and meta["period"]["months"] == 285
+    assert all(p["anomaly"] is not None for p in series) and len(series) == 284
+    assert all(p["anomaly"] is not None for r in regions for p in r["series"])

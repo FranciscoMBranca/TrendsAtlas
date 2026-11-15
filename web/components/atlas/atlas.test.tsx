@@ -24,11 +24,22 @@ const withQuery = (node: React.ReactNode) => (
 );
 
 describe("componentes do atlas", () => {
-  it("a abertura assume dados de exemplo quando meta.isDemo é verdadeiro", () => {
-    render(<Opening data={data} />);
+  it("a abertura assume dados de exemplo quando meta.isDemo é verdadeiro", async () => {
+    // Vegetation still has no real reader: its files stay synthetic.
+    const demo = await loadAtlasData("vegetation", diskFetcher);
+    expect(demo.meta.isDemo).toBe(true);
+    render(<Opening data={demo} />);
     expect(screen.getByText("dados de exemplo")).toBeInTheDocument();
     expect(screen.getByText(/aqui com dados sintéticos/i)).toBeInTheDocument();
     expect(screen.queryByText(/medida pela NASA/)).not.toBeInTheDocument();
+  });
+
+  it("com dados reais a abertura nomeia a fonte e não diz 'dados de exemplo'", () => {
+    // Precipitation comes from NASA GPM IMERG (data/cubes, workflow "Dados NASA").
+    expect(data.meta.isDemo).toBe(false);
+    render(<Opening data={data} />);
+    expect(screen.queryByText("dados de exemplo")).not.toBeInTheDocument();
+    expect(screen.getAllByText(new RegExp(data.meta.source.name)).length).toBeGreaterThan(0);
   });
 
   it("a abertura não inventa números enquanto os dados carregam", () => {

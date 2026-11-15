@@ -10,11 +10,11 @@ on:
     inputs:
       start:
         description: "Primeiro mês (AAAA-MM)"
-        default: "2001-01"
+        default: "2000-01"
         required: true
       end:
         description: "Último mês (AAAA-MM)"
-        default: "2024-12"
+        default: "2025-12"
         required: true
       products:
         description: "Que produtos descarregar"
@@ -125,6 +125,18 @@ jobs:
           fi
           git commit -m "Dados NASA ${{ inputs.start }} a ${{ inputs.end }} (${{ inputs.products }})"
           git push origin "$branch"
-          gh pr create --base main --head "$branch" \
+          url="https://github.com/${{ github.repository }}/compare/main...$branch?expand=1"
+          if gh pr create --base main --head "$branch" \
             --title "Dados NASA ${{ inputs.start }} a ${{ inputs.end }}" \
-            --body "Cubos a 5° e ficheiros do site gerados pelo workflow **Dados NASA** (run ${{ github.run_id }}). Produtos: ${{ inputs.products }}. Rever o rótulo \`real\`, o período e os números antes de juntar."
+            --body "Cubos a 5° e ficheiros do site gerados pelo workflow **Dados NASA** (run ${{ github.run_id }}). Produtos: ${{ inputs.products }}. Rever o rótulo real, o período e os números antes de juntar."; then
+            echo "Pull request aberto." >> "$GITHUB_STEP_SUMMARY"
+          else
+            # Usually Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests" is off.
+            echo "::warning::Os dados estão no ramo $branch, mas o GitHub não deixou o Actions abrir o pull request. Abra-o aqui: $url"
+            {
+              echo "### Dados prontos no ramo $branch"
+              echo "O pull request não foi aberto automaticamente: [abrir o pull request]($url)."
+              echo ""
+              echo "Para a próxima vez: Settings > Actions > General > Workflow permissions > marcar *Allow GitHub Actions to create and approve pull requests*."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi

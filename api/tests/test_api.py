@@ -21,7 +21,11 @@ def test_world_analysis_matches_global_series():
     r = client.post("/regiao/analise", json={"variavel": "temperatura", "regiao": {"tipo": "globo"}})
     assert r.status_code == 200, r.text
     body = r.json()
-    assert body["rotulo"] == "demonstracao"
+    # Real cube (data/cubes) when present, labelled synthetic otherwise: the label must
+    # always be the one the manifest declares for this variable.
+    manifest = {v["id"]: v for v in client.get("/variaveis").json()["variaveis"]}
+    assert body["rotulo"] == manifest["temperatura"]["rotulo"]
+    assert body["rotulo"] in {"real", "demonstracao"}
     g = client.get("/variaveis/temperatura/serie").json()
     assert np.allclose([p["anomalia"] for p in body["serie"]], g["anomalia"], atol=1e-3)
     assert body["selo"] in {"significativa", "ainda_nao_significativa", "sem_tendencia_clara",

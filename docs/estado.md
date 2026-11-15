@@ -29,8 +29,8 @@ Actualizado: 2026-11-14 (segunda actualização). Prioridade: concluir o desafio
    ```bash
    .venv/Scripts/python -m pip install -e "./pipeline[nasa]"
    cd pipeline
-   ../.venv/Scripts/python -m terratempo.ingest --variable precipitacao --start 2001-01 --end 2024-12
-   ../.venv/Scripts/python -m terratempo.ingest --variable temperatura --start 2001-01 --end 2024-12
+   ../.venv/Scripts/python -m terratempo.ingest --variable precipitacao --start 2000-01 --end 2025-12
+   ../.venv/Scripts/python -m terratempo.ingest --variable temperatura --start 2000-01 --end 2025-12
    ../.venv/Scripts/python -m terratempo.ingest --variable humidade --skip-download
    ../.venv/Scripts/python -m terratempo.export --out ../web/public/data
    ```

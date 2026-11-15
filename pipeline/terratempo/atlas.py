@@ -153,16 +153,21 @@ class AtlasResult:
     values: np.ndarray
 
 
-def full_years(ds: Dataset) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """Trim the cube to whole calendar years (January to December)."""
-    first = int(np.argmax(ds.months == 1))
-    last = len(ds.months) - 1 - int(np.argmax(ds.months[::-1] == 12))
-    sl = slice(first, last + 1)
-    return ds.cube[sl].astype(float), ds.years[sl], ds.months[sl], np.arange(first, last + 1)
+def trim_empty_edges(ds: Dataset) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Drop leading/trailing months with no data at all (e.g. months NASA has not published yet).
+
+    The period shown on the site is then the period that really has data.
+    """
+    has = np.isfinite(ds.cube).reshape(len(ds.cube), -1).any(axis=1)
+    if not has.any():
+        raise ValueError("sem_dados")
+    idx = np.flatnonzero(has)
+    sl = slice(int(idx[0]), int(idx[-1]) + 1)
+    return ds.cube[sl].astype(float), ds.years[sl], ds.months[sl]
 
 
 def analyse_cube(ds: Dataset, progress=None) -> AtlasResult:
-    values, years, months, _ = full_years(ds)
+    values, years, months = trim_empty_edges(ds)
     if values.shape[0] < MIN_YEARS * 12:
         raise ValueError("periodo_curto")
     anomalies = monthly_anomaly(values, months)
@@ -200,6 +205,11 @@ def analyse_cube(ds: Dataset, progress=None) -> AtlasResult:
     return AtlasResult(years, ds.grid.lats, ds.grid.lons, months_iso, stats,
                        trend.benjamini_hochberg(p_final, FDR_Q), emergence, emergence_fdr, ytd,
                        sig, sig_fdr_w, window_years, valid, anomalies, values)
+
+
+def _series(dates: list[str], values: np.ndarray, digits: int) -> list[dict[str, Any]]:
+    """{date, anomaly} points; months without data are left out (the schema has no nulls)."""
+    return [{"date": m, "anomaly": _r(v, digits)} for m, v in zip(dates, values) if math.isfinite(v)]
 
 
 def _area_pct(flags: np.ndarray, r: AtlasResult) -> float:
@@ -258,7 +268,7 @@ def build_files(ds: Dataset, atlas_id: str, r: AtlasResult, regions: list[dict])
             "sig": bool(s.p < ALPHA), "meanValue": _r(mean_value, d),
             "trendPctOfMean": _r(100.0 * t / mean_value, 1) if spec["relative"] and mean_value > 0 else None,
             "cells": int(mask.sum()), "emergence": e_year, "yearsToDetect": e_left,
-            "series": [{"date": m, "anomaly": _r(v, d)} for m, v in zip(r.months_iso, y)],
+            "series": _series(r.months_iso, y, d),
         })
 
     ups = [x for x in region_out if x["trend"] is not None and x["trend"] > 0]
@@ -306,7 +316,7 @@ def build_files(ds: Dataset, atlas_id: str, r: AtlasResult, regions: list[dict])
     }
     return {
         "grid_trend.json": cells,
-        "series_global.json": [{"date": m, "anomaly": _r(v, d)} for m, v in zip(r.months_iso, global_anom)],
+        "series_global.json": _series(r.months_iso, global_anom, d),
         "regions.json": region_out,
         "meta.json": meta,
     }
