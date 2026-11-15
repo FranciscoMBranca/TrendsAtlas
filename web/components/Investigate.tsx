@@ -7,7 +7,7 @@ import { useI18n } from "@/lib/i18n";
 import type { AtlasData } from "@/lib/atlas/data/schema";
 import { SectionHeader } from "./atlas/SectionHeader";
 import { SegmentedControl } from "./atlas/map/SegmentedControl";
-import Result from "./Result";
+import Result, { type AudienceMode } from "./Result";
 
 /** Atlas variable id (prototype data) -> API variable id (Phase 0 pipeline). */
 export const API_VARIABLE: Record<string, string> = {
@@ -49,6 +49,7 @@ export function Investigate({ data }: { data: AtlasData }) {
   const [error, setError] = useState<ApiError | null>(null);
   const [busy, setBusy] = useState(false);
   const [apiUp, setApiUp] = useState<boolean | null>(null);
+  const [audience, setAudience] = useState<AudienceMode>("explorador");
 
   useEffect(() => {
     setResult(null);
@@ -100,12 +101,24 @@ export function Investigate({ data }: { data: AtlasData }) {
     <section id="investigar" className="investigate atlas-width" lang={lang}>
       <div className="section-heading-row">
         <SectionHeader number="→" title={t("inv.rotulo")} />
+        <div className="investigate-toggles">
+        <SegmentedControl
+          label={t("modo.rotulo")}
+          value={audience}
+          onChange={setAudience}
+          options={[
+            { value: "crianca", label: t("modo.crianca") },
+            { value: "explorador", label: t("modo.explorador") },
+            { value: "cientista", label: t("modo.cientista") },
+          ]}
+        />
         <div className="segmented" role="radiogroup" aria-label="Idioma / Language">
           {LANGS.map((l) => (
             <button key={l} type="button" role="radio" aria-checked={l === lang} onClick={() => setLang(l)}>
               {l.toUpperCase()}
             </button>
           ))}
+        </div>
         </div>
       </div>
 
@@ -235,7 +248,7 @@ export function Investigate({ data }: { data: AtlasData }) {
               {t(error.chave, error.parametros)}
             </p>
           )}
-          {result && <Result a={result} lang={lang} />}
+          {result && <Result a={result} lang={lang} mode={audience} />}
         </>
       )}
     </section>

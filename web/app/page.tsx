@@ -8,6 +8,7 @@ import { AtlasHeader } from "@/components/atlas/AtlasHeader";
 import { DataGate } from "@/components/atlas/DataGate";
 import { EmergenceSection } from "@/components/atlas/emergence/EmergenceSection";
 import { MethodSection } from "@/components/atlas/MethodSection";
+import { PresentationLauncher } from "@/components/atlas/PresentationMode";
 import { Opening } from "@/components/atlas/Opening";
 import { Panorama } from "@/components/atlas/Panorama";
 import { RegionContrast } from "@/components/atlas/RegionContrast";
@@ -41,6 +42,7 @@ function Atlas() {
             <>
               <VariableSection data={data} />
               <TrendMap data={data} />
+              <PresentationLauncher data={data} />
               <EmergenceSection data={data} />
               <Investigate data={data} />
               <RegionContrast data={data} />

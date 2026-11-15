@@ -256,3 +256,48 @@
 .result > button {
   justify-self: start;
 }
+
+/* Modos de público e projecção */
+.investigate-toggles {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.sentence-child {
+  font-size: 30px;
+}
+.child-arrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  display: inline-block;
+  min-width: 1em;
+}
+.child-arrow.arrow-sobe {
+  color: var(--trend-up);
+}
+.child-arrow.arrow-desce {
+  color: var(--trend-down);
+}
+.projection-note {
+  max-width: 900px;
+  border-left-style: dashed;
+}
+.projection-warning {
+  font-weight: 600;
+  color: var(--foreground) !important;
+}
+.result .chart .proj-band {
+  fill: var(--muted-foreground);
+  opacity: 0.12;
+}
+.result .chart .proj-line {
+  fill: none;
+  stroke: var(--trend-up);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+.result .chart .proj-divider {
+  stroke: var(--border);
+  stroke-dasharray: 2 3;
+}

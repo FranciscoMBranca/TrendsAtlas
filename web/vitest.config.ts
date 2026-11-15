@@ -10,6 +10,6 @@ export default defineConfig({
     globals: true,
     testTimeout: 20000,
     setupFiles: ["./test/setup.ts"],
-    include: ["tests/**/*.test.ts", "components/**/*.test.tsx", "lib/**/*.test.ts"],
+    include: ["tests/**/*.test.{ts,tsx}", "components/**/*.test.tsx", "lib/**/*.test.ts"],
   },
 });

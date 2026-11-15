@@ -14,6 +14,16 @@ Actualizado: 2026-11-14 (segunda actualização). Prioridade: concluir o desafio
 | R4 | O resultado do Detetive fica numa secção própria, **Investigue** (`#investigar`), a seguir a "Quando" | Ligada à API; meses, mundo inteiro, regiões do atlas e rectângulo |
 | — | Tipos de letra servidos pelo próprio site (`next/font`), sem Google Fonts em tempo de execução | Divergência P7 da R0 |
 
+## Fase de apresentação dos resultados (2026-11-15)
+
+Dados reais da NASA 2000–2025 em produção (temperatura e humidade MERRA-2, precipitação IMERG até 2025-09).
+
+| Item | O que ficou | Decisões a validar |
+| --- | --- | --- |
+| **W22, SPEC-110 Modo apresentação** | Botão "Ver ano a ano" debaixo do mapa: ecrã inteiro com o mapa de cada ano (média das anomalias mensais face a 2000–2025), média global do ano, reproduzir/pausar, 3 velocidades, barra de anos, Esc fecha, setas mudam de ano. Pausa com o separador escondido; com movimento reduzido não anima e mostra o último ano. Só aparece em variáveis com dados reais. Ficheiro `annual_anomaly.json` (cerca de 450 kB por variável). | Escala fixa = percentil 98 de \|anomalia\|; um ano entra com ≥ 10 meses. Exemplos guiados (W24) e funcionamento offline (SPEC-110 §3.3) por fazer |
+| **P32, W25, SPEC-120 Projecção condicional** | No resultado da secção Investigue, só com tendência significativa: recta da regressão prolongada até metade do comprimento da série (2038 para 2000–2025), banda que alarga, aviso "Isto não é uma previsão do clima." em todos os idiomas. | Banda da **recta** (não de valores individuais); termo de nível com s²/n porque s² já está corrigido com n_ef. Cobertura simulada: 94,8 % (ruído branco) e 93,8 % (AR(1) 0,5), dentro de 90–98 % |
+| **W21 Modos de público** | Criança, Explorador e Cientista na secção Investigue. Mesmos números; a Criança vê seta, frase simples e selo em palavras, sem valores-p, tabela nem projecção; o Cientista vê tudo (OLS, R², Z, Hamed-Rao, n_ef, ρ₁). | Textos da Criança são **rascunho**: rever com quem ensina (N02, D10). Os modos ainda só afectam a secção Investigue |
+
 ## Feito nesta ronda
 
 - **CI corrigido**: o `pip install` falhava porque `api/requirements.txt` tinha `-e ../pipeline`. Agora o pipeline instala-se à parte. CI verde no commit `fad98b5`.

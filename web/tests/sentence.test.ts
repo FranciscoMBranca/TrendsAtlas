@@ -23,7 +23,7 @@ describe("result sentence", () => {
 
   it("has no causal words in the result templates (SPEC-101 criterion 3)", () => {
     for (const lang of LANGS) {
-      const templates = Object.entries(CATALOGS[lang]).filter(([k]) => /^(frase|res|selo|onde|regra)\./.test(k));
+      const templates = Object.entries(CATALOGS[lang]).filter(([k]) => /^(frase|res|selo|onde|regra|crianca|projeccao)\./.test(k));
       for (const [, text] of templates) {
         expect(text.toLowerCase()).not.toMatch(/\bcausa|devido a|por culpa de|\bcaused by|\bdue to/);
       }

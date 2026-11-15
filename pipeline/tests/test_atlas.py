@@ -70,3 +70,15 @@ def test_months_not_yet_published_are_trimmed_and_never_null(tmp_path):
     assert meta["period"]["end"] == "2024-09" and meta["period"]["months"] == 285
     assert all(p["anomaly"] is not None for p in series) and len(series) == 284
     assert all(p["anomaly"] is not None for r in regions for p in r["series"])
+
+
+def test_annual_anomaly_file_for_presentation_mode(small, tmp_path):
+    folder = export_variable(small, tmp_path)
+    a = json.loads((folder / "annual_anomaly.json").read_text(encoding="utf-8"))
+    assert a["years"] == list(range(2001, 2025))
+    assert len(a["values"]) == len(a["years"]) and all(len(row) == len(a["cells"]) for row in a["values"])
+    assert a["extent"] > 0 and a["unit"] == "°C"
+    # the warming synthetic series: the last year is warmer than the first on average
+    first = np.nanmean([v for v in a["values"][0] if v is not None])
+    last = np.nanmean([v for v in a["values"][-1] if v is not None])
+    assert last > first

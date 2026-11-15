@@ -77,7 +77,27 @@ export interface Analysis {
   selo: Seal;
   regra_valor_p: number;
   quanto_falta_anos: number | null;
+  projeccao: Projection;
   frase: { chave: string; parametros: { declive_decada: number | null; meses: number[] | null; anos: number | null } };
+}
+
+export interface ProjectionPoint {
+  ano: number;
+  centro: number | null;
+  inferior: number | null;
+  superior: number | null;
+}
+
+/** SPEC-120: conditional projection of the fitted line ("if the trend continues"). */
+export interface Projection {
+  condicional: true;
+  aviso_chave: string;
+  disponivel: boolean;
+  motivo: string | null;
+  horizonte_anos?: number;
+  /** The fitted line at the last observed step: where the projection starts. */
+  inicio?: ProjectionPoint;
+  pontos: ProjectionPoint[];
 }
 
 export interface ApiError {

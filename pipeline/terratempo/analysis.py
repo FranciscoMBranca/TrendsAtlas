@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from . import emergence, seasonal, trend
+from . import emergence, projection, seasonal, trend
 from .anomaly import monthly_anomaly
 
 MIN_YEARS = 10
@@ -116,6 +116,17 @@ def analyse(series: Series, months: list[int] | None = None,
     seal = _seal(mk.p, lin.p, years_left)
 
     direction = "sobe" if slope > 0 else ("desce" if slope < 0 else "estavel")
+
+    # SPEC-120: conditional projection, hidden unless the trend is significant.
+    if seal == "significativa":
+        last_year = int(t[ok][-1]) if steps_per_year == 1 else int(years.max())
+        proj = projection.project(y, t, steps_per_year, last_year)
+        for pt in [proj["inicio"], *proj["pontos"]]:
+            for k in ("centro", "inferior", "superior"):
+                pt[k] = _finite(pt[k])
+    else:
+        proj = {"condicional": True, "aviso_chave": projection.NOTICE_KEY, "disponivel": False,
+                "motivo": "nao_significativa", "pontos": []}
     tc = float(np.nanmean(t[ok]))
     yc = intercept + slope * tc
     line = [_finite(intercept + slope * ti) for ti in t]
@@ -152,6 +163,7 @@ def analyse(series: Series, months: list[int] | None = None,
         "selo": seal,
         "regra_valor_p": P_RULE,
         "quanto_falta_anos": years_left if seal == "ainda_nao_significativa" else None,
+        "projeccao": proj,
         "frase": {
             "chave": f"frase.{seal}.{direction}",
             "parametros": {

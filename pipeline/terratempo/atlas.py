@@ -212,6 +212,41 @@ def _series(dates: list[str], values: np.ndarray, digits: int) -> list[dict[str,
     return [{"date": m, "anomaly": _r(v, digits)} for m, v in zip(dates, values) if math.isfinite(v)]
 
 
+def annual_anomalies(r: "AtlasResult", ds: Dataset, digits: int) -> dict[str, Any]:
+    """SPEC-110: one map per year with the mean of that year's monthly anomalies.
+
+    A cell-year needs at least 10 of 12 months; years with no valid cell are left out.
+    The colour scale is symmetric and fixed for all years (98th percentile of |values|).
+    """
+    years_u = sorted({int(y) for y in r.years})
+    keep_cells = [(i, j) for i in range(r.lats.size) for j in range(r.lons.size) if r.valid[i, j]]
+    out_years, out_values = [], []
+    for yr in years_u:
+        sel = r.years == yr
+        block = r.anomalies[sel]
+        count = np.isfinite(block).sum(axis=0)
+        with np.errstate(invalid="ignore"):
+            mean = np.where(count >= 10, np.nanmean(np.where(np.isfinite(block), block, np.nan), axis=0), np.nan)
+        vals = [_r(mean[i, j], digits) for i, j in keep_cells]
+        if all(v is None for v in vals):
+            continue
+        out_years.append(yr)
+        out_values.append(vals)
+    flat = np.array([v for row in out_values for v in row if v is not None], dtype=float)
+    extent = float(np.percentile(np.abs(flat), 98)) if flat.size else 1.0
+    return {
+        "schemaVersion": SCHEMA_VERSION,
+        "isDemo": ds.label == LABEL_DEMO,
+        "variable": ATLAS_ID.get(ds.id, ds.id),
+        "unit": VARIABLES[ATLAS_ID[ds.id]]["unit"],
+        "baseline": f"{years_u[0]}–{years_u[-1]}",
+        "extent": _r(extent, digits),
+        "cells": [[_r(r.lats[i], 2), _r(r.lons[j], 2)] for i, j in keep_cells],
+        "years": out_years,
+        "values": out_values,
+    }
+
+
 def _area_pct(flags: np.ndarray, r: AtlasResult) -> float:
     w = np.broadcast_to(cos_lat_weights(r.lats)[:, None], r.valid.shape)
     total = float(w[r.valid].sum())
@@ -319,6 +354,7 @@ def build_files(ds: Dataset, atlas_id: str, r: AtlasResult, regions: list[dict])
         "series_global.json": _series(r.months_iso, global_anom, d),
         "regions.json": region_out,
         "meta.json": meta,
+        "annual_anomaly.json": annual_anomalies(r, ds, spec["decimals"] + 1),
     }
 
 

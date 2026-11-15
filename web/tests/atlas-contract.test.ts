@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { gridSchema, manifestSchema, metaSchema, regionsSchema, seriesSchema } from "@/lib/atlas/data/schema";
+import { annualSchema } from "@/lib/atlas/annual";
 
 const dir = resolve(__dirname, "../test/fixtures/atlas-v3");
 const read = (p: string) => JSON.parse(readFileSync(resolve(dir, p), "utf-8"));
@@ -21,5 +22,9 @@ describe("atlas export from the Python pipeline", () => {
   });
   it("variables.json passes the manifest schema", () => {
     expect(manifestSchema.parse(read("variables.json")).variables[0]!.id).toBe("temperature");
+  });
+  it("annual_anomaly.json passes the presentation-mode schema (SPEC-110)", () => {
+    const a = annualSchema.parse(read("temperature/annual_anomaly.json"));
+    expect(a.years.length).toBeGreaterThan(10);
   });
 });
