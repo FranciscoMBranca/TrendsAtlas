@@ -103,6 +103,8 @@ describe("página principal condicional", () => {
     await act(async () => {});
     const input = screen.getByRole("combobox", { name: /Procurar/ });
     fireEvent.change(input, { target: { value: "Angol" } });
+    // Wait for the place list (loaded asynchronously) before choosing with Enter.
+    await screen.findByRole("option", { name: /Angola/ }, { timeout: 8000 });
     fireEvent.keyDown(input, { key: "Enter" });
     expect(await screen.findByRole("complementary", { name: "Angola" }, { timeout: 8000 })).toBeInTheDocument();
     expect(screen.getByText(/Tendência no mapa/)).toBeInTheDocument();
